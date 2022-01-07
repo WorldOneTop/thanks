@@ -2,7 +2,7 @@ package com.hallym.hlth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.thanks.databinding.ActivityMainBinding
+import com.hallym.hlth.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
