@@ -1,4 +1,4 @@
-package com.example.thanks
+package com.hallym.thanks
 
 import org.junit.Test
 
