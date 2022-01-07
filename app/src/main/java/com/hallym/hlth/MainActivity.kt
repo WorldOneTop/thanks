@@ -1,4 +1,4 @@
-package com.hallym.thanks
+package com.hallym.hlth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.hallym.thanks
+package com.hallym.hlth
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
