@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#008577</color>
-    <color name="color_primary_dark">#00574B</color>
-    <color name="color_accent">#D81B60</color>
+    <color name="color_primary">#ffffff</color>
+    <color name="color_primary_variant">#fafafa</color>
+    <color name="color_on_primary">#000000</color>
+    <color name="color_secondary">#4dd0e1</color>
+    <color name="color_secondary_variant">#009faf</color>
+    <color name="color_on_secondary">#000000</color>
 
     <color name="color_bg_primary">#ECEEF2</color>
     <color name="color_bg_secondary">#F0F2F6</color>
@@ -10,4 +13,6 @@
 
     <color name="color_text_primary">#DE000000</color>
     <color name="color_text_secondary">#99000000</color>
+
+    <color name="transparent">#00000000</color>
 </resources>
