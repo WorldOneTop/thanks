@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hallym.hlth.R
+import com.hallym.hlth.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
+
+    private lateinit var binding: FragmentMenuBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        binding = FragmentMenuBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     companion object {
