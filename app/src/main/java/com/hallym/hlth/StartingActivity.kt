@@ -21,6 +21,7 @@ class StartingActivity : AppCompatActivity() {
 
             // TODO: 로그인이 되어 있지 않으면 로그인 Activity로 이동
             startActivity(Intent(this@StartingActivity, MainActivity::class.java))
+            this.finish()
 
         }, 1000)
     }
