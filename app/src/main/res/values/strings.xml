@@ -7,5 +7,9 @@
     <string name="bottom_nav_me">Me</string>
     <string name="bottom_nav_menu">Menu</string>
 
+    <!--  HomeFragment  -->
+    <string name="action_notification">Notification</string>
+    <string name="action_account">Account</string>
+
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>
