@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.hallym.hlth.databinding.ActivityMainBinding
-import com.hallym.hlth.fragments.CategoryFragment
+import com.hallym.hlth.fragments.DailyFragment
 import com.hallym.hlth.fragments.HomeFragment
-import com.hallym.hlth.fragments.MeFragment
+import com.hallym.hlth.fragments.MonthlyFragment
 import com.hallym.hlth.fragments.MenuFragment
 
 class MainActivity : AppCompatActivity() {
@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var homeFragment: HomeFragment
-    private lateinit var categoryFragment: CategoryFragment
-    private lateinit var meFragment: MeFragment
+    private lateinit var dailyFragment: DailyFragment
+    private lateinit var monthlyFragment: MonthlyFragment
     private lateinit var menuFragment: MenuFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFragment() {
         homeFragment = HomeFragment.newInstance()
-        categoryFragment = CategoryFragment.newInstance()
-        meFragment = MeFragment.newInstance()
+        dailyFragment = DailyFragment.newInstance()
+        monthlyFragment = MonthlyFragment.newInstance()
         menuFragment = MenuFragment.newInstance()
     }
 
@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
         binding.bnvMain.setOnItemSelectedListener { menu ->
             changeFragment(when (menu.itemId) {
                 R.id.action_home -> homeFragment
-                R.id.action_category -> categoryFragment
-                R.id.action_me -> meFragment
+                R.id.action_daily -> dailyFragment
+                R.id.action_monthly -> monthlyFragment
                 R.id.action_menu -> menuFragment
                 else -> homeFragment
             })
