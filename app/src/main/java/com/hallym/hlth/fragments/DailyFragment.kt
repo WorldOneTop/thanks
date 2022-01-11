@@ -5,24 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hallym.hlth.R
-import com.hallym.hlth.databinding.FragmentCategoryBinding
+import com.hallym.hlth.databinding.FragmentDailyBinding
 
-class CategoryFragment : Fragment() {
+class DailyFragment : Fragment() {
 
-    private lateinit var binding: FragmentCategoryBinding
+    private lateinit var binding: FragmentDailyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        binding = FragmentDailyBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() = CategoryFragment()
+        fun newInstance() = DailyFragment()
     }
 }

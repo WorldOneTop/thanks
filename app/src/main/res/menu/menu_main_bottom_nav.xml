@@ -6,14 +6,14 @@
         android:title="@string/bottom_nav_home" />
 
     <item
-        android:id="@+id/action_category"
+        android:id="@+id/action_daily"
         android:icon="@drawable/ic_round_assignment_24"
-        android:title="@string/bottom_nav_category" />
+        android:title="@string/bottom_nav_daily" />
 
     <item
-        android:id="@+id/action_me"
-        android:icon="@drawable/ic_round_account_circle_24"
-        android:title="@string/bottom_nav_me" />
+        android:id="@+id/action_monthly"
+        android:icon="@drawable/ic_round_today_24"
+        android:title="@string/bottom_nav_monthly" />
 
     <item
         android:id="@+id/action_menu"
