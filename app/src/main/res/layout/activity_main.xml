@@ -23,6 +23,7 @@
         android:id="@+id/layoutMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/color_bg_secondary"
         app:layout_constraintBottom_toTopOf="@+id/bnvMain"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
