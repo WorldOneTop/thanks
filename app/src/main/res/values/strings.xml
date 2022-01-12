@@ -12,6 +12,10 @@
     <!--  HomeFragment  -->
     <string name="action_notification">Notification</string>
     <string name="action_account">Account</string>
+    <string name="link_become">Hallym\nBecome</string>
+    <string name="link_bus">Bus\nSchedule</string>
+    <string name="link_shuttle">Shuttle\nBus</string>
+    <string name="link_map">School\nMap</string>
 
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

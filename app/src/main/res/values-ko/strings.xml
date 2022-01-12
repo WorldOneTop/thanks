@@ -13,4 +13,9 @@
     <!--  HomeFragment  -->
     <string name="action_notification">알림</string>
     <string name="action_account">계정</string>
+    <string name="link_become">한림\nBecome</string>
+    <string name="link_bus">버스\n시간표</string>
+    <string name="link_shuttle">셔틀버스\n시간표</string>
+    <string name="link_map">학교\n지도</string>
+
 </resources>
