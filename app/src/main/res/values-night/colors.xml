@@ -14,5 +14,8 @@
     <color name="color_text_primary">#DEffffff</color>
     <color name="color_text_secondary">#99ffffff</color>
 
+    <color name="color_selectable">#99FFFFFF</color>
+    <color name="color_disabled">#46484A</color>
+
     <color name="transparent">#00000000</color>
 </resources>
