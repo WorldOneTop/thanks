@@ -11,9 +11,9 @@
         android:title="@string/bottom_nav_daily" />
 
     <item
-        android:id="@+id/action_monthly"
-        android:icon="@drawable/ic_round_today_24"
-        android:title="@string/bottom_nav_monthly" />
+        android:id="@+id/action_chat"
+        android:icon="@drawable/round_message_24"
+        android:title="@string/bottom_nav_chat" />
 
     <item
         android:id="@+id/action_menu"

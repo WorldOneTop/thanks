@@ -3,10 +3,12 @@ package com.hallym.hlth.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hallym.hlth.MainActivity
+import com.hallym.hlth.NotificationActivity
 import com.hallym.hlth.R
 import com.hallym.hlth.adapters.HomeAdapter
 import com.hallym.hlth.adapters.HomeGoalsValueObject
@@ -49,8 +51,7 @@ class HomeFragment : Fragment() {
             arrayOf(
                 "",
                 HomeGoalsValueObject(
-                    "🙇‍♂️ 감사합니다",
-                    5,
+                    1,
                     1,
                     arrayOf(
                         Document(0, "고양이가 세상을 구한다", "감사", 2022, 2, 1, "2022/02/01", null),
@@ -58,9 +59,22 @@ class HomeFragment : Fragment() {
                     )
                 ),
                 HomeGoalsValueObject(
-                    "🙇‍♂️ 감사합니다",
+                    2,
                     1,
-                    1,
+                    arrayOf(
+                        Document(0, "고양이는 귀엽다", "절약", 2022, 2, 1, "2022/02/01", null)
+                    )
+                ),
+                HomeGoalsValueObject(
+                    3,
+                    2,
+                    arrayOf(
+                        Document(0, "고양이는 귀엽다", "절약", 2022, 2, 1, "2022/02/01", null)
+                    )
+                ),
+                HomeGoalsValueObject(
+                    4,
+                    -1,
                     arrayOf(
                         Document(0, "고양이는 귀엽다", "절약", 2022, 2, 1, "2022/02/01", null)
                     )
@@ -83,7 +97,12 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_notification -> {
-                // TODO: Show notification
+                startActivity(
+                    Intent(
+                        requireContext(),
+                        NotificationActivity::class.java
+                    )
+                )
             }
 
             R.id.action_account -> {

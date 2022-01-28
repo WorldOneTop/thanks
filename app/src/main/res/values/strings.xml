@@ -7,7 +7,7 @@
     <string name="bottom_nav_me">Me</string>
     <string name="bottom_nav_menu">Menu</string>
     <string name="bottom_nav_daily">Daily</string>
-    <string name="bottom_nav_monthly">Monthly</string>
+    <string name="bottom_nav_chat">Chat</string>
 
     <!--  HomeFragment  -->
     <string name="action_notification">Notification</string>

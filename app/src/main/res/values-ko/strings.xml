@@ -8,7 +8,7 @@
     <string name="bottom_nav_me">내 목표</string>
     <string name="bottom_nav_menu">메뉴</string>
     <string name="bottom_nav_daily">오늘 목표</string>
-    <string name="bottom_nav_monthly">이달 목표</string>
+    <string name="bottom_nav_chat">쪽지</string>
 
     <!--  HomeFragment  -->
     <string name="action_notification">알림</string>

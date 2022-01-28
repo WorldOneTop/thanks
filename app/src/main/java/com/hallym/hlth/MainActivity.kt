@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.hallym.hlth.databinding.ActivityMainBinding
 import com.hallym.hlth.fragments.DailyFragment
 import com.hallym.hlth.fragments.HomeFragment
-import com.hallym.hlth.fragments.MonthlyFragment
+import com.hallym.hlth.fragments.ChatFragment
 import com.hallym.hlth.fragments.MenuFragment
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var homeFragment: HomeFragment
     private lateinit var dailyFragment: DailyFragment
-    private lateinit var monthlyFragment: MonthlyFragment
+    private lateinit var chatFragment: ChatFragment
     private lateinit var menuFragment: MenuFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private fun initFragment() {
         homeFragment = HomeFragment.newInstance()
         dailyFragment = DailyFragment.newInstance()
-        monthlyFragment = MonthlyFragment.newInstance()
+        chatFragment = ChatFragment.newInstance()
         menuFragment = MenuFragment.newInstance()
     }
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             changeFragment(when (menu.itemId) {
                 R.id.action_home -> homeFragment
                 R.id.action_daily -> dailyFragment
-                R.id.action_monthly -> monthlyFragment
+                R.id.action_chat -> chatFragment
                 R.id.action_menu -> menuFragment
                 else -> homeFragment
             })
