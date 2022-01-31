@@ -51,7 +51,8 @@ class HomeFragment : Fragment() {
             arrayOf(
                 "",
                 HomeGoalsValueObject(
-                    1,
+                    "🙇‍♂️ "+getString(R.string.title_thanks),
+                    5,
                     1,
                     arrayOf(
                         Document(0, "고양이가 세상을 구한다", "감사", 2022, 2, 1, "2022/02/01", null),
@@ -59,24 +60,27 @@ class HomeFragment : Fragment() {
                     )
                 ),
                 HomeGoalsValueObject(
-                    2,
+                    "🙇‍♂️ "+getString(R.string.title_save),
+                    1,
                     1,
                     arrayOf(
                         Document(0, "고양이는 귀엽다", "절약", 2022, 2, 1, "2022/02/01", null)
                     )
                 ),
                 HomeGoalsValueObject(
-                    3,
+                    "🙇‍♂️ "+getString(R.string.title_kind),
+                    1,
                     2,
                     arrayOf(
-                        Document(0, "고양이는 귀엽다", "절약", 2022, 2, 1, "2022/02/01", null)
+                        Document(0, "고양이는 귀엽다", "선행", 2022, 2, 1, "2022/02/01", null)
                     )
                 ),
                 HomeGoalsValueObject(
-                    4,
+                    "🙇‍♂️ "+getString(R.string.title_book),
+                    1,
                     -1,
                     arrayOf(
-                        Document(0, "고양이는 귀엽다", "절약", 2022, 2, 1, "2022/02/01", null)
+                        Document(0, "고양이는 귀엽다", "책", 2022, 2, 1, "2022/02/01", null)
                     )
                 )
             )

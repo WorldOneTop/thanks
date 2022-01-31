@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.hallym.hlth.R
 import com.hallym.hlth.databinding.RowEmptyFooterBinding
 import com.hallym.hlth.databinding.RowHomeGoalsBinding
 import com.hallym.hlth.databinding.RowHomeLinkBinding
@@ -94,17 +95,9 @@ class HomeAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
     }
 }
 
-class HomeGoalsValueObject(type: Int, var progress: Int, var documents: Array<Document>){
-    var title: String
-    var max: Int
-
-    init {
-        when(type){
-            1 -> {this.title = "🙇‍♂️ 감사합니다";this.max = 5} // 오감사
-            2 -> {this.title = "🙇‍♂️ 오늘의 선행";this.max = 1} // 선행
-            3 -> {this.title = "🙇‍♂️ 책을 읽어요";this.max = 1} // 책
-            4 -> {this.title = "🙇‍♂️ 아껴씁시다";this.max = 1} // 절약
-            else -> {this.title = "";this.max = 1}
-        }
-    }
-}
+class HomeGoalsValueObject(
+    var title: String,
+    var max: Int,
+    var progress: Int,
+    var documents: Array<Document>
+    )

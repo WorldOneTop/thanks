@@ -10,6 +10,10 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Hlth">
         <activity
+                android:name=".ChatInActivity"
+                android:exported="false"
+                android:windowSoftInputMode="adjustPan"/>
+        <activity
                 android:name=".NotificationActivity"
                 android:exported="false" />
         <activity

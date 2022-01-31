@@ -17,5 +17,13 @@
     <string name="link_bus">버스\n시간표</string>
     <string name="link_shuttle">셔틀버스\n시간표</string>
     <string name="link_map">학교\n지도</string>
+    <string name="title_thanks">오늘의 감사</string>
+    <string name="title_kind">오늘의 선행</string>
+    <string name="title_save">오늘의 절약</string>
+    <string name="title_book">독후감</string>
+    <string name="title_contest">공모전</string>
+
+    <!--  ChatInActivity  -->
+    <string name="edit_hint">메시지를 입력하세요.</string>
 
 </resources>
