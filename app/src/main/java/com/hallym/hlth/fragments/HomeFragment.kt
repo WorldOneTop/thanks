@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
             arrayOf(
                 "",
                 HomeGoalsValueObject(
-                    "🙇‍♂️ "+getString(R.string.title_thanks),
+                    getString(R.string.title_thanks),
                     5,
                     1,
                     arrayOf(
@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
                     )
                 ),
                 HomeGoalsValueObject(
-                    "🙇‍♂️ "+getString(R.string.title_save),
+                    getString(R.string.title_save),
                     1,
                     1,
                     arrayOf(
@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
                     )
                 ),
                 HomeGoalsValueObject(
-                    "🙇‍♂️ "+getString(R.string.title_kind),
+                    getString(R.string.title_kind),
                     1,
                     2,
                     arrayOf(
@@ -76,7 +76,7 @@ class HomeFragment : Fragment() {
                     )
                 ),
                 HomeGoalsValueObject(
-                    "🙇‍♂️ "+getString(R.string.title_book),
+                    getString(R.string.title_book),
                     1,
                     -1,
                     arrayOf(

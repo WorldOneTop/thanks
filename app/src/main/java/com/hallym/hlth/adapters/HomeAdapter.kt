@@ -38,7 +38,7 @@ class HomeAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
     var onLinkClickListener: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
+            return when (viewType) {
             HomeLinkViewHolder.VIEW_TYPE ->
                 HomeLinkViewHolder(
                     RowHomeLinkBinding.inflate(

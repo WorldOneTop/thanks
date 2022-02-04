@@ -6,7 +6,7 @@
     <string name="bottom_nav_category">Category</string>
     <string name="bottom_nav_me">Me</string>
     <string name="bottom_nav_menu">Menu</string>
-    <string name="bottom_nav_daily">Daily</string>
+    <string name="bottom_nav_daily">Challenge</string>
     <string name="bottom_nav_chat">Chat</string>
 
     <!--  HomeFragment  -->
@@ -16,14 +16,31 @@
     <string name="link_bus">Bus\nSchedule</string>
     <string name="link_shuttle">Shuttle\nBus</string>
     <string name="link_map">School\nMap</string>
-    <string name="title_thanks">Thanks of the day</string>
-    <string name="title_kind">Good work of the day</string>
-    <string name="title_save">Saving of the day</string>
-    <string name="title_book">Book report</string>
-    <string name="title_contest">Contest</string>
+
+    <string name="title_thanks">🙇‍♂  Thanks of the day</string>
+    <string name="title_kind">🙇‍♂  Virtues of the day</string>
+    <string name="title_save">🙇‍♂  Saving of the day</string>
+    <string name="title_book">🙇‍♂  Readings of the month</string>
+    <string name="title_contest">🙇‍♂  Contest</string>
+
+    <string name="title_thanks_short">Thanks</string>
+    <string name="title_kind_short">Virtues</string>
+    <string name="title_save_short">Saving</string>
+    <string name="title_book_short">Readings</string>
+    <string name="title_contest_short">Contest</string>
+
 
     <!--  ChatInActivity  -->
     <string name="edit_hint">Enter Message</string>
+
+    <!--  DailyActivity  -->
+    <string name="daily_thanks_text">
+Five things to be grateful for a day\nWrite down the things you are grateful for today.</string>
+    <string name="daily_kind_text">Do one good thing a day\nWrite down what you did today.</string>
+    <string name="daily_save_text">Saving one thing a day\nWrite down what you saved today.</string>
+    <string name="daily_book_text">Read one book a month\nWrite down your impressions of a book you read deeply.</string>
+
+    <string name="daily_add">Add a new item</string>
 
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

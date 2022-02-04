@@ -38,15 +38,103 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/dailyTitle"
+            app:layout_constraintTop_toBottomOf="@id/ablDaily"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_primary"/>
+
+    <TextView
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/dailySubTitle"
+            app:layout_constraintTop_toBottomOf="@id/dailyTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/color_text_primary"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDaily"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ablDaily">
+            android:layout_marginTop="30dp"
+            android:id="@+id/rvDaily"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dailySubTitle"
+            app:layout_constraintBottom_toBottomOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/tab_selected"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            android:id="@+id/dailyTabBarParentLayout">
+
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_unselected"
+                android:layout_margin="8dp">
+
+            <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabbarDaily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40sp"
+                    android:background="@drawable/tab_unselected"
+                    app:tabGravity="center"
+                    app:tabPadding="10dp"
+                    app:tabBackground="@drawable/selector_tab"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="fixed"
+                    app:tabRippleColor="@null"
+                    app:tabSelectedTextColor="@color/color_text_primary"
+                    app:tabTextColor="@color/color_text_secondary"
+                    android:layout_margin="4dp"
+                    android:layout_centerInParent="true">
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_thanks_short" />
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_save_short" />
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_kind_short" />
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_book_short" />
+
+
+            </com.google.android.material.tabs.TabLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

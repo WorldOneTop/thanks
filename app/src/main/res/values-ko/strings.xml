@@ -17,13 +17,28 @@
     <string name="link_bus">버스\n시간표</string>
     <string name="link_shuttle">셔틀버스\n시간표</string>
     <string name="link_map">학교\n지도</string>
-    <string name="title_thanks">오늘의 감사</string>
-    <string name="title_kind">오늘의 선행</string>
-    <string name="title_save">오늘의 절약</string>
-    <string name="title_book">독후감</string>
-    <string name="title_contest">공모전</string>
+
+    <string name="title_thanks">🙇‍♂  오늘의 감사</string>
+    <string name="title_kind">🙇‍♂  오늘의 선행</string>
+    <string name="title_save">🙇‍♂  오늘의 절약</string>
+    <string name="title_book">🙇‍♂  독후감</string>
+    <string name="title_contest">🙇‍♂  공모전</string>
+
+    <string name="title_thanks_short">감사</string>
+    <string name="title_kind_short">선행</string>
+    <string name="title_save_short">절약</string>
+    <string name="title_book_short">독후감</string>
+    <string name="title_contest_short">공모전</string>
+
 
     <!--  ChatInActivity  -->
     <string name="edit_hint">메시지를 입력하세요.</string>
 
+    <!--  DailyActivity  -->
+    <string name="daily_thanks_text">하루에 다섯 가지 감사하기\n오늘 감사했던 일에 대해 적어보세요.</string>
+    <string name="daily_kind_text">하루에 한 가지 선행하기\n오늘 선행했던 일에 대해 적어보세요.</string>
+    <string name="daily_save_text">하루에 한 가지 절약하기\n오늘 절약했던 일에 대해 적어보세요.</string>
+    <string name="daily_book_text">한 달에 한 권 독서하기\n감명 깊이 읽었던 책의 감상문을 적어보세요.</string>
+
+    <string name="daily_add">새 항목 추가하기</string>
 </resources>
