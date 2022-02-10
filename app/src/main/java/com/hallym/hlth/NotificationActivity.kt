@@ -2,6 +2,7 @@ package com.hallym.hlth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hallym.hlth.adapters.NotificationAdapter
@@ -17,8 +18,10 @@ class NotificationActivity : AppCompatActivity() {
 
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarNotification)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle(R.string.action_notification)
 
-        binding.notiBack.setOnClickListener{ onBackPressed() }
         initRecyclerView()
     }
     private fun initRecyclerView() {
@@ -46,5 +49,12 @@ class NotificationActivity : AppCompatActivity() {
 
         binding.rvNotification.adapter = adapter
         binding.rvNotification.layoutManager = LinearLayoutManager(applicationContext)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
