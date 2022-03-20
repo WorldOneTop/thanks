@@ -34,7 +34,7 @@ class HomeAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
         notifyItemChanged(position)
     }
 
-    var onCardClickListener: ((view: View, position: Int) -> Unit)? = null
+    var onCardClickListener: ((ArrayList<Document>) -> Unit)? = null
     var onLinkClickListener: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -71,8 +71,8 @@ class HomeAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
         if (holder is HomeGoalsViewHolder) {
             if (data is HomeGoalsValueObject) {
                 holder.bind(data)
-                holder.onClickListener = { view ->
-                    onCardClickListener?.let { it(view, position) }
+                holder.onClickListener = { docs ->
+                    onCardClickListener?.let { it(docs) }
                 }
             }
         } else if (holder is HomeLinkViewHolder) {
@@ -99,5 +99,5 @@ class HomeGoalsValueObject(
     var title: String,
     var max: Int,
     var progress: Int,
-    var documents: Array<Document>
+    var documents: ArrayList<Document>
     )

@@ -13,7 +13,7 @@ class HomeGoalsLineAdapter(private val context: Context) :
 
     private val data: ArrayList<Document> = arrayListOf()
 
-    fun setData(documents: Array<Document>) {
+    fun setData(documents: ArrayList<Document>) {
         val prev = data.size
         this.data.clear()
         notifyItemRangeRemoved(0, prev)

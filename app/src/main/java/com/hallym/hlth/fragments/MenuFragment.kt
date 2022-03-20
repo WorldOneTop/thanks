@@ -1,5 +1,6 @@
 package com.hallym.hlth.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.hallym.hlth.ApplyMenActivity
 import com.hallym.hlth.MainActivity
 import com.hallym.hlth.R
+import com.hallym.hlth.SettingActivity
 import com.hallym.hlth.adapters.MenuAdapter
 import com.hallym.hlth.adapters.MenuValueObject
 import com.hallym.hlth.databinding.FragmentMenuBinding
@@ -46,11 +49,14 @@ class MenuFragment : Fragment() {
         this.data.clear()
 
         // TODO: Replace with real data
+        data.add(MenuValueObject("cat_account", "사용자"))
+        data.add(MenuValueObject("account_manage", "계정 관리", R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("cat_user", "회원 관리"))
-        data.add(MenuValueObject("register_mentee", "멘티 신청", R.drawable.ic_round_account_circle_24))
-        data.add(MenuValueObject("register_mentor", "멘토 신청", R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("register_mentee", getString(R.string.apply_mentee_title), R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("register_mentor", getString(R.string.apply_mentor_title), R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("manager_mentee", "멘티 관리", R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("cat_app", "애플리케이션"))
+        data.add(MenuValueObject("app_setting", "설정", R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("app_info", "애플리케이션 정보", R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("footer", ""))
     }
@@ -72,9 +78,25 @@ class MenuFragment : Fragment() {
         adapter.onClickListener = { id ->
             // TODO: click events
             when (id) {
-                "register_mentee" -> {}
+                "register_mentor" -> {
+                    val intent = Intent(requireContext(), ApplyMenActivity::class.java)
+                    intent.putExtra("isMentor",true)
+                    startActivity(intent)
+                }
+                "register_mentee" -> {
+                    val intent = Intent(requireContext(), ApplyMenActivity::class.java)
+                    intent.putExtra("isMentor",false)
+                    startActivity(intent)
+                }
+                "app_setting" ->{
+                    startActivity(Intent(requireContext(),SettingActivity::class.java))
+                }
+                "app_info" -> {
+                    Toast.makeText(requireContext(), "v 1.0.1 최신?", Toast.LENGTH_SHORT).show()
+                }
+
             }
-            Toast.makeText(requireContext(), "$id clicked", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(requireContext(), "$id clicked", Toast.LENGTH_SHORT).show()
         }
 
     }

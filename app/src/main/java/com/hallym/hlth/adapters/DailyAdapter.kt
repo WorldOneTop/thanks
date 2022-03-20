@@ -7,21 +7,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hallym.hlth.databinding.*
 import com.hallym.hlth.models.Chatting
+import com.hallym.hlth.models.Document
 import com.hallym.hlth.viewholders.*
 
 class DailyAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val data: ArrayList<String> = arrayListOf()
-//    var onClickListener: ((chatRoom: Int,userName: String, userId: Int) -> Unit)? = null
-    var onClickListener: ((position: String) -> Unit)? = null
+    var onClickListener: (() -> Unit)? = null
 
-    fun setData(data: Array<String>, position: String) {
+    fun setData(position: Int) {
         val prev = this.data.size + 2
         this.data.clear()
         notifyItemRangeRemoved(0, prev)
 
-        this.data.addAll(data)
-        this.data.add(position)
+        for(doc in Document.todayDataType[position]!!){
+            this.data.add(doc.content)
+        }
+        this.data.add(position.toString())
         notifyItemRangeInserted(0, data.size + 1)
     }
 

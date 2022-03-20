@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Thanks a day</string>
 
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+
     <!--  MainActivity  -->
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_category">Category</string>
@@ -23,12 +26,22 @@
     <string name="title_book">🙇‍♂  Readings of the month</string>
     <string name="title_contest">🙇‍♂  Contest</string>
 
+    <string name="title_thanks_word">Thanks of the day</string>
+    <string name="title_kind_word">Virtues of the day</string>
+    <string name="title_save_word">Saving of the day</string>
+    <string name="title_book_word">Readings of the month</string>
+    <string name="title_contest_word">Contest</string>
+
     <string name="title_thanks_short">Thanks</string>
     <string name="title_kind_short">Virtues</string>
     <string name="title_save_short">Saving</string>
     <string name="title_book_short">Readings</string>
     <string name="title_contest_short">Contest</string>
 
+    <!--  StartingActivity  -->
+    <string name="permission_require">Requires permission for storage space.</string>
+    <string name="permission_go">Go to set permissions</string>
+    <string name="permission_no">Cancel</string>
 
     <!--  ChatInActivity  -->
     <string name="edit_hint">Enter Message</string>
@@ -39,8 +52,69 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="daily_kind_text">Do one good thing a day\nWrite down what you did today.</string>
     <string name="daily_save_text">Saving one thing a day\nWrite down what you saved today.</string>
     <string name="daily_book_text">Read one book a month\nWrite down your impressions of a book you read deeply.</string>
-
+    <string name="daily_image_load_fail">Failed to import photos.</string>
     <string name="daily_add">Add a new item</string>
+    <string name="daily_add_title">Writing</string>
+    <string name="daily_add_fail">Please enter a contents</string>
+
+    <!--  LoginActivity  -->
+    <string name="login_auto_login">Keep me signed in</string>
+    <string name="login_empty">Please check your ID and password</string>
+    <string name="login_fail">ID or password is different</string>
+
+    <!--  UserInfoActivity  -->
+    <string name="info_tab_history">Activity history</string>
+    <string name="info_signup_date">Member since</string>
+    <string name="info_activity_days">Active days</string>
+    <string name="info_doc_count">Total writing</string>
+
+    <!--  ApplyMenActivity  -->
+    <string name="apply_mentor_title">Apply for mentor</string>
+    <string name="apply_mentee_title">Apply for mentee</string>
+    <string name="apply_men_submit">Apply</string>
+    <string name="apply_men_status_true">In active</string>
+    <string name="apply_men_status_false">Recruiting</string>
+    <string name="apply_men_status_null">End of activity</string>
+
+    <!--  SettingActivity  -->
+    <string name="setting_title">Setting</string>
+    <string name="setting_tab_private_setting">Personal settings</string>
+    <string name="setting_color">Preferred color</string>
+    <string name="setting_tab_info">Privacy</string>
+    <string name="setting_tab_lock">App lock</string>
+    <string name="setting_pin">Set PIN</string>
+    <string name="setting_finger">Set Fingerprint</string>
+    <string name="setting_tab_app_setting">Application settings</string>
+    <string name="setting_first_page">Set first page</string>
+    <string name="setting_tab_noti">Receive notifications</string>
+    <string name="setting_noti_daily">Daily goal reminder</string>
+    <string name="setting_noti_category">Notification type</string>
+    <string name="setting_chat">Direct message notifications</string>
+    <string name="setting_tab_notice">Notification</string>
+    <string name="setting_operation">Gratitude campaign operation policy</string>
+    <string name="setting_private_info">Privacy policy</string>
+    <string name="setting_tab_operation">Operation policy</string>
+    <string name="setting_help">Help</string>
+    <string name="setting_qna">Contact us</string>
+    <string name="setting_bug">Report a bug</string>
+    <string name="setting_danger">Danger</string>
+    <string name="setting_remove_data">Remove all data</string>
+
+    <!--  PINActivity  -->
+    <string name="pin_check_title">Enter your PIN number</string>
+    <string name="pin_old_title">Enter your old PIN number</string>
+    <string name="pin_new_title">Enter the PIN to set</string>
+    <string name="pin_4_letter">Please enter at least 4 characters</string>
+    <string name="pin_fail">Incorrect PIN entered</string>
+    <string name="pin_remove">Remove PIN information</string>
+    <string name="pin_update">PIN changed</string>
+
+    <string-array name="first_page">
+        <item>Home</item>
+        <item>Challenge</item>
+        <item>Chat</item>
+        <item>Menu</item>
+    </string-array>
 
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

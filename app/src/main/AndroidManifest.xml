@@ -2,17 +2,38 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.hallym.hlth">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
+            android:requestLegacyExternalStorage="true"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Hlth">
         <activity
+                android:name=".PINActivity"
+                android:exported="false" />
+        <activity
+                android:name=".SettingActivity"
+                android:exported="false" />
+        <activity
+                android:name=".ApplyMenActivity"
+                android:exported="false" />
+        <activity
+                android:name=".UserInfoActivity"
+                android:exported="false" />
+        <activity
+                android:name=".LoginActivity"
+                android:exported="false"
+                android:screenOrientation="portrait" />
+        <activity
                 android:name=".ChatInActivity"
                 android:exported="false"
-                android:windowSoftInputMode="adjustPan"/>
+                android:windowSoftInputMode="adjustPan" />
         <activity
                 android:name=".NotificationActivity"
                 android:exported="false" />
@@ -28,6 +49,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <service
+                android:name=".function.FirebaseMessage"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/ic_app" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+<!--        <meta-data-->
+<!--                android:name="com.google.firebase.messaging.default_notification_color"-->
+<!--                android:resource="@color/color_primary" />-->
     </application>
 
 </manifest>

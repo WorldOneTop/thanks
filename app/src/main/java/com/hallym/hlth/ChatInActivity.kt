@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hallym.hlth.adapters.ChatInAdapter
 import com.hallym.hlth.adapters.NotificationAdapter
-import com.hallym.hlth.adapters.NotificationObject
 import com.hallym.hlth.databinding.ActivityChatInBinding
 import com.hallym.hlth.models.Chatting
 import java.util.*

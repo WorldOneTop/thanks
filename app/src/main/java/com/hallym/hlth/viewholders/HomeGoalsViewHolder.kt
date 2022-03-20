@@ -11,6 +11,7 @@ import com.hallym.hlth.R
 import com.hallym.hlth.adapters.HomeGoalsLineAdapter
 import com.hallym.hlth.adapters.HomeGoalsValueObject
 import com.hallym.hlth.databinding.RowHomeGoalsBinding
+import com.hallym.hlth.models.Document
 
 class HomeGoalsViewHolder(
     private val viewPool: RecyclerView.RecycledViewPool,
@@ -23,7 +24,7 @@ class HomeGoalsViewHolder(
     }
 
     private val adapter = HomeGoalsLineAdapter(itemView.context)
-    var onClickListener: ((View) -> Unit)? = null
+    var onClickListener: ((ArrayList<Document>) -> Unit)? = null
 
     init {
         binding.rvRowHomeGoals.adapter = adapter
@@ -64,8 +65,8 @@ class HomeGoalsViewHolder(
 
         adapter.setData(data.documents)
 
-        binding.cardRowHomeGoals.setOnClickListener { v ->
-            onClickListener?.let { it(v) }
+        binding.cardRowHomeGoals.setOnClickListener {
+            onClickListener?.let { it(data.documents) }
         }
     }
 }

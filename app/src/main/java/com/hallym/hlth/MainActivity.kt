@@ -8,6 +8,7 @@ import com.hallym.hlth.fragments.DailyFragment
 import com.hallym.hlth.fragments.HomeFragment
 import com.hallym.hlth.fragments.ChatFragment
 import com.hallym.hlth.fragments.MenuFragment
+import com.hallym.hlth.function.Setting
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,7 +37,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         // Set first fragment
-        changeFragment(homeFragment)
+        when(Setting.firstPage){
+            0 -> {changeFragment(homeFragment)
+                binding.bnvMain.selectedItemId = R.id.action_home
+            }
+            1 -> {
+                changeFragment(dailyFragment)
+                binding.bnvMain.selectedItemId = R.id.action_daily
+            }
+            2 -> {
+                changeFragment(chatFragment)
+                binding.bnvMain.selectedItemId = R.id.action_chat
+            }
+            3 -> {
+                changeFragment(menuFragment)
+                binding.bnvMain.selectedItemId = R.id.action_menu
+            }
+            else -> {
+                changeFragment(homeFragment)
+                binding.bnvMain.selectedItemId = R.id.action_home
+            }
+        }
 
         // Set OnItemSelectedListener on BottomNavigationView
         binding.bnvMain.setOnItemSelectedListener { menu ->

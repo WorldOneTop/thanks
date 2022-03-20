@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+    <ImageView
+            android:id="@+id/addDocClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_close_24"
+            android:background="@drawable/bg_secondary_circular"/>
+    <TextView
+            android:layout_weight="1"
+            android:text="@string/daily_add_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+            android:id="@+id/addDocSubmit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_check_circle_24"
+            app:tint="@color/color_secondary" />
+
+
+</LinearLayout>
+    <EditText
+            android:id="@+id/addDocEdit"
+            android:layout_marginTop="30dp"
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="15"
+            android:minHeight="80dp"
+            android:background="@drawable/bg_secondary_rounded"/>
+
+    <ImageView
+            android:id="@+id/addDocImage"
+            android:layout_marginTop="15dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_add_photo_alternate_24"
+            android:background="@drawable/bg_secondary_rounded"/>
+</LinearLayout>

@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">감사운동</string>
 
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+
     <!--  MainActivity  -->
     <string name="bottom_nav_home">홈</string>
     <string name="bottom_nav_category">게시판</string>
@@ -24,12 +27,22 @@
     <string name="title_book">🙇‍♂  독후감</string>
     <string name="title_contest">🙇‍♂  공모전</string>
 
+    <string name="title_thanks_word">오늘의 감사</string>
+    <string name="title_kind_word">오늘의 선행</string>
+    <string name="title_save_word">오늘의 절약</string>
+    <string name="title_book_word">독후감</string>
+    <string name="title_contest_word">공모전</string>
+
     <string name="title_thanks_short">감사</string>
     <string name="title_kind_short">선행</string>
     <string name="title_save_short">절약</string>
     <string name="title_book_short">독후감</string>
     <string name="title_contest_short">공모전</string>
 
+    <!--  StartingActivity  -->
+    <string name="permission_require">저장 공간에 대한 권한이 필요합니다.</string>
+    <string name="permission_go">권한 설정 하기</string>
+    <string name="permission_no">거절</string>
 
     <!--  ChatInActivity  -->
     <string name="edit_hint">메시지를 입력하세요.</string>
@@ -39,6 +52,68 @@
     <string name="daily_kind_text">하루에 한 가지 선행하기\n오늘 선행했던 일에 대해 적어보세요.</string>
     <string name="daily_save_text">하루에 한 가지 절약하기\n오늘 절약했던 일에 대해 적어보세요.</string>
     <string name="daily_book_text">한 달에 한 권 독서하기\n감명 깊이 읽었던 책의 감상문을 적어보세요.</string>
-
+    <string name="daily_image_load_fail">사진을 가져오는데 실패했습니다.</string>
     <string name="daily_add">새 항목 추가하기</string>
+    <string name="daily_add_title">글 작성</string>
+    <string name="daily_add_fail">내용을 입력해주세요.</string>
+
+    <!--  LoginActivity  -->
+    <string name="login_auto_login">자동 로그인</string>
+    <string name="login_empty">아이디 혹은 비밀번호를 확인해주세요.</string>
+    <string name="login_fail">아이디 혹은 비밀번호가 다릅니다</string>
+
+    <!--  UserInfoActivity  -->
+    <string name="info_tab_history">활동 이력</string>
+    <string name="info_signup_date">가입일</string>
+    <string name="info_activity_days">활동 일수</string>
+    <string name="info_doc_count">총 작성 글</string>
+
+    <!--  ApplyMenActivity  -->
+    <string name="apply_mentor_title">멘토 신청</string>
+    <string name="apply_mentee_title">멘티 신청</string>
+    <string name="apply_men_submit">신청하기</string>
+    <string name="apply_men_status_true">활동 중</string>
+    <string name="apply_men_status_false">모집 중</string>
+    <string name="apply_men_status_null">활동 종료</string>
+
+    <!--  SettingActivity  -->
+    <string name="setting_title">설정</string>
+    <string name="setting_tab_private_setting">개인 설정</string>
+    <string name="setting_color">선호 색상</string>
+    <string name="setting_tab_info">개인정보 보호</string>
+    <string name="setting_tab_lock">앱 잠금</string>
+    <string name="setting_pin">PIN 설정</string>
+    <string name="setting_finger">지문 설정</string>
+    <string name="setting_tab_app_setting">애플리케이션 설정</string>
+    <string name="setting_first_page">첫 페이지 설정</string>
+    <string name="setting_tab_noti">알림 받기</string>
+    <string name="setting_noti_daily">일일 목표 알림</string>
+    <string name="setting_noti_category">알림 종류</string>
+    <string name="setting_chat">쪽지 알림</string>
+    <string name="setting_tab_notice">알림</string>
+    <string name="setting_operation">감사운동 운영방침</string>
+    <string name="setting_private_info">개인정보처리방침</string>
+    <string name="setting_tab_operation">운영방침</string>
+    <string name="setting_help">도움말</string>
+    <string name="setting_qna">문의하기</string>
+    <string name="setting_bug">버그 신고</string>
+    <string name="setting_danger">위험</string>
+    <string name="setting_remove_data">모든 데이터 삭제</string>
+
+
+    <!--  PINActivity  -->
+    <string name="pin_check_title">PIN 번호를 입력하세요.</string>
+    <string name="pin_old_title">기존의 PIN 번호를 입력하세요.</string>
+    <string name="pin_new_title">설정할 PIN 번호를 입력하세요.</string>
+    <string name="pin_4_letter">4글자 이상 입력해주세요.</string>
+    <string name="pin_fail">PIN을 잘못 입력했습니다.</string>
+    <string name="pin_remove">PIN 정보 삭제</string>
+    <string name="pin_update">PIN이 변경되었습니다.</string>
+
+    <string-array name = "first_page">
+        <item>홈</item>
+        <item>오늘 목표</item>
+        <item>쪽지</item>
+        <item>메뉴</item>
+    </string-array>
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hallym.hlth.databinding.RowNotificationBinding
+import com.hallym.hlth.models.Notice
 import com.hallym.hlth.viewholders.EmptyFooterViewHolder
 import com.hallym.hlth.viewholders.MenuCategoryViewHolder
 import com.hallym.hlth.viewholders.MenuViewHolder
@@ -12,10 +13,9 @@ import com.hallym.hlth.viewholders.NotificationViewHolder
 
 class NotificationAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val data: ArrayList<NotificationObject> = arrayListOf()
-    var onClickListener: ((id: String) -> Unit)? = null
+    private val data: ArrayList<Notice> = arrayListOf()
 
-    fun setData(data: Array<NotificationObject>) {
+    fun setData(data: ArrayList<Notice>) {
         val prev = this.data.size
         this.data.clear()
         notifyItemRangeRemoved(0, prev)
@@ -41,7 +41,4 @@ class NotificationAdapter(private val context: Context) : RecyclerView.Adapter<R
         return data.size
     }
 
-}
-
-class NotificationObject(var title: String, var text: String, var iconId: Int) {
 }

@@ -13,7 +13,6 @@ class HomeGoalsLineViewHolder(private val binding: RowHomeGoalsLineBinding) :
     }
 
     fun bind(document: Document) {
-        binding.txtRowHomeGoalsLine.text =
-            if (document.title != null) document.title else document.content
+        binding.txtRowHomeGoalsLine.text = document.content
     }
 }
