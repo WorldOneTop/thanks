@@ -16,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
+import com.hallym.hlth.DiaryActivity
+import com.hallym.hlth.NotificationActivity
 import com.hallym.hlth.R
 import com.hallym.hlth.adapters.DailyAdapter
 import com.hallym.hlth.databinding.FragmentDailyBinding
@@ -35,14 +37,9 @@ class DailyFragment : Fragment() {
     private var currentPosition = 0
     private var imagePath: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentDailyBinding.inflate(inflater, container, false)
-        dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.dialog_add_doc)
 
         return binding.root
     }
@@ -61,7 +58,12 @@ class DailyFragment : Fragment() {
 
     private fun initTab(){
         adapter = DailyAdapter(requireContext())
-        adapter.onClickListener={ showDialog() }
+        binding.dailyAddRoot.setOnClickListener{
+            showDialog()
+        }
+        binding.addDiaryButton.setOnClickListener{
+            startActivity(Intent(requireContext(), DiaryActivity::class.java))
+        }
 
 
         binding.tabbarDaily.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -88,6 +90,11 @@ class DailyFragment : Fragment() {
     private fun changeTab(index: Int){
         currentPosition = index
         when(index){
+            0 ->{
+                binding.dailyTitle.text = getString(R.string.title_thanks)
+                binding.dailySubTitle.text = getString(R.string.daily_thanks_text)
+                adapter.setData(index)
+            }
             1 ->{
                 binding.dailyTitle.text = getString(R.string.title_save)
                 binding.dailySubTitle.text = getString(R.string.daily_save_text)
@@ -109,8 +116,13 @@ class DailyFragment : Fragment() {
                 adapter.setData(index)
             }
         }
+        initAddView(index)
     }
     private fun initDialog(){
+        dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_add_doc)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+
         val intent = Intent(Intent.ACTION_PICK).apply {
             type = MediaStore.Images.Media.CONTENT_TYPE
             data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -142,6 +154,21 @@ class DailyFragment : Fragment() {
         }
     }
 
+    private fun initAddView(index:Int){
+        Document.todayDataType[index]!!
+        if(index == 0){
+            if(Document.todayDataType[index]!!.size >= 5) {
+                binding.dailyAddRoot.visibility = View.GONE
+                return
+            }
+        }else{
+            if(Document.todayDataType[index]!!.size >= 1) {
+                binding.dailyAddRoot.visibility = View.GONE
+                return
+            }
+        }
+        binding.dailyAddRoot.visibility = View.VISIBLE
+    }
     private fun getRealPathFromURI(contentURI: Uri): String? {
         val result: String?
         val cursor: Cursor? = requireContext().contentResolver.query(contentURI, null, null, null, null)
@@ -169,7 +196,6 @@ class DailyFragment : Fragment() {
         return true
     }
     private fun showDialog() {
-        dialog.window?.setLayout(binding.root.width,binding.root.height)
         dialog.addDocImage.visibility = if(currentPosition != 2) View.GONE else View.VISIBLE
         dialog.show()
     }

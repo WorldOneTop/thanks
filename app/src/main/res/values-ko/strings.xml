@@ -5,6 +5,8 @@
     <string name="login">로그인</string>
     <string name="logout">로그아웃</string>
 
+    <string name="OK">확인</string>
+
     <!--  MainActivity  -->
     <string name="bottom_nav_home">홈</string>
     <string name="bottom_nav_category">게시판</string>
@@ -109,6 +111,12 @@
     <string name="pin_fail">PIN을 잘못 입력했습니다.</string>
     <string name="pin_remove">PIN 정보 삭제</string>
     <string name="pin_update">PIN이 변경되었습니다.</string>
+
+
+    <!--  DiaryActivity  -->
+    <string name="diary_title">감사 일기</string>
+    <string name="diary_exp">오늘 감사한 일에 대해 일기를 써 보세요.</string>
+
 
     <string-array name = "first_page">
         <item>홈</item>

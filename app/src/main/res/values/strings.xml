@@ -4,6 +4,8 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
 
+    <string name="OK">OK</string>
+
     <!--  MainActivity  -->
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_category">Category</string>
@@ -108,6 +110,10 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="pin_fail">Incorrect PIN entered</string>
     <string name="pin_remove">Remove PIN information</string>
     <string name="pin_update">PIN changed</string>
+
+    <!--  DiaryActivity  -->
+    <string name="diary_title">Thanks Diary</string>
+    <string name="diary_exp">Write today\'s gratitude journal</string>
 
     <string-array name="first_page">
         <item>Home</item>

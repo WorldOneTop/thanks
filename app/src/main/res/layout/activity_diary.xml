@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DiaryActivity"
+        android:background="@color/color_bg_secondary">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/ablDiary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/color_bg_primary"
+            android:fitsSystemWindows="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarDiary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:fitsSystemWindows="true"
+                android:fontFamily="@font/font_ibm_plex_sans_bold"
+                android:minHeight="?android:attr/actionBarSize">
+            <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_ibm_plex_sans_bold"
+                    android:text="@string/diary_title"
+                    android:textColor="@color/color_text_primary"
+                    android:textSize="22sp">
+            </TextView>
+            <ImageView
+                    android:id="@+id/toolbarDairyWrite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_baseline_edit_note_24"
+                    android:layout_marginEnd="10dp"
+                    app:tint="@color/color_primary"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDiary"
+            app:layout_constraintTop_toBottomOf="@id/ablDiary"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="30dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_secondary_rounded"
+            android:backgroundTint="@color/color_bg_primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
