@@ -1,5 +1,7 @@
 package com.hallym.hlth.models
 
+import android.content.Context
+import com.hallym.hlth.R
 import org.json.JSONObject
 import java.util.ArrayList
 
@@ -29,13 +31,14 @@ data class Document(
             data.getString("fileUrl").ifEmpty { null }
     )
 
-    fun typeToStr():String{
+    fun typeToStr(context: Context):String{
+
         return when(docType){
-            0 -> "감사"
-            1 -> "절약"
-            2 -> "선행"
-            3 -> "독후감"
-            else -> "감사"
+            0 -> context.getString(R.string.title_thanks_short)
+            1 -> context.getString(R.string.title_save_short)
+            2 -> context.getString(R.string.title_kind_short)
+            3 -> context.getString(R.string.title_book_short)
+            else -> "??"
         }
     }
 }

@@ -127,8 +127,8 @@
     <string name="diary_title">감사 일기</string>
     <string name="diary_exp">오늘 감사한 일에 대해 일기를 써 보세요.</string>
 
-    <!--  MenteeManageActivity  -->
-    <string name="mentees_title">멘토 관리</string>
+    <!--  ChatActivity  -->
+    <string name="chat_send">쪽지 보내기</string>
 
     <string-array name = "first_page">
         <item>홈</item>

@@ -8,10 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.hallym.hlth.ApplyMenActivity
-import com.hallym.hlth.MainActivity
-import com.hallym.hlth.R
-import com.hallym.hlth.SettingActivity
+import com.hallym.hlth.*
 import com.hallym.hlth.adapters.MenuAdapter
 import com.hallym.hlth.adapters.MenuValueObject
 import com.hallym.hlth.databinding.FragmentMenuBinding
@@ -93,6 +90,9 @@ class MenuFragment : Fragment() {
                 }
                 "app_info" -> {
                     Toast.makeText(requireContext(), "v 1.0.1 최신?", Toast.LENGTH_SHORT).show()
+                }
+                "manager_mentee" -> {
+                    startActivity(Intent(requireContext(),MenteeManageActivity::class.java))
                 }
 
             }

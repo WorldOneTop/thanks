@@ -186,6 +186,3 @@ class SettingActivity : AppCompatActivity() {
     }
 }
 
-private fun AlertDialog.Builder.setItems(items: List<String>, onClickListener: DialogInterface.OnClickListener) {
-
-}

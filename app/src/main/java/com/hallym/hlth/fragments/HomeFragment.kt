@@ -153,7 +153,7 @@ class HomeFragment : Fragment() {
             return
         docDialog.window?.setLayout(binding.root.width,binding.root.height)
         docDialog.detailDocRoot.removeAllViews()
-        docDialog.detailDocTitle.text = documents[0].typeToStr()
+        docDialog.detailDocTitle.text = documents[0].typeToStr(requireContext())
 
         for(doc in documents){
             val tv = TextView(requireContext())
