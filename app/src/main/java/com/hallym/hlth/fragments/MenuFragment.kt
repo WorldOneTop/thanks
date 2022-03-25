@@ -49,15 +49,15 @@ class MenuFragment : Fragment() {
         this.data.clear()
 
         // TODO: Replace with real data
-        data.add(MenuValueObject("cat_account", "사용자"))
-        data.add(MenuValueObject("account_manage", "계정 관리", R.drawable.ic_round_account_circle_24))
-        data.add(MenuValueObject("cat_user", "회원 관리"))
-        data.add(MenuValueObject("register_mentee", getString(R.string.apply_mentee_title), R.drawable.ic_round_account_circle_24))
-        data.add(MenuValueObject("register_mentor", getString(R.string.apply_mentor_title), R.drawable.ic_round_account_circle_24))
-        data.add(MenuValueObject("manager_mentee", "멘티 관리", R.drawable.ic_round_account_circle_24))
-        data.add(MenuValueObject("cat_app", "애플리케이션"))
-        data.add(MenuValueObject("app_setting", "설정", R.drawable.ic_round_account_circle_24))
-        data.add(MenuValueObject("app_info", "애플리케이션 정보", R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("cat_account", getString(R.string.menu_tab_user)))
+        data.add(MenuValueObject("account_manage", getString(R.string.menu_manage_account), R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("cat_user", getString(R.string.menu_tab_member)))
+        data.add(MenuValueObject("register_mentee", getString(R.string.menu_apply_mentee), R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("register_mentor", getString(R.string.menu_apply_mentor), R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("manager_mentee", getString(R.string.menu_manage_mentee), R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("cat_app", getString(R.string.menu_tab_app)))
+        data.add(MenuValueObject("app_setting", getString(R.string.menu_setting), R.drawable.ic_round_account_circle_24))
+        data.add(MenuValueObject("app_info", getString(R.string.menu_app_info), R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("footer", ""))
     }
 

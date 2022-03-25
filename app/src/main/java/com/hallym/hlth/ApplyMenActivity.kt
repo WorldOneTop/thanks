@@ -34,7 +34,6 @@ class ApplyMenActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_apply_men)
         binding = ActivityApplyMenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -53,9 +52,9 @@ class ApplyMenActivity() : AppCompatActivity() {
         setSupportActionBar(binding.toolbarApplyMen)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         if(intent.getBooleanExtra("isMentor",true)){
-            supportActionBar?.setTitle(R.string.apply_mentor_title)
+            supportActionBar?.setTitle(R.string.menu_apply_mentor)
         }else{
-            supportActionBar?.setTitle(R.string.apply_mentee_title)
+            supportActionBar?.setTitle(R.string.menu_apply_mentee)
         }
         adapter = ApplyMenAdapter(applicationContext,intent.getBooleanExtra("isMentor",true))
         adapter.onClickListener = {term, isMentor ->

@@ -41,6 +41,19 @@
     <string name="title_book_short">독후감</string>
     <string name="title_contest_short">공모전</string>
 
+    <!--  MenuFragment  -->
+    <string name="menu_tab_user">사용자</string>
+    <string name="menu_tab_member">회원 관리</string>
+    <string name="menu_tab_app">애플리케이션</string>
+
+    <string name="menu_manage_account">계정 관리</string>
+    <string name="menu_apply_mentee">멘티 신청</string>
+    <string name="menu_apply_mentor">멘토 신청</string>
+    <string name="menu_manage_mentee">멘티 관리</string>
+    <string name="menu_setting">설정</string>
+    <string name="menu_app_info">애플리케이션 정보</string>
+
+
     <!--  StartingActivity  -->
     <string name="permission_require">저장 공간에 대한 권한이 필요합니다.</string>
     <string name="permission_go">권한 설정 하기</string>
@@ -71,15 +84,12 @@
     <string name="info_doc_count">총 작성 글</string>
 
     <!--  ApplyMenActivity  -->
-    <string name="apply_mentor_title">멘토 신청</string>
-    <string name="apply_mentee_title">멘티 신청</string>
     <string name="apply_men_submit">신청하기</string>
     <string name="apply_men_status_true">활동 중</string>
     <string name="apply_men_status_false">모집 중</string>
     <string name="apply_men_status_null">활동 종료</string>
 
     <!--  SettingActivity  -->
-    <string name="setting_title">설정</string>
     <string name="setting_tab_private_setting">개인 설정</string>
     <string name="setting_color">선호 색상</string>
     <string name="setting_tab_info">개인정보 보호</string>
@@ -117,6 +127,8 @@
     <string name="diary_title">감사 일기</string>
     <string name="diary_exp">오늘 감사한 일에 대해 일기를 써 보세요.</string>
 
+    <!--  MenteeManageActivity  -->
+    <string name="mentees_title">멘토 관리</string>
 
     <string-array name = "first_page">
         <item>홈</item>

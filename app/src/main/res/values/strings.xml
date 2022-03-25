@@ -40,6 +40,18 @@
     <string name="title_book_short">Readings</string>
     <string name="title_contest_short">Contest</string>
 
+    <!-- MenuFragment -->
+    <string name="menu_tab_user">User</string>
+    <string name="menu_tab_member">Manage members</string>
+    <string name="menu_tab_app">Application</string>
+
+    <string name="menu_manage_account">Manage account</string>
+    <string name="menu_apply_mentee">Apply for mentee</string>
+    <string name="menu_apply_mentor">Apply for mentor</string>
+    <string name="menu_manage_mentee">Manage mentees</string>
+    <string name="menu_setting">Settings</string>
+    <string name="menu_app_info">Application information</string>
+
     <!--  StartingActivity  -->
     <string name="permission_require">Requires permission for storage space.</string>
     <string name="permission_go">Go to set permissions</string>
@@ -71,15 +83,12 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="info_doc_count">Total writing</string>
 
     <!--  ApplyMenActivity  -->
-    <string name="apply_mentor_title">Apply for mentor</string>
-    <string name="apply_mentee_title">Apply for mentee</string>
     <string name="apply_men_submit">Apply</string>
     <string name="apply_men_status_true">In active</string>
     <string name="apply_men_status_false">Recruiting</string>
     <string name="apply_men_status_null">End of activity</string>
 
     <!--  SettingActivity  -->
-    <string name="setting_title">Setting</string>
     <string name="setting_tab_private_setting">Personal settings</string>
     <string name="setting_color">Preferred color</string>
     <string name="setting_tab_info">Privacy</string>

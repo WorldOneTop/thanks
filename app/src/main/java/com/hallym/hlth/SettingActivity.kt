@@ -25,7 +25,7 @@ class SettingActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbarSetting)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(R.string.setting_title)
+        supportActionBar?.setTitle(R.string.menu_setting)
 
         setting = Setting(this)
         initView()
