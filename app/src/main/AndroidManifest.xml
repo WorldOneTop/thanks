@@ -15,7 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Hlth">
         <activity
-                android:name=".MenteeInfo"
+                android:name=".MenteeInfoActivity"
                 android:exported="false" />
         <activity
                 android:name=".MenteeManageActivity"

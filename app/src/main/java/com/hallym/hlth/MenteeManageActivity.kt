@@ -2,16 +2,12 @@ package com.hallym.hlth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hallym.hlth.databinding.ActivityMenteeManageBinding
 import com.hallym.hlth.databinding.RowMenteesBinding
-import com.hallym.hlth.models.Document
 
 
 class MenteeManageActivity : AppCompatActivity() {
@@ -39,9 +35,10 @@ class MenteeManageActivity : AppCompatActivity() {
         binding.rvMenteeManage.layoutManager = GridLayoutManager(applicationContext, 2)
         binding.rvMenteeManage.adapter = adapter
 
-        adapter.onClickListener = {
-            val intent = Intent(this,SettingActivity::class.java)
-            intent.putExtra("id",it)
+        adapter.onClickListener = { id,name ->
+            val intent = Intent(this,MenteeInfoActivity::class.java)
+            intent.putExtra("id",id)
+            intent.putExtra("name",name)
             startActivity(intent)
 
         }
@@ -63,7 +60,7 @@ class MenteeManageActivity : AppCompatActivity() {
 }
 class MenteeManageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val data: ArrayList<MenteeManageData> = arrayListOf()
-    var onClickListener: ((index: Int) -> Unit)? = null
+    var onClickListener: ((index: Int,name:String) -> Unit)? = null
 
 
     fun setData(data:ArrayList<MenteeManageData>){
@@ -93,7 +90,7 @@ class MenteeManageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 }
 class MenteeManageViewHolder(private val binding:RowMenteesBinding) : RecyclerView.ViewHolder(binding.root), View.OnCreateContextMenuListener {
-    var onClickListener: ((index: Int) -> Unit)? = null
+    var onClickListener: ((index: Int,name:String) -> Unit)? = null
 
     init {
         itemView.setOnCreateContextMenuListener(this)
@@ -107,7 +104,7 @@ class MenteeManageViewHolder(private val binding:RowMenteesBinding) : RecyclerVi
         binding.menteesSave.text = data.save.toString()
         binding.menteesBook.text = data.book.toString()
 
-        binding.root.setOnClickListener{ onClickListener?.let { it(data.id) }}
+        binding.root.setOnClickListener{ onClickListener?.let { it(data.id,data.name) }}
     }
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
             menu?.add(0, 0, 0, "쪽지 보내기")?.setOnMenuItemClickListener {

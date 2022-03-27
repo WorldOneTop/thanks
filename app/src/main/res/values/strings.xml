@@ -124,6 +124,9 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="diary_title">Thanks Diary</string>
     <string name="diary_exp">Write today\'s gratitude journal</string>
 
+    <!-- MenteeInfoActivity -->
+    <string name="mentee_info_term">n mentoring</string>
+
     <!-- ChatActivity -->
     <string name="chat_send">Send message</string>
 
