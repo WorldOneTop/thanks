@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hallym.hlth.databinding.ActivityDiaryBinding
 import com.hallym.hlth.databinding.RowDiaryBinding
+import com.hallym.hlth.function.LoginStorage
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.models.Document
 import com.hallym.hlth.models.Term
@@ -90,7 +91,7 @@ class DiaryActivity : AppCompatActivity() {
         adapter.onClickListener = { diaryData ->
             progressDialog.show()
             this.diaryData = diaryData
-            Query().getDoc(diaryData.date){
+            Query().getDoc(LoginStorage.id.toString(),diaryData.date){
                 val documents = JSONObject(it).getJSONArray("data")
                 val thanksDoc:java.util.ArrayList<Document> = ArrayList()
                 for(i in 0 until documents.length()){

@@ -78,7 +78,7 @@ class StartingActivity : AppCompatActivity() {
         Document.clearTodayData()
         Document.homeDataType = Document.todayDataType
 
-        Query().getDoc(Query.now()){
+        Query().getDoc(LoginStorage.id.toString(),Query.now()){
             try {
                 val documents = JSONObject(it).getJSONArray("data")
 

@@ -42,9 +42,9 @@ class Query {
             }
         }
     }
-    fun getDoc(date:String, onResponse: (String)-> Unit){
+    fun getDoc(id:String, date:String, onResponse: (String)-> Unit){
         val request = Request.Builder()
-            .url(URL + "selectDocument?userId=${LoginStorage.id}&date=$date")
+            .url(URL + "selectDocument?userId=$id&date=$date")
             .build()
 
         okHttpClient.newCall(request).enqueue(object : Callback {
@@ -157,6 +157,23 @@ class Query {
                 })
             }
         }
+    }
+
+    fun getMenteesDoc(onResponse: (JSONObject) -> Unit){
+        val date = now()
+        val request = Request.Builder()
+            .url(URL + "getMenteesDoc?userId=${LoginStorage.id}&date=$date")
+            .build()
+
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body!!.string()
+                Log.d("asd getMenteesDoc",body)
+                onResponse(JSONObject(body))
+            }
+        })
     }
 
 }

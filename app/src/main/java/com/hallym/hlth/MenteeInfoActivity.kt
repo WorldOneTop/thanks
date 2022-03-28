@@ -1,14 +1,22 @@
 package com.hallym.hlth
 
 import android.R
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hallym.hlth.databinding.ActivityMenteeInfoBinding
+import com.hallym.hlth.function.Query
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class MenteeInfoActivity : AppCompatActivity() {
@@ -22,6 +30,8 @@ class MenteeInfoActivity : AppCompatActivity() {
         initView()
         setData()
     }
+
+    @SuppressLint("SetTextI18n")
     private fun initView(){
         setSupportActionBar(binding.toolbarMenteeInfo)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -30,106 +40,52 @@ class MenteeInfoActivity : AppCompatActivity() {
         binding.menteeInfoTitle.text = name
         binding.menteeInfoName.text = name
         binding.menteeInfoIcon.text = name?.get(0).toString()
-//        binding.menteeInfoTerm.text = binding.menteeInfoTerm.text
+        binding.menteeInfoTerm.text = intent.getIntExtra("term",0).toString() + binding.menteeInfoTerm.text
 
         binding.menteeInfoMsg.setOnClickListener{
             intent.getIntExtra("id",0)
         }
     }
     private fun setData(){
-//        Query().getDoc(date){
-//            try {
-//                val documents = JSONObject(it).getJSONArray("data")
-//
-//                for(i in 0 until documents.length()){
-//                    Document.todayDataType[documents.getJSONObject(i).getInt("docType")]?.add(
-//                        Document(
-//                            documents.getJSONObject(i)
-//                        )
-//                    )
-//                }
-//                setChatData()
-//            }catch (e: JSONException){
-//                CoroutineScope(Dispatchers.Main).launch{
-//                    Toast.makeText(applicationContext,"Can't connect to server.", Toast.LENGTH_LONG).show()
-//                    finish()
-//                }
-//            }
-//        }
-
         val thanks:ArrayList<String> = ArrayList()
-        var kind:String = "ArrayList()"
-        var save:String = "ArrayList()\nArrayList()\nArrayList()\nArrayList()\nArrayList()\nArrayList()\nArrayList()"
-        var book:String = "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()\n" +
-                "ArrayList()"
-
-        thanks.add("\"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +\n" +
-                "                \"ArrayList()\\n\" +")
-        thanks.add("asvasdvasf")
-        thanks.add("asvasdvasf")
-        thanks.add("asvasdvasf")
-        thanks.add("asvasdvasf")
-        thanks.add("asvasdvasf")
-        thanks.add("asvasdvasf")
-
         val thanksAdapter: ArrayAdapter<String> = ArrayAdapter(this, R.layout.simple_list_item_1,thanks)
-        binding.menteeInfoThanks.adapter = thanksAdapter
-        setListViewHeightBasedOnChildren(binding.menteeInfoThanks)
-        binding.menteeInfoKind.text = null
-        binding.menteeInfoSave.text = save
-        binding.menteeInfoBook.text = book
+
+        Query().getDoc(intent.getIntExtra("id",0).toString(),Query.now()){
+            try {
+                val documents = JSONObject(it).getJSONArray("data")
+
+
+                CoroutineScope(Dispatchers.Main).launch{
+
+                    for(i in 0 until documents.length()){
+                        when(documents.getJSONObject(i).getInt("docType")){
+                            0 ->{
+                                thanks.add(documents.getJSONObject(i).getString("content"))
+                            }
+                            1 ->{
+                                binding.menteeInfoKind.text = documents.getJSONObject(i).getString("content")
+                            }
+                            2 ->{
+                                binding.menteeInfoSave.text = documents.getJSONObject(i).getString("content")
+                            }
+                            3 ->{
+                                binding.menteeInfoBook.text = documents.getJSONObject(i).getString("content")
+                            }
+                        }
+                    }
+                    if(thanks.isEmpty()){
+                        thanks.add("  ")
+                    }
+                    binding.menteeInfoThanks.adapter = thanksAdapter
+                    setListViewHeightBasedOnChildren(binding.menteeInfoThanks)
+                }
+            }catch (e: JSONException){
+                CoroutineScope(Dispatchers.Main).launch{
+                    Toast.makeText(applicationContext,"Can't connect to server.", Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

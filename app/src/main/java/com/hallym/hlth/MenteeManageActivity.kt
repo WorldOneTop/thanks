@@ -8,6 +8,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hallym.hlth.databinding.ActivityMenteeManageBinding
 import com.hallym.hlth.databinding.RowMenteesBinding
+import com.hallym.hlth.function.Query
+import com.hallym.hlth.models.Document
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 
 class MenteeManageActivity : AppCompatActivity() {
@@ -35,20 +41,36 @@ class MenteeManageActivity : AppCompatActivity() {
         binding.rvMenteeManage.layoutManager = GridLayoutManager(applicationContext, 2)
         binding.rvMenteeManage.adapter = adapter
 
-        adapter.onClickListener = { id,name ->
+        adapter.onClickListener = { id,name,term ->
             val intent = Intent(this,MenteeInfoActivity::class.java)
             intent.putExtra("id",id)
             intent.putExtra("name",name)
+            intent.putExtra("term",term)
             startActivity(intent)
 
         }
     }
     private fun setData(){
-//getMenteesDoc 찾기
-        adapter.setData(arrayListOf(
-            MenteeManageData(20185159,"홍길동",1,2,0,0),
-            MenteeManageData(20185159,"고길동",0,2,2,0),
-        ))
+        val mentees = ArrayList<MenteeManageData>()
+
+        Query().getMenteesDoc{
+            val data = it.getJSONArray("data")
+
+            for(i in 0 until data.length()){
+                mentees.add(MenteeManageData(
+                    data.getJSONObject(i).getInt("userId"),
+                    data.getJSONObject(i).getString("userId__name"),
+                    data.getJSONObject(i).getInt("term"),
+                    data.getJSONObject(i).getInt("thanks"),
+                    data.getJSONObject(i).getInt("kind"),
+                    data.getJSONObject(i).getInt("save"),
+                    data.getJSONObject(i).getInt("book"),
+                ))
+            }
+            CoroutineScope(Dispatchers.Main).launch {
+                adapter.setData(mentees)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -60,7 +82,7 @@ class MenteeManageActivity : AppCompatActivity() {
 }
 class MenteeManageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val data: ArrayList<MenteeManageData> = arrayListOf()
-    var onClickListener: ((index: Int,name:String) -> Unit)? = null
+    var onClickListener: ((index: Int,name:String,term:Int) -> Unit)? = null
 
 
     fun setData(data:ArrayList<MenteeManageData>){
@@ -90,7 +112,7 @@ class MenteeManageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 }
 class MenteeManageViewHolder(private val binding:RowMenteesBinding) : RecyclerView.ViewHolder(binding.root), View.OnCreateContextMenuListener {
-    var onClickListener: ((index: Int,name:String) -> Unit)? = null
+    var onClickListener: ((index: Int,name:String,term:Int) -> Unit)? = null
 
     init {
         itemView.setOnCreateContextMenuListener(this)
@@ -104,7 +126,7 @@ class MenteeManageViewHolder(private val binding:RowMenteesBinding) : RecyclerVi
         binding.menteesSave.text = data.save.toString()
         binding.menteesBook.text = data.book.toString()
 
-        binding.root.setOnClickListener{ onClickListener?.let { it(data.id,data.name) }}
+        binding.root.setOnClickListener{ onClickListener?.let { it(data.id,data.name,data.term) }}
     }
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
             menu?.add(0, 0, 0, "쪽지 보내기")?.setOnMenuItemClickListener {
@@ -116,6 +138,7 @@ class MenteeManageViewHolder(private val binding:RowMenteesBinding) : RecyclerVi
 data class MenteeManageData(
     var id:Int,
     var name:String,
+    var term:Int,
     var thanks:Int,
     var kind:Int,
     var save:Int,
