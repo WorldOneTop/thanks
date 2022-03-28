@@ -44,7 +44,7 @@ class MenteeManageActivity : AppCompatActivity() {
         }
     }
     private fun setData(){
-
+//getMenteesDoc 찾기
         adapter.setData(arrayListOf(
             MenteeManageData(20185159,"홍길동",1,2,0,0),
             MenteeManageData(20185159,"고길동",0,2,2,0),

@@ -91,12 +91,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setTodayDocumentData(){
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis)
-
         Document.clearTodayData()
         Document.homeDataType = Document.todayDataType
 
-        Query().getDoc(date){
+        Query().getDoc(Query.now()){
             try {
                 val documents = JSONObject(it).getJSONArray("data")
 

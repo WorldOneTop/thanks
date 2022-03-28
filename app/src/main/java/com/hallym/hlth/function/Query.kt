@@ -8,10 +8,15 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Query {
     companion object{
         const val URL:String = "https://thanks-server-ggxvc.run.goorm.io/"
+        fun now():String{
+            return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis)
+        }
     }
     private var okHttpClient:OkHttpClient = OkHttpClient()
 
