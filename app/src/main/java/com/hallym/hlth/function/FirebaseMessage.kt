@@ -16,7 +16,7 @@ class FirebaseMessage : FirebaseMessagingService() {
 
         if(remoteMessage.from =="/topics/notice"){
             Notice.noticeList?.let {
-                Notice.noticeList!!.add(0,Notice(remoteMessage.data["title"]!!,remoteMessage.data["content"]!!,remoteMessage.data["date"]!!,Notice.iconNotice))
+                Notice.noticeList!!.add(0,Notice(remoteMessage.data["title"]!!,remoteMessage.data["body"]!!,remoteMessage.data["date"]!!,Notice.iconNotice))
             }
         }
 //        // TODO(developer): Handle FCM messages here.

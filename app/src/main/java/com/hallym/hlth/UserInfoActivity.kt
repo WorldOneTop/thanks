@@ -76,7 +76,7 @@ class UserInfoActivity : AppCompatActivity() {
     }
     private fun initListener(){
         binding.infoLogout.setOnClickListener {
-            LoginStorage(this).saveIdPw("","")
+            LoginStorage(this).saveData("","",1)
             val setting = Setting(this)
             setting.setAutoLogin(false)
             setting.apply()

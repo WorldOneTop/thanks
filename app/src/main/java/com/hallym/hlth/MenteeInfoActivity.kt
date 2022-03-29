@@ -74,7 +74,7 @@ class MenteeInfoActivity : AppCompatActivity() {
                         }
                     }
                     if(thanks.isEmpty()){
-                        thanks.add("  ")
+                        thanks.add(" ")
                     }
                     binding.menteeInfoThanks.adapter = thanksAdapter
                     setListViewHeightBasedOnChildren(binding.menteeInfoThanks)

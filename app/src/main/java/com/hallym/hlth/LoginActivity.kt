@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.login_empty), Toast.LENGTH_SHORT).show()
             }
         }
-        binding.loginPw.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        binding.loginPw.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if(checkForm()) {
                     submit()
@@ -68,12 +68,12 @@ class LoginActivity : AppCompatActivity() {
                 val status = JSONObject(it)
                 if(status.getString("status") == "OK"){
                     if(binding.loginAutoLogin.isChecked){
-                        LoginStorage(this).saveIdPw(binding.loginId.text.toString(),binding.loginPw.text.toString())
+                        LoginStorage(this).saveData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("status"))
                         val setting = Setting(this)
                         setting.setAutoLogin(true)
                         setting.apply()
                     }else{
-                        LoginStorage(this).setIdPw(binding.loginId.text.toString(),binding.loginPw.text.toString())
+                        LoginStorage(this).setData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("status"))
                     }
                     setTodayDocumentData()
                 }else{

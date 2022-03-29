@@ -7,6 +7,14 @@
 
     <string name="OK">확인</string>
 
+    <!--  Status  -->
+    <string name="status_1">유저</string>
+    <string name="status_2">멘토 신청 대기</string>
+    <string name="status_3">멘티 신청 대기</string>
+    <string name="status_4">멘토</string>
+    <string name="status_5">멘티</string>
+
+
     <!--  MainActivity  -->
     <string name="bottom_nav_home">홈</string>
     <string name="bottom_nav_category">게시판</string>

@@ -59,7 +59,8 @@ class Query {
     }
     fun uploadDoc(content:String, type:Int, imagePath: String?, onResponse: (JSONObject)-> Unit){
         val request = Request.Builder()
-            .url(URL + "createDoc?userId=${LoginStorage.id}&docType=$type&content=$content")
+            .url(URL + "createDoc/?userId=${LoginStorage.id}&docType=$type")
+
 
         imagePath?.let {
             val file= File(imagePath)
@@ -75,6 +76,7 @@ class Query {
 
             request.post(body)
         }
+        request.post(FormBody.Builder().add("content",content).build())
 
         okHttpClient.newCall(request.build()).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {

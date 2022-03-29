@@ -1,6 +1,7 @@
 package com.hallym.hlth.function
 
 import android.content.Context
+import com.hallym.hlth.R
 import org.json.JSONObject
 
 class LoginStorage (val context: Context){
@@ -9,6 +10,8 @@ class LoginStorage (val context: Context){
         var id:String? = null
             private set
         var pw:String? = null
+            private set
+        var status:Int? = null
             private set
     }
     var content:JSONObject
@@ -24,21 +27,35 @@ class LoginStorage (val context: Context){
             }
         }
     }
-    fun setIdPw(id:String, pw:String) {
+    fun setData(id:String, pw:String,status:Int) {
         LoginStorage.id = id
         LoginStorage.pw = pw
+        LoginStorage.status = status
     }
-    fun saveIdPw(id:String?, pw:String?) {
+    fun saveData(id:String?, pw:String?,status:Int) {
         content.put("id", id)
         content.put("pw", pw)
+        content.put("status", status)
         context.openFileOutput(FILE_PATH, Context.MODE_PRIVATE).use {
             it.write(content.toString().toByteArray())
         }
         LoginStorage.id = id
         LoginStorage.pw = pw
+        LoginStorage.status = status
     }
-    fun loadIdPw(){
+    fun loadData(){
         id = content.getString("id")
         pw = content.getString("pw")
+        status = content.getInt("status")
+    }
+    fun statusToStr():String{
+        return when(status){
+            1 -> context.getString(R.string.status_1)
+            2 -> context.getString(R.string.status_2)
+            3 -> context.getString(R.string.status_3)
+            4 -> context.getString(R.string.status_4)
+            5 -> context.getString(R.string.status_5)
+            else -> "??"
+        }
     }
 }

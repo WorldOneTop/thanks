@@ -48,7 +48,7 @@ class StartingActivity : AppCompatActivity() {
     }
 
     private fun initData(){
-        LoginStorage(applicationContext).loadIdPw()
+        LoginStorage(applicationContext).loadData()
         Setting(applicationContext).loadData()
     }
     private fun startApp(){

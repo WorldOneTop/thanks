@@ -6,6 +6,13 @@
 
     <string name="OK">OK</string>
 
+    <!-- Status -->
+    <string name="status_1">User</string>
+    <string name="status_2">Waiting for mentor application</string>
+    <string name="status_3">Waiting for mentee application</string>
+    <string name="status_4">Mentor</string>
+    <string name="status_5">Mentee</string>
+
     <!--  MainActivity  -->
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_category">Category</string>
