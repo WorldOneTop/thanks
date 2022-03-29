@@ -61,6 +61,12 @@
     <string name="menu_setting">설정</string>
     <string name="menu_app_info">애플리케이션 정보</string>
 
+    <string name="menu_applyMentor_already">이미 멘티를 지원했습니다.</string>
+    <string name="menu_applyMentor_noMentee">멘티를 먼저 진행해야합니다.</string>
+    <string name="menu_applyMentee_already">이미 멘토를 지원했습니다.</string>
+    <string name="menu_applyMen_already">현재 멘토링 진행중입니다.</string>
+    <string name="menu_manageMen_noMentor">멘토가 아닙니다.</string>
+
 
     <!--  StartingActivity  -->
     <string name="permission_require">저장 공간에 대한 권한이 필요합니다.</string>

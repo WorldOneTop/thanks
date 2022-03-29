@@ -59,6 +59,12 @@
     <string name="menu_setting">Settings</string>
     <string name="menu_app_info">Application information</string>
 
+    <string name="menu_applyMentor_already">Already applied for a mentee</string>
+    <string name="menu_applyMentor_noMentee">You must go through the mentee first</string>
+    <string name="menu_applyMentee_already">Already applied for a mentor</string>
+    <string name="menu_applyMen_already">Mentoring is currently in progress</string>
+    <string name="menu_manageMen_noMentor">I am not a mentor</string>
+
     <!--  StartingActivity  -->
     <string name="permission_require">Requires permission for storage space.</string>
     <string name="permission_go">Go to set permissions</string>

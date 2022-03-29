@@ -12,6 +12,7 @@ import com.hallym.hlth.*
 import com.hallym.hlth.adapters.MenuAdapter
 import com.hallym.hlth.adapters.MenuValueObject
 import com.hallym.hlth.databinding.FragmentMenuBinding
+import com.hallym.hlth.function.LoginStorage
 
 class MenuFragment : Fragment() {
 
@@ -73,17 +74,28 @@ class MenuFragment : Fragment() {
         binding.rvMenu.adapter = adapter
 
         adapter.onClickListener = { id ->
-            // TODO: click events
             when (id) {
-                "register_mentor" -> {
-                    val intent = Intent(requireContext(), ApplyMenActivity::class.java)
-                    intent.putExtra("isMentor",true)
-                    startActivity(intent)
+                "register_mentor" -> { //멘티 헀는지 여부 체크해야함
+                    if(LoginStorage.status == 3)
+                        Toast.makeText(requireContext(),getString(R.string.menu_applyMentor_already),Toast.LENGTH_LONG).show()
+                    else if(LoginStorage.status!! >= 4)
+                        Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
+                    else{
+                        val intent = Intent(requireContext(), ApplyMenActivity::class.java)
+                        intent.putExtra("isMentor",true)
+                        startActivity(intent)
+                    }
                 }
                 "register_mentee" -> {
-                    val intent = Intent(requireContext(), ApplyMenActivity::class.java)
-                    intent.putExtra("isMentor",false)
-                    startActivity(intent)
+                    if(LoginStorage.status == 2)
+                        Toast.makeText(requireContext(),getString(R.string.menu_applyMentee_already),Toast.LENGTH_LONG).show()
+                    else if(LoginStorage.status!! >= 4)
+                        Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
+                    else{
+                        val intent = Intent(requireContext(), ApplyMenActivity::class.java)
+                        intent.putExtra("isMentor",false)
+                        startActivity(intent)
+                    }
                 }
                 "app_setting" ->{
                     startActivity(Intent(requireContext(),SettingActivity::class.java))
@@ -92,7 +104,10 @@ class MenuFragment : Fragment() {
                     Toast.makeText(requireContext(), "v 1.0.1 최신?", Toast.LENGTH_SHORT).show()
                 }
                 "manager_mentee" -> {
-                    startActivity(Intent(requireContext(),MenteeManageActivity::class.java))
+                    if(LoginStorage.status != 4)
+                        Toast.makeText(requireContext(),getString(R.string.menu_manageMen_noMentor),Toast.LENGTH_LONG).show()
+                    else
+                        startActivity(Intent(requireContext(),MenteeManageActivity::class.java))
                 }
 
             }

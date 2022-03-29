@@ -40,16 +40,16 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.login_empty), Toast.LENGTH_SHORT).show()
             }
         }
-        binding.loginPw.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+        binding.loginPw.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if(checkForm()) {
+                if (checkForm()) {
                     submit()
-                }else{
+                } else {
                     Toast.makeText(this, getString(R.string.login_empty), Toast.LENGTH_SHORT).show()
                 }
             }
             false
-        })
+        }
     }
     private fun checkForm():Boolean{
         val id = binding.loginId.text.toString()
@@ -68,12 +68,12 @@ class LoginActivity : AppCompatActivity() {
                 val status = JSONObject(it)
                 if(status.getString("status") == "OK"){
                     if(binding.loginAutoLogin.isChecked){
-                        LoginStorage(this).saveData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("status"))
+                        LoginStorage(this).saveData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("userStatus"))
                         val setting = Setting(this)
                         setting.setAutoLogin(true)
                         setting.apply()
                     }else{
-                        LoginStorage(this).setData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("status"))
+                        LoginStorage(this).setData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("userStatus"))
                     }
                     setTodayDocumentData()
                 }else{

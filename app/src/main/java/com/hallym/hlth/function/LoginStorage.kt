@@ -21,7 +21,7 @@ class LoginStorage (val context: Context){
             content = JSONObject(context.openFileInput(FILE_PATH).bufferedReader().readLine())
         }catch (e: Exception){ // file not fond or json except
             context.openFileOutput(FILE_PATH, Context.MODE_PRIVATE).use {
-                val data = mapOf("id" to null,"pw" to null)
+                val data = mapOf("id" to null,"pw" to null, "status" to 1)
                 it.write(data.toString().toByteArray())
                 content = JSONObject(data)
             }
