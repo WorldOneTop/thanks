@@ -58,6 +58,9 @@ class Setting (val context: Context) {
             isRecvDailyNoti != preference.getBoolean("isRecvDailyNoti",false)){
             Query().settingMessage(isRecvChat,isRecvDailyNoti)
         }
+        if(isAutoLogin){
+            LoginStorage(context).saveData(LoginStorage.id,LoginStorage.pw, LoginStorage.status!!)
+        }
         editPreference.apply()
     }
     fun setColor(data: String?){
