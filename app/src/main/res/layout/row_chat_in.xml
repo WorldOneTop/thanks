@@ -10,7 +10,6 @@
             android:id="@+id/rowChatInDateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -48,121 +47,131 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-            android:id="@+id/rowChatInName"
-            android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rowChatYouLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rowChatInDateLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/rowChatInDateLayout">
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/rowChatInUCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/color_bg_tertiary"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rowChatInName">
-
-        <LinearLayout
+        <TextView
+                android:id="@+id/rowChatInName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                    android:id="@+id/rowChatInUContent"
+        <androidx.cardview.widget.CardView
+                android:id="@+id/rowChatInUCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/color_bg_tertiary"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rowChatInName">
+
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:maxWidth="260dp"
-                    android:paddingLeft="12dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="12dp"
-                    android:textColor="@color/color_text_primary"
-                    android:textSize="16sp" />
-        </LinearLayout>
+                    android:orientation="vertical">
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                        android:id="@+id/rowChatInUContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:maxWidth="260dp"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="12dp"
+                        android:textColor="@color/color_text_primary"
+                        android:textSize="16sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
-    <TextView
-            android:id="@+id/rowChatInUTime"
-            android:layout_width="wrap_content"
+        <TextView
+                android:id="@+id/rowChatInUTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_secondary"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@+id/rowChatInUCard"
+                app:layout_constraintStart_toEndOf="@+id/rowChatInUCard" />
+
+        <TextView
+                android:id="@+id/rowChatInURead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_primary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/rowChatInUTime"
+                app:layout_constraintStart_toEndOf="@+id/rowChatInUCard" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rowChatMyLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_text_secondary"
-            android:textSize="11sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/rowChatInUCard"
-            app:layout_constraintStart_toEndOf="@+id/rowChatInUCard" />
-
-    <TextView
-            android:id="@+id/rowChatInURead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/rowChatInUTime"
-            app:layout_constraintStart_toEndOf="@+id/rowChatInUCard" />
-
-
-
-    <androidx.cardview.widget.CardView
-            android:id="@+id/rowChatInCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/color_primary"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/rowChatInDateLayout">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+                android:id="@+id/rowChatInCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardBackgroundColor="@color/color_primary"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                    android:id="@+id/rowChatInContent"
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:maxWidth="260dp"
-                    android:paddingLeft="12dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="12dp"
-                    android:textColor="@color/color_text_white"
-                    android:textSize="16sp" />
-        </LinearLayout>
+                    android:orientation="vertical">
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                        android:id="@+id/rowChatInContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:maxWidth="260dp"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="12dp"
+                        android:textColor="@color/color_text_white"
+                        android:textSize="16sp" />
+            </LinearLayout>
 
-    <TextView
-            android:id="@+id/rowChatInTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_text_secondary"
-            android:textSize="11sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/rowChatInCard"
-            app:layout_constraintEnd_toStartOf="@+id/rowChatInCard" />
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-            android:id="@+id/rowChatInRead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/rowChatInTime"
-            app:layout_constraintEnd_toStartOf="@+id/rowChatInCard" />
+        <TextView
+                android:id="@+id/rowChatInTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_secondary"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@+id/rowChatInCard"
+                app:layout_constraintEnd_toStartOf="@+id/rowChatInCard" />
+
+        <TextView
+                android:id="@+id/rowChatInRead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_primary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/rowChatInTime"
+                app:layout_constraintEnd_toStartOf="@+id/rowChatInCard" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

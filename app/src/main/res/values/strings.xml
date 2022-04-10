@@ -143,6 +143,9 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <!-- ChatActivity -->
     <string name="chat_send">Send message</string>
 
+    <!-- notification message -->
+    <string name="message_notice_body">Your notice has been registered</string>
+
     <string-array name="first_page">
         <item>Home</item>
         <item>Challenge</item>

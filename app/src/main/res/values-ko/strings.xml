@@ -147,6 +147,9 @@
     <!--  ChatActivity  -->
     <string name="chat_send">쪽지 보내기</string>
 
+    <!--  notification message  -->
+    <string name="message_notice_body">공지사항이 등록되었습니다.</string>
+
     <string-array name = "first_page">
         <item>홈</item>
         <item>오늘 목표</item>

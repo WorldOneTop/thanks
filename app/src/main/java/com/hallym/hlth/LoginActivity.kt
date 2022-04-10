@@ -7,6 +7,7 @@ import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hallym.hlth.databinding.ActivityLoginBinding
+import com.hallym.hlth.function.InitData
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.function.Setting
 import com.hallym.hlth.function.LoginStorage
@@ -23,7 +24,7 @@ import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val pattern = Pattern.compile("20[0-9]{6}\$");
+    private val pattern = Pattern.compile("20[0-9]{6}\$")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +76,10 @@ class LoginActivity : AppCompatActivity() {
                     }else{
                         LoginStorage(this).setData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("userStatus"))
                     }
-                    setTodayDocumentData()
+                    InitData(this){
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()
+                    }
                 }else{
                     CoroutineScope(Dispatchers.Main).launch{
                         Toast.makeText(applicationContext,getString(R.string.login_fail),Toast.LENGTH_SHORT).show()
@@ -89,39 +93,4 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun setTodayDocumentData(){
-        Document.clearTodayData()
-        Document.homeDataType = Document.todayDataType
-
-        Query().getDoc(LoginStorage.id.toString(),Query.now()){
-            try {
-                val documents = JSONObject(it).getJSONArray("data")
-
-                for(i in 0 until documents.length()){
-                    Document.todayDataType[documents.getJSONObject(i).getInt("docType")]?.add(
-                        Document(
-                        documents.getJSONObject(i)
-                    )
-                    )
-                }
-                setChatData()
-            }catch (e: JSONException){
-                CoroutineScope(Dispatchers.Main).launch{
-                    Toast.makeText(applicationContext,"Can't connect to server.",Toast.LENGTH_LONG).show()
-                    finish()
-                }
-            }
-        }
-    }
-
-    private fun setChatData(){
-        setNotiData()
-    }
-
-    private fun setNotiData(){
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        finish()
-    }
-
 }

@@ -1,6 +1,9 @@
 package com.hallym.hlth.fragments
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
@@ -17,6 +21,10 @@ import com.hallym.hlth.NotificationActivity
 import com.hallym.hlth.adapters.ChatAdapter
 import com.hallym.hlth.adapters.HomeAdapter
 import com.hallym.hlth.databinding.FragmentChatBinding
+import com.hallym.hlth.function.ChatController
+import com.hallym.hlth.function.ChatDB
+import com.hallym.hlth.function.Query
+//import com.hallym.hlth.function.ChatStorage
 import com.hallym.hlth.models.Chatting
 import java.util.*
 
@@ -24,6 +32,15 @@ class ChatFragment : Fragment() {
 
     private lateinit var binding: FragmentChatBinding
     private lateinit var adapter: ChatAdapter
+    private val mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if(intent.getStringExtra("category") == "send"){
+                adapter.addChatting(
+                    intent.getIntExtra("userId",0), intent.getStringExtra("date").toString(),intent.getStringExtra("content").toString(),intent.getStringExtra("name").toString()
+                )
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,41 +69,28 @@ class ChatFragment : Fragment() {
     private fun initRecyclerView() {
         adapter = ChatAdapter(requireContext())
 
-        // TODO: Replace with real data
-        adapter.setData(
-            arrayOf(
-                Chatting(0,0,"상대 이름", "2022.01.30 20:10","보낸 내용",1),
-                Chatting(1,0,"상대 이름","2022.01.30 20:10","보낸 내용",10),
-                Chatting(2,0,"다른상대","2022.01.29 20:10","보낸 내용22",100),
-                Chatting(3,0,"다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대",
-                    "2022.01.29 20:10","보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용",0),
-                Chatting(3,0,"다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대다른상대",
-                    "2021.01.29 20:10","보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용보낸 내용",1000),
-            )
-        )
-
         binding.rvChat.addItemDecoration(DividerItemDecoration(requireContext(),VERTICAL))
         binding.rvChat.adapter = adapter
         binding.rvChat.layoutManager = LinearLayoutManager(requireContext())
 
-        var intent = Intent( requireContext(),ChatInActivity::class.java )
-        adapter.onClickListener = { chatRoom,userName,userId ->
-            intent.putExtra("chatRoom",chatRoom)
-            intent.putExtra("userName",userName)
+        val intent = Intent( requireContext(),ChatInActivity::class.java )
+        adapter.onClickListener = { userId,userName ->
             intent.putExtra("userId",userId)
-            startActivity(
-                intent
-            )
-
+            intent.putExtra("userName",userName)
+            startActivity(intent)
         }
 
     }
-}
 
-//class Chatting (
-//    var userId: Int,
-//    var userName: String,
-//    var date: String,
-//    var content: String,
-//    var read: Int,
-//)
+    override fun onStart() {
+        adapter.setData(ChatController(ChatDB(requireContext()).readableDatabase).lastChatList())
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+            mBroadcastReceiver, IntentFilter("Chatting"))
+        super.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(mBroadcastReceiver)
+    }
+}

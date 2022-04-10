@@ -37,12 +37,11 @@
                 android:exported="false" />
         <activity
                 android:name=".LoginActivity"
-                android:exported="false"
-                android:screenOrientation="portrait" />
+                android:exported="false" />
         <activity
                 android:name=".ChatInActivity"
                 android:exported="false"
-                android:windowSoftInputMode="adjustPan" />
+                android:windowSoftInputMode="adjustResize"/>
         <activity
                 android:name=".NotificationActivity"
                 android:exported="false" />
@@ -67,9 +66,6 @@
             </intent-filter>
         </service>
 
-        <meta-data
-                android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/ic_app" />
     </application>
 
 </manifest>

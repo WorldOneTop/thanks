@@ -2,6 +2,7 @@ package com.hallym.hlth
 
 import android.R
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -43,7 +44,10 @@ class MenteeInfoActivity : AppCompatActivity() {
         binding.menteeInfoTerm.text = intent.getIntExtra("term",0).toString() + binding.menteeInfoTerm.text
 
         binding.menteeInfoMsg.setOnClickListener{
-            intent.getIntExtra("id",0)
+            val sendIntent = Intent(applicationContext, ChatInActivity::class.java)
+            sendIntent.putExtra("userId",intent.getIntExtra("userId",0))
+            sendIntent.putExtra("userName",name)
+            startActivity(sendIntent)
         }
     }
     private fun setData(){
@@ -89,27 +93,27 @@ class MenteeInfoActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
+        if (item.itemId == R.id.home) {
             finish()
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun setListViewHeightBasedOnChildren(listView: ListView){
-        val listAdapter = listView.getAdapter()
+        val listAdapter = listView.adapter
         var totalHeight = 0
         for(i in 0 until listAdapter.count){
             val listItem = listAdapter.getView(i,null,listView)
             listItem.measure(
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-            totalHeight += listItem.measuredHeight;
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
+            totalHeight += listItem.measuredHeight
         }
 
-        val params = listView.layoutParams;
-        params.height = totalHeight + (listView.dividerHeight * (listAdapter.count - 1));
-        listView.layoutParams = params;
-        listView.requestLayout();
+        val params = listView.layoutParams
+        params.height = totalHeight + (listView.dividerHeight * (listAdapter.count - 1))
+        listView.layoutParams = params
+        listView.requestLayout()
         }
 
 }

@@ -43,12 +43,19 @@ class MenteeManageActivity : AppCompatActivity() {
 
         adapter.onClickListener = { id,name,term ->
             val intent = Intent(this,MenteeInfoActivity::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("userId",id)
             intent.putExtra("name",name)
             intent.putExtra("term",term)
             startActivity(intent)
 
         }
+        adapter.sendChatListener = { id,name ->
+            val intent = Intent(applicationContext, ChatInActivity::class.java)
+            intent.putExtra("userId",id)
+            intent.putExtra("userName",name)
+            startActivity(intent)
+        }
+
     }
     private fun setData(){
         val mentees = ArrayList<MenteeManageData>()
@@ -83,6 +90,7 @@ class MenteeManageActivity : AppCompatActivity() {
 class MenteeManageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val data: ArrayList<MenteeManageData> = arrayListOf()
     var onClickListener: ((index: Int,name:String,term:Int) -> Unit)? = null
+    lateinit var sendChatListener:(userId:Int,userName:String) -> Unit
 
 
     fun setData(data:ArrayList<MenteeManageData>){
@@ -105,6 +113,7 @@ class MenteeManageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as MenteeManageViewHolder).bind(data[position])
         holder.onClickListener = onClickListener
+        holder.sendChatListener = sendChatListener
     }
 
     override fun getItemCount(): Int {
@@ -113,11 +122,16 @@ class MenteeManageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 }
 class MenteeManageViewHolder(private val binding:RowMenteesBinding) : RecyclerView.ViewHolder(binding.root), View.OnCreateContextMenuListener {
     var onClickListener: ((index: Int,name:String,term:Int) -> Unit)? = null
+    lateinit var sendChatListener:(userId:Int,userName:String) -> Unit
 
+    private var userId = 0
+    private var userName = ""
     init {
         itemView.setOnCreateContextMenuListener(this)
     }
     fun bind(data:MenteeManageData){
+        userId = data.id
+        userName = data.name
         binding.menteesName.text = data.name
         binding.menteesIcon.text = data.name[0].toString()
 
@@ -129,9 +143,8 @@ class MenteeManageViewHolder(private val binding:RowMenteesBinding) : RecyclerVi
         binding.root.setOnClickListener{ onClickListener?.let { it(data.id,data.name,data.term) }}
     }
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-            menu?.add(0, 0, 0, "쪽지 보내기")?.setOnMenuItemClickListener {
-
-            true
+            menu?.add(0, 0, 0, "쪽지 보내기")?.setOnMenuItemClickListener {sendChatListener(userId,userName)
+                true
         }
     }
 }

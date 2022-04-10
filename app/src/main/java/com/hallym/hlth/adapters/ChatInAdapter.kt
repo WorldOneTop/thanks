@@ -1,6 +1,7 @@
 package com.hallym.hlth.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ class ChatInAdapter(private val context: Context) : RecyclerView.Adapter<Recycle
 
     private val data: ArrayList<Chatting> = arrayListOf()
 
-    fun setData(data: Array<Chatting>) {
+    fun setData(data: ArrayList<Chatting>) {
         val prev = this.data.size
         this.data.clear()
         notifyItemRangeRemoved(0, prev)
@@ -22,7 +23,26 @@ class ChatInAdapter(private val context: Context) : RecyclerView.Adapter<Recycle
         this.data.addAll(data)
         notifyItemRangeInserted(0, data.size + 1)
     }
-
+    fun addChat(data: Chatting) {
+        this.data.add(data)
+        notifyItemInserted(this.data.size-1)
+    }
+    fun setAllRead(){
+        var count = 0
+        for(i in data.size-1 downTo 0){
+            if(data[i].read == 0)
+                break
+            data[i].read = 0
+            count++
+        }
+        Log.d("asd","허ㅘㄱ인 ${data.last().read}")
+        notifyItemRangeChanged(data.size-count,count)
+    }
+    fun requireReadServer():Boolean{
+        if(data.size==0)
+            return false
+        return !(data.last().isMe) && data.last().read != 0
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ChatInViewHolder(

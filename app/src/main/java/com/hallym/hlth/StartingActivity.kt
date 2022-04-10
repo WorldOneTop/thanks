@@ -15,6 +15,7 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.hallym.hlth.function.InitData
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.function.Setting
 import com.hallym.hlth.function.LoginStorage
@@ -58,7 +59,9 @@ class StartingActivity : AppCompatActivity() {
                     val status = JSONObject(it)
                     if(status.getString("status") == "OK"){
                         loginSuccess = true
-                        setTodayDocumentData()
+                        InitData(this){
+                            startActivity()
+                        }
                     }else{
                         startActivity()
                     }
@@ -73,38 +76,6 @@ class StartingActivity : AppCompatActivity() {
             startActivity()
         }
     }
-
-    private fun setTodayDocumentData(){
-        Document.clearTodayData()
-        Document.homeDataType = Document.todayDataType
-
-        Query().getDoc(LoginStorage.id.toString(),Query.now()){
-            try {
-                val documents = JSONObject(it).getJSONArray("data")
-
-                for(i in 0 until documents.length()){
-                    Document.todayDataType[documents.getJSONObject(i).getInt("docType")]?.add(Document(
-                        documents.getJSONObject(i)
-                    ))
-                }
-                setChatData()
-            }catch (e:JSONException){
-                CoroutineScope(Dispatchers.Main).launch{
-                    Toast.makeText(applicationContext,"Can't connect to server.",Toast.LENGTH_LONG).show()
-                    finish()
-                }
-            }
-        }
-    }
-
-    private fun setChatData(){
-        setNotiData()
-    }
-
-    private fun setNotiData(){
-        startActivity()
-    }
-
     private fun checkPermission(): Boolean{
         return (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED)
@@ -130,6 +101,7 @@ class StartingActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun startActivity(){
         if(Setting.isFingerLock){
             val executor = ContextCompat.getMainExecutor(this)
@@ -184,17 +156,17 @@ class StartingActivity : AppCompatActivity() {
     private fun permissionDialog(){
         val localBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
         localBuilder.setMessage(getString(R.string.permission_require))
-            .setPositiveButton(getString(R.string.permission_go),
-                DialogInterface.OnClickListener { _, _ ->
-                    try {
-                            val intent: Intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                            .setData(Uri.parse("package:$packageName"))
-                        startActivity(intent)
-                    } catch (e: ActivityNotFoundException) {
-                        val intent = Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS)
-                        startActivity(intent)
-                    }
-                })
+            .setPositiveButton(getString(R.string.permission_go)
+            ) { _, _ ->
+                try {
+                    val intent: Intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        .setData(Uri.parse("package:$packageName"))
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    val intent = Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS)
+                    startActivity(intent)
+                }
+            }
             .setNegativeButton(getString(R.string.permission_no)) { _, _ ->
                 this.finish()
             }

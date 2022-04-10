@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+//        val initViewIndex = if(true) 1 else Setting.firstPage
         // Set first fragment
         when(Setting.firstPage){
             0 -> {changeFragment(homeFragment)

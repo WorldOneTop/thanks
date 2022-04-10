@@ -178,4 +178,65 @@ class Query {
         })
     }
 
+    fun sendChat(receiverId:Int, content:String, onResponse: (JSONObject) -> Unit){
+        val request = Request.Builder()
+            .url(URL + "sendChat/?senderId=${LoginStorage.id}&receiverId=$receiverId")
+
+        request.post(FormBody.Builder().add("content",content).build())
+
+        okHttpClient.newCall(request.build()).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body!!.string()
+                Log.d("asd sendChat",body)
+                onResponse(JSONObject(body))
+            }
+        })
+    }
+    fun readChat(receiverId:Int){
+        val request = Request.Builder()
+            .url(URL + "readChat?senderId=${LoginStorage.id}&receiverId=$receiverId")
+            .build()
+
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+            override fun onResponse(call: Call, response: Response) {
+                Log.d("asd getLastChatList",response.body!!.string())
+            }
+        })
+    }
+//    fun getLastChatList(onResponse: (JSONObject) -> Unit){
+//        val request = Request.Builder()
+//            .url(URL + "readLastChat?userId=${LoginStorage.id}")
+//            .build()
+//
+//        okHttpClient.newCall(request).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//            }
+//            override fun onResponse(call: Call, response: Response) {
+//                val body = response.body!!.string()
+//                Log.d("asd getLastChatList",body)
+//                onResponse(JSONObject(body))
+//            }
+//        })
+//    }
+//    fun readChtting(onResponse: (JSONObject) -> Unit){
+//        val request = Request.Builder()
+//            .url(URL + "readChat?userId=${LoginStorage.id}")
+//            .build()
+//
+//        okHttpClient.newCall(request).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//            }
+//            override fun onResponse(call: Call, response: Response) {
+//                val body = response.body!!.string()
+//                Log.d("asd getLastChatList",body)
+//                onResponse(JSONObject(body))
+//            }
+//        })
+//    }
+
+
 }
