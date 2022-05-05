@@ -80,7 +80,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="daily_save_text">Saving one thing a day\nWrite down what you saved today.</string>
     <string name="daily_book_text">Read one book a month\nWrite down your impressions of a book you read deeply.</string>
     <string name="daily_image_load_fail">Failed to import photos.</string>
-    <string name="daily_add">Add a new item</string>
+    <string name="daily_add">+Add</string>
     <string name="daily_add_title">Writing</string>
     <string name="daily_add_fail">Please enter a contents</string>
 

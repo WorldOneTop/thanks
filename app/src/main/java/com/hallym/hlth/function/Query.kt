@@ -14,6 +14,7 @@ import java.util.*
 class Query {
     companion object{
         const val URL:String = "https://thanks-server-ggxvc.run.goorm.io/"
+        lateinit var CSRF:String
         fun now():String{
             return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis)
         }
@@ -32,6 +33,7 @@ class Query {
 
                 okHttpClient.newCall(request).enqueue(object : Callback {
                     override fun onFailure(call: Call, e: IOException) {
+                        Log.d("asd fail", e.toString())
                     }
                     override fun onResponse(call: Call, response: Response) {
                         val body = response.body!!.string()
@@ -59,7 +61,7 @@ class Query {
     }
     fun uploadDoc(content:String, type:Int, imagePath: String?, onResponse: (JSONObject)-> Unit){
         val request = Request.Builder()
-            .url(URL + "createDoc/?userId=${LoginStorage.id}&docType=$type")
+            .url(URL + "createDoc/?userId=${LoginStorage.id}&docType=$type&CSRF=$CSRF")
 
 
         imagePath?.let {
@@ -92,7 +94,7 @@ class Query {
 
     fun getAccountInfo( onResponse: (JSONObject)-> Unit){
         val request = Request.Builder()
-            .url(URL + "accountInfo?userId=${LoginStorage.id}")
+            .url(URL + "accountInfo?userId=${LoginStorage.id}&CSRF=$CSRF")
             .build()
 
         okHttpClient.newCall(request).enqueue(object : Callback {
@@ -142,29 +144,10 @@ class Query {
         })
     }
 
-    fun settingMessage(recvChat:Boolean, recvDaily:Boolean){
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val request = Request.Builder()
-                    .url(URL + "settingMessage?token=${task.result.toString()}&recvChat=${if(recvChat) 1 else 0}&recvDaily=${if(recvDaily) 1 else 0}")
-                    .build()
-
-                okHttpClient.newCall(request).enqueue(object : Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-                    }
-                    override fun onResponse(call: Call, response: Response) {
-                        val body = response.body!!.string()
-                        Log.d("asd settingMessage",body)
-                    }
-                })
-            }
-        }
-    }
-
     fun getMenteesDoc(onResponse: (JSONObject) -> Unit){
         val date = now()
         val request = Request.Builder()
-            .url(URL + "getMenteesDoc?userId=${LoginStorage.id}&date=$date")
+            .url(URL + "getMenteesDoc?userId=${LoginStorage.id}&date=$date&CSRF=$CSRF")
             .build()
 
         okHttpClient.newCall(request).enqueue(object : Callback {
@@ -180,7 +163,7 @@ class Query {
 
     fun sendChat(receiverId:Int, content:String, onResponse: (JSONObject) -> Unit){
         val request = Request.Builder()
-            .url(URL + "sendChat/?senderId=${LoginStorage.id}&receiverId=$receiverId")
+            .url(URL + "sendChat/?senderId=${LoginStorage.id}&receiverId=$receiverId&CSRF=$CSRF")
 
         request.post(FormBody.Builder().add("content",content).build())
 
@@ -196,7 +179,7 @@ class Query {
     }
     fun readChat(receiverId:Int){
         val request = Request.Builder()
-            .url(URL + "readChat?senderId=${LoginStorage.id}&receiverId=$receiverId")
+            .url(URL + "readChat?senderId=${LoginStorage.id}&receiverId=$receiverId&CSRF=$CSRF")
             .build()
 
         okHttpClient.newCall(request).enqueue(object : Callback {
@@ -207,36 +190,4 @@ class Query {
             }
         })
     }
-//    fun getLastChatList(onResponse: (JSONObject) -> Unit){
-//        val request = Request.Builder()
-//            .url(URL + "readLastChat?userId=${LoginStorage.id}")
-//            .build()
-//
-//        okHttpClient.newCall(request).enqueue(object : Callback {
-//            override fun onFailure(call: Call, e: IOException) {
-//            }
-//            override fun onResponse(call: Call, response: Response) {
-//                val body = response.body!!.string()
-//                Log.d("asd getLastChatList",body)
-//                onResponse(JSONObject(body))
-//            }
-//        })
-//    }
-//    fun readChtting(onResponse: (JSONObject) -> Unit){
-//        val request = Request.Builder()
-//            .url(URL + "readChat?userId=${LoginStorage.id}")
-//            .build()
-//
-//        okHttpClient.newCall(request).enqueue(object : Callback {
-//            override fun onFailure(call: Call, e: IOException) {
-//            }
-//            override fun onResponse(call: Call, response: Response) {
-//                val body = response.body!!.string()
-//                Log.d("asd getLastChatList",body)
-//                onResponse(JSONObject(body))
-//            }
-//        })
-//    }
-
-
 }

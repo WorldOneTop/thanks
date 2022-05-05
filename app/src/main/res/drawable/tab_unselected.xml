@@ -3,7 +3,7 @@
         android:shape="rectangle">
 
     <!-- color of the selected tab -->
-    <solid android:color="@color/color_bg_secondary" />
+    <solid android:color="@color/color_bg_tertiary" />
     <corners android:radius="10dp" />
 
 

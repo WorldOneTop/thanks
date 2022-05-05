@@ -1,6 +1,5 @@
 package com.hallym.hlth.fragments
 
-import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
@@ -14,10 +13,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.hallym.hlth.DiaryActivity
-import com.hallym.hlth.NotificationActivity
 import com.hallym.hlth.R
 import com.hallym.hlth.adapters.DailyAdapter
 import com.hallym.hlth.databinding.FragmentDailyBinding
@@ -38,7 +37,6 @@ class DailyFragment : Fragment() {
     private var imagePath: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
-        // Inflate the layout for this fragment
         binding = FragmentDailyBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -58,10 +56,10 @@ class DailyFragment : Fragment() {
 
     private fun initTab(){
         adapter = DailyAdapter(requireContext())
-        binding.dailyAddRoot.setOnClickListener{
+        binding.dailyAddTxt.setOnClickListener{
             showDialog()
         }
-        binding.addDiaryButton.setOnClickListener{
+        binding.dailyDiary.setOnClickListener{
             startActivity(Intent(requireContext(), DiaryActivity::class.java))
         }
 
@@ -84,6 +82,7 @@ class DailyFragment : Fragment() {
         binding.tabbarDaily.selectTab(binding.tabbarDaily.getTabAt(currentPosition))
 
         binding.rvDaily.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvDaily.addItemDecoration(DividerItemDecoration(requireContext(), 1))
         binding.rvDaily.adapter = adapter
 
     }
@@ -91,32 +90,32 @@ class DailyFragment : Fragment() {
         currentPosition = index
         when(index){
             0 ->{
-                binding.dailyTitle.text = getString(R.string.title_thanks)
+                binding.dailyTitle.text = getString(R.string.title_thanks_word)
                 binding.dailySubTitle.text = getString(R.string.daily_thanks_text)
                 adapter.setData(index)
             }
             1 ->{
-                binding.dailyTitle.text = getString(R.string.title_save)
+                binding.dailyTitle.text = getString(R.string.title_save_word)
                 binding.dailySubTitle.text = getString(R.string.daily_save_text)
                 adapter.setData(index)
             }
             2 ->{
-                binding.dailyTitle.text = getString(R.string.title_kind)
+                binding.dailyTitle.text = getString(R.string.title_kind_word)
                 binding.dailySubTitle.text = getString(R.string.daily_kind_text)
                 adapter.setData(index)
             }
             3 ->{
-                binding.dailyTitle.text = getString(R.string.title_book)
+                binding.dailyTitle.text = getString(R.string.title_book_word)
                 binding.dailySubTitle.text = getString(R.string.daily_book_text)
                 adapter.setData(index)
             }
             else ->{
-                binding.dailyTitle.text = getString(R.string.title_thanks)
+                binding.dailyTitle.text = getString(R.string.title_thanks_word)
                 binding.dailySubTitle.text = getString(R.string.daily_thanks_text)
                 adapter.setData(index)
             }
         }
-        initAddView(index)
+        setSumView(index)
     }
     private fun initDialog(){
         dialog = Dialog(requireContext())
@@ -154,20 +153,12 @@ class DailyFragment : Fragment() {
         }
     }
 
-    private fun initAddView(index:Int){
-        Document.todayDataType[index]!!
+    private fun setSumView(index:Int){
         if(index == 0){
-            if(Document.todayDataType[index]!!.size >= 5) {
-                binding.dailyAddRoot.visibility = View.GONE
-                return
-            }
+            binding.dailySumTxt.text = "${Document.todayDataType[index]!!.size} / 5"
         }else{
-            if(Document.todayDataType[index]!!.size >= 1) {
-                binding.dailyAddRoot.visibility = View.GONE
-                return
-            }
+            binding.dailySumTxt.text =  "${Document.todayDataType[index]!!.size} / 1"
         }
-        binding.dailyAddRoot.visibility = View.VISIBLE
     }
     private fun getRealPathFromURI(contentURI: Uri): String? {
         val result: String?

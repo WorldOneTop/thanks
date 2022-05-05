@@ -13,83 +13,86 @@
             android:scaleType="centerCrop"
             android:src="@drawable/login_background"/>
 
-<androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="50dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-
     <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:fitsSystemWindows="true"
+            android:layout_height="match_parent"
+            android:padding="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            android:orientation="horizontal">
-        <View
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="5"/>
-        <ImageView
+
+        <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/symbol_logo"
-                android:layout_weight="4" />
-        <View
+                android:layout_marginBottom="50dp"
+                android:fitsSystemWindows="true"
+
+                android:orientation="horizontal">
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="5" />
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/symbol_logo"
+                    android:layout_weight="4" />
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="5" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <EditText
+                android:id="@+id/loginId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:drawableStart="@drawable/ic_round_account_circle_24"
+                android:drawablePadding="8dp"
+                android:background="@drawable/bg_secondary_rounded"
+                android:inputType="number"
+                android:importantForAutofill="no"
+                android:layout_marginBottom="10dp"
+                android:imeOptions="actionNext" />
+
+        <EditText
+                android:id="@+id/loginPw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="8dp"
+                android:background="@drawable/bg_secondary_rounded"
+                android:inputType="textPassword"
+                android:importantForAutofill="no"
+                android:layout_marginBottom="10dp"
+                android:imeOptions="actionDone" />
+
+        <TextView
+                android:id="@+id/loginSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/bg_secondary_rounded"
+                android:backgroundTint="@color/color_primary_variant"
+                android:text="@string/login"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:layout_marginBottom="10dp" />
+
+        <CheckBox
+                android:id="@+id/loginAutoLogin"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="5" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textSize="17sp"
+                android:text="@string/login_auto_login" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <EditText
-            android:id="@+id/loginId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:drawableStart="@drawable/ic_round_account_circle_24"
-            android:drawablePadding="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:layout_marginBottom="10dp"
-            android:imeOptions="actionNext"/>
-
-    <EditText
-            android:id="@+id/loginPw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:drawableStart="@drawable/ic_baseline_lock_24"
-            android:drawablePadding="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:inputType="textPassword"
-            android:importantForAutofill="no"
-            android:layout_marginBottom="10dp"
-            android:imeOptions="actionDone"/>
-
-    <TextView
-            android:id="@+id/loginSubmit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:backgroundTint="@color/color_primary_variant"
-            android:text="@string/login"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:layout_marginBottom="10dp"/>
-
-    <CheckBox
-            android:id="@+id/loginAutoLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textSize="17sp"
-            android:text="@string/login_auto_login"/>
-
-</androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>

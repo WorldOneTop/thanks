@@ -20,7 +20,7 @@
     <string name="bottom_nav_category">게시판</string>
     <string name="bottom_nav_me">내 목표</string>
     <string name="bottom_nav_menu">메뉴</string>
-    <string name="bottom_nav_daily">오늘 목표</string>
+    <string name="bottom_nav_daily">목표</string>
     <string name="bottom_nav_chat">쪽지</string>
 
     <!--  HomeFragment  -->
@@ -37,7 +37,7 @@
     <string name="title_book">🙇‍♂  독후감</string>
     <string name="title_contest">🙇‍♂  공모전</string>
 
-    <string name="title_thanks_word">오늘의 감사</string>
+    <string name="title_thanks_word">감사합니다</string>
     <string name="title_kind_word">오늘의 선행</string>
     <string name="title_save_word">오늘의 절약</string>
     <string name="title_book_word">독후감</string>
@@ -82,7 +82,7 @@
     <string name="daily_save_text">하루에 한 가지 절약하기\n오늘 절약했던 일에 대해 적어보세요.</string>
     <string name="daily_book_text">한 달에 한 권 독서하기\n감명 깊이 읽었던 책의 감상문을 적어보세요.</string>
     <string name="daily_image_load_fail">사진을 가져오는데 실패했습니다.</string>
-    <string name="daily_add">새 항목 추가하기</string>
+    <string name="daily_add">+추가</string>
     <string name="daily_add_title">글 작성</string>
     <string name="daily_add_fail">내용을 입력해주세요.</string>
 

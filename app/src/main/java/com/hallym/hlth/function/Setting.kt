@@ -56,7 +56,7 @@ class Setting (val context: Context) {
         }
         if(isRecvChat != preference.getBoolean("isRecvChat",false) ||
             isRecvDailyNoti != preference.getBoolean("isRecvDailyNoti",false)){
-            Query().settingMessage(isRecvChat,isRecvDailyNoti)
+//            Query().settingMessage(isRecvChat,isRecvDailyNoti)
         }
         if(isAutoLogin){
             LoginStorage(context).saveData(LoginStorage.id,LoginStorage.pw, LoginStorage.status!!)

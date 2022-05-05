@@ -68,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val status = JSONObject(it)
                 if(status.getString("status") == "OK"){
+                    Query.CSRF = status.getString("CSRF")
                     if(binding.loginAutoLogin.isChecked){
                         LoginStorage(this).saveData(binding.loginId.text.toString(),binding.loginPw.text.toString(),status.getInt("userStatus"))
                         val setting = Setting(this)
