@@ -1,6 +1,11 @@
 package com.hallym.hlth.function
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.icu.util.Calendar
+import android.os.SystemClock
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ktx.Firebase
@@ -54,13 +59,31 @@ class Setting (val context: Context) {
                 Firebase.messaging.unsubscribeFromTopic("notice")
             }
         }
-        if(isRecvChat != preference.getBoolean("isRecvChat",false) ||
-            isRecvDailyNoti != preference.getBoolean("isRecvDailyNoti",false)){
-//            Query().settingMessage(isRecvChat,isRecvDailyNoti)
+        if(isRecvDailyNoti != preference.getBoolean("isRecvDailyNoti",false)){
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+            val pendingIntent = PendingIntent.getBroadcast(context, 1, Intent(context, AlarmReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+
+            if(isRecvDailyNoti){
+                val calendar: Calendar = Calendar.getInstance().apply {
+                    timeInMillis = System.currentTimeMillis()
+                    set(Calendar.HOUR_OF_DAY, 20)
+                }
+                alarmManager?.setInexactRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent
+                )
+            }else{
+                alarmManager?.cancel(pendingIntent)
+            }
         }
+
         if(isAutoLogin){
             LoginStorage(context).saveData(LoginStorage.id,LoginStorage.pw, LoginStorage.status!!)
         }
+
+
         editPreference.apply()
     }
     fun setColor(data: String?){
