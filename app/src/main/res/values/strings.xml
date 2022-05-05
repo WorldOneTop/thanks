@@ -1,8 +1,24 @@
+
 <resources>
     <string name="app_name">Thanks a day</string>
 
+    <!--  Login  -->
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+
+    <string name="hallym_univ">Hallym University</string>
+    <string name="mentoring">Appreciation mentoring</string>
+
+    <string name="login_ment">Welcome!\nPlease log in with your student information system to get started.</string>
+    <string name="login_id">Student ID</string>
+    <string name="login_pw">Password</string>
+
+    <string name="login_help">Problems logging in?</string>
+    <string name="login_help_str">You can find your ID and change your password\nYou can do it in the Student Information System.\n\nIf you don\'t remember your password,\nPlease contact the Student Support Team.</string>
+
+    <string name="login_help_choice1">Student information system</string>
+    <string name="login_help_choice2">Student Support Team</string>
+    <string name="login_help_choice3">Cancel</string>
 
     <string name="OK">OK</string>
 
@@ -152,6 +168,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
         <item>Chat</item>
         <item>Menu</item>
     </string-array>
+
 
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

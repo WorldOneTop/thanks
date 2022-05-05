@@ -2,8 +2,24 @@
 <resources>
     <string name="app_name">감사운동</string>
 
+    <!--  Login  -->
     <string name="login">로그인</string>
     <string name="logout">로그아웃</string>
+
+    <string name="hallym_univ">한림대학교</string>
+    <string name="mentoring">감사멘토링</string>
+
+    <string name="login_ment">환영합니다!\n시작하려면 학생정보시스템으로 로그인해주세요.</string>
+    <string name="login_id">학번</string>
+    <string name="login_pw">비밀번호</string>
+
+    <string name="login_help">로그인에 문제가 있나요?</string>
+    <string name="login_help_str">아이디 찾기와 비밀번호 변경은\n학생정보시스템에서 할 수 있어요.\n\n만약 비밀번호가 기억나지 않는다면,\n학생지원팀에 문의해주세요.</string>
+
+    <string name="login_help_choice1">학생정보시스템</string>
+    <string name="login_help_choice2">학생지원팀</string>
+    <string name="login_help_choice3">취소</string>
+
 
     <string name="OK">확인</string>
 
@@ -156,4 +172,7 @@
         <item>쪽지</item>
         <item>메뉴</item>
     </string-array>
+
+
+
 </resources>

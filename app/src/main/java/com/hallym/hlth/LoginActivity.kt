@@ -1,9 +1,10 @@
 package com.hallym.hlth
 
+import android.app.Dialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hallym.hlth.databinding.ActivityLoginBinding
@@ -11,27 +12,41 @@ import com.hallym.hlth.function.InitData
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.function.Setting
 import com.hallym.hlth.function.LoginStorage
-import com.hallym.hlth.models.Document
+import kotlinx.android.synthetic.main.dialog_login_help.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.*
 import java.util.regex.Pattern
 
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val pattern = Pattern.compile("20[0-9]{6}\$")
+    private lateinit var dialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initDialog()
         initActv()
+    }
+    private fun initDialog(){
+        dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_login_help)
+        dialog.loginHelpChoice1.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr")))
+        }
+        dialog.loginHelpChoice2.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr")))
+        }
+        dialog.loginHelpChoice3.setOnClickListener{
+            dialog.dismiss()
+        }
+
     }
     private fun initActv(){
         binding.loginSubmit.setOnClickListener{
@@ -50,6 +65,12 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             false
+        }
+        binding.loginHelp.setOnClickListener{
+            dialog.show()
+        }
+        binding.loginPrivacy.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr")))
         }
     }
     private fun checkForm():Boolean{
