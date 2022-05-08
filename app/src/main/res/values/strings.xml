@@ -45,17 +45,13 @@
     <string name="link_shuttle">Shuttle\nBus</string>
     <string name="link_map">School\nMap</string>
 
-    <string name="title_thanks">🙇‍♂  Thanks of the day</string>
-    <string name="title_kind">🙇‍♂  Virtues of the day</string>
-    <string name="title_save">🙇‍♂  Saving of the day</string>
-    <string name="title_book">🙇‍♂  Readings of the month</string>
-    <string name="title_contest">🙇‍♂  Contest</string>
+    <string name="title_thanks">Thank you</string>
+    <string name="title_kind">Virtues of the day</string>
+    <string name="title_save">Saving of the day</string>
+    <string name="title_book">Readings of the month</string>
+    <string name="title_contest">Contest</string>
 
     <string name="title_thanks_word">Thanks of the day</string>
-    <string name="title_kind_word">Virtues of the day</string>
-    <string name="title_save_word">Saving of the day</string>
-    <string name="title_book_word">Readings of the month</string>
-    <string name="title_contest_word">Contest</string>
 
     <string name="title_thanks_short">Thanks</string>
     <string name="title_kind_short">Virtues</string>
@@ -99,6 +95,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="daily_add">+Add</string>
     <string name="daily_add_title">Writing</string>
     <string name="daily_add_fail">Please enter a contents</string>
+    <string name="daily_is_full">Goal achieved!</string>
 
     <!--  LoginActivity  -->
     <string name="login_auto_login">Keep me signed in</string>

@@ -57,11 +57,23 @@ class DailyFragment : Fragment() {
     private fun initTab(){
         adapter = DailyAdapter(requireContext())
         binding.dailyAddTxt.setOnClickListener{
-            showDialog()
+            if(Document.todayDataType[currentPosition]!!.size < currentLimitSubmit()){
+                showDialog()
+            }else{
+                Toast.makeText(requireContext(), getString(R.string.daily_is_full), Toast.LENGTH_SHORT).show()
+            }
         }
         binding.dailyDiary.setOnClickListener{
             startActivity(Intent(requireContext(), DiaryActivity::class.java))
         }
+        binding.dailyAddButton.setOnClickListener{
+            if(Document.todayDataType[currentPosition]!!.size < currentLimitSubmit()){
+                showDialog()
+            }else{
+                Toast.makeText(requireContext(), getString(R.string.daily_is_full), Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
 
         binding.tabbarDaily.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -95,27 +107,28 @@ class DailyFragment : Fragment() {
                 adapter.setData(index)
             }
             1 ->{
-                binding.dailyTitle.text = getString(R.string.title_save_word)
+                binding.dailyTitle.text = getString(R.string.title_save)
                 binding.dailySubTitle.text = getString(R.string.daily_save_text)
                 adapter.setData(index)
             }
             2 ->{
-                binding.dailyTitle.text = getString(R.string.title_kind_word)
+                binding.dailyTitle.text = getString(R.string.title_kind)
                 binding.dailySubTitle.text = getString(R.string.daily_kind_text)
                 adapter.setData(index)
             }
             3 ->{
-                binding.dailyTitle.text = getString(R.string.title_book_word)
+                binding.dailyTitle.text = getString(R.string.title_book)
                 binding.dailySubTitle.text = getString(R.string.daily_book_text)
                 adapter.setData(index)
             }
             else ->{
-                binding.dailyTitle.text = getString(R.string.title_thanks_word)
+                binding.dailyTitle.text = getString(R.string.title_thanks)
                 binding.dailySubTitle.text = getString(R.string.daily_thanks_text)
                 adapter.setData(index)
             }
         }
-        setSumView(index)
+        binding.dailySumTxt.text = "${Document.todayDataType[index]!!.size} / ${currentLimitSubmit()}"
+        binding.dailyDiary.visibility = if(index == 0) View.VISIBLE else View.GONE
     }
     private fun initDialog(){
         dialog = Dialog(requireContext())
@@ -153,12 +166,8 @@ class DailyFragment : Fragment() {
         }
     }
 
-    private fun setSumView(index:Int){
-        if(index == 0){
-            binding.dailySumTxt.text = "${Document.todayDataType[index]!!.size} / 5"
-        }else{
-            binding.dailySumTxt.text =  "${Document.todayDataType[index]!!.size} / 1"
-        }
+    private fun currentLimitSubmit():Int{
+        return if(currentPosition == 0) 5 else 1
     }
     private fun getRealPathFromURI(contentURI: Uri): String? {
         val result: String?

@@ -174,7 +174,7 @@
                     android:textColor="@color/color_text_primary"
                     android:textSize="18sp"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_kind_word"/>
+                    android:text="@string/title_kind"/>
             <TextView
                     android:id="@+id/infoKindCount"
                     android:layout_width="wrap_content"
@@ -193,7 +193,7 @@
                     android:textColor="@color/color_text_primary"
                     android:textSize="18sp"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_save_word"/>
+                    android:text="@string/title_save"/>
             <TextView
                     android:id="@+id/infoSaveCount"
                     android:layout_width="wrap_content"
@@ -212,7 +212,7 @@
                     android:textColor="@color/color_text_primary"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="@string/title_book_word"/>
+                    android:text="@string/title_book"/>
             <TextView
                     android:id="@+id/infoBookCount"
                     android:layout_width="wrap_content"
@@ -222,181 +222,4 @@
         </GridLayout>
 
     </androidx.cardview.widget.CardView>
-<!--    <ScrollView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--        <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:fitsSystemWindows="true"-->
-<!--                android:layout_marginHorizontal="16dp">-->
-
-
-<!--            <TextView-->
-<!--                    android:id="@+id/infoName"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="24dp"-->
-<!--                    android:textColor="@color/color_text_primary"-->
-<!--                    android:textSize="18sp" />-->
-
-<!--            <TextView-->
-<!--                    android:id="@+id/infoId"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="3dp"-->
-<!--                    android:layout_marginBottom="8dp"-->
-<!--                    android:textColor="@color/color_text_secondary"-->
-<!--                    android:textSize="16sp" />-->
-
-<!--            <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="24dp"-->
-<!--                    android:layout_marginBottom="8dp"-->
-<!--                    android:textColor="@color/color_text_primary"-->
-<!--                    android:textSize="18sp"-->
-<!--                    android:text="@string/info_tab_history" />-->
-
-<!--            <GridLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:rowCount="2"-->
-<!--                    android:columnCount="2">-->
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_margin="8dp"-->
-<!--                        android:background="@color/color_bg_primary"-->
-<!--                        app:cardCornerRadius="16dp"-->
-<!--                        android:layout_columnWeight="1"-->
-<!--                        app:cardElevation="4dp">-->
-
-<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="vertical"-->
-<!--                            android:layout_margin="4dp"-->
-<!--                            android:gravity="center">-->
-
-<!--                        <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:textColor="@color/color_text_primary"-->
-<!--                                android:text="@string/title_thanks_short" />-->
-
-<!--                        <TextView-->
-<!--                                android:id="@+id/infoThanksCount"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content" />-->
-<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_margin="8dp"-->
-<!--                        android:background="@color/color_bg_primary"-->
-<!--                        app:cardCornerRadius="16dp"-->
-<!--                        android:layout_columnWeight="1"-->
-<!--                        app:cardElevation="4dp">-->
-
-<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="vertical"-->
-<!--                            android:layout_margin="4dp"-->
-<!--                            android:gravity="center">-->
-
-<!--                        <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:textColor="@color/color_text_primary"-->
-<!--                                android:text="@string/title_save_short" />-->
-
-<!--                        <TextView-->
-<!--                                android:id="@+id/infoSaveCount"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content" />-->
-<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_margin="8dp"-->
-<!--                        android:background="@color/color_bg_primary"-->
-<!--                        app:cardCornerRadius="16dp"-->
-<!--                        android:layout_columnWeight="1"-->
-<!--                        app:cardElevation="4dp">-->
-
-<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="vertical"-->
-<!--                            android:layout_margin="4dp"-->
-<!--                            android:gravity="center">-->
-
-<!--                        <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:textColor="@color/color_text_primary"-->
-<!--                                android:text="@string/title_kind_short" />-->
-
-<!--                        <TextView-->
-<!--                                android:id="@+id/infoKindCount"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content" />-->
-<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_margin="8dp"-->
-<!--                        android:background="@color/color_bg_primary"-->
-<!--                        app:cardCornerRadius="16dp"-->
-<!--                        android:layout_columnWeight="1"-->
-<!--                        app:cardElevation="4dp">-->
-
-<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="vertical"-->
-<!--                            android:layout_margin="4dp"-->
-<!--                            android:gravity="center">-->
-
-<!--                        <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:textColor="@color/color_text_primary"-->
-<!--                                android:text="@string/title_book_short" />-->
-
-<!--                        <TextView-->
-<!--                                android:id="@+id/infoBookCount"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content" />-->
-<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
-<!--                </androidx.cardview.widget.CardView>-->
-<!--            </GridLayout>-->
-
-<!--            <TextView-->
-<!--                    android:id="@+id/infoLogout"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@drawable/bg_secondary_rounded"-->
-<!--                    android:backgroundTint="@color/color_secondary"-->
-<!--                    android:paddingVertical="7dp"-->
-<!--                    android:paddingHorizontal="14dp"-->
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    android:layout_marginTop="12dp"-->
-<!--                    android:textSize="19sp"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:textColor="@color/color_text_white"-->
-<!--                    android:text="Logout" />-->
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
