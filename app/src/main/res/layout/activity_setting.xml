@@ -39,13 +39,21 @@
                 app:cardElevation="0dp"
                 android:layout_marginVertical="8dp">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/color_text_primary"
                     android:padding="15dp"
-                    android:text="@string/setting_color"
-                    app:drawableEndCompat="@drawable/ic_baseline_chevron_right_24" />
+                    android:text="@string/setting_color" />
+
+            <TextView
+                    android:id="@+id/settingColorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textAlignment="textEnd"
+                    android:padding="15dp"
+                    app:drawableEndCompat="@drawable/ic_baseline_chevron_right_24"/>
         </androidx.cardview.widget.CardView>
 
 

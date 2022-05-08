@@ -33,6 +33,7 @@ class SettingActivity : AppCompatActivity() {
     }
     private fun initView(){
 
+        binding.settingColorTitle.text = resources.getStringArray(R.array.setting_color)[Setting.color]
         binding.settingAppLock.isChecked = Setting.isLock
         if(Setting.isLock){
             binding.settingAppLockLayout.visibility = View.VISIBLE
@@ -40,7 +41,7 @@ class SettingActivity : AppCompatActivity() {
         }
         binding.settingAutoLogin.isChecked = Setting.isAutoLogin
 
-        binding.settingFirstPageTitle.text = transformFirstpage(Setting.firstPage)
+        binding.settingFirstPageTitle.text = resources.getStringArray(R.array.first_page)[Setting.firstPage]
         binding.settingReceiveNoti.isChecked = Setting.isRecvNoti
         if(Setting.isRecvNoti){
             binding.settingReceiveNotiLayout.visibility = View.VISIBLE
@@ -52,7 +53,14 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setListener(){
         binding.settingColor.setOnClickListener{
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(getString(R.string.setting_color))
+            builder.setItems(R.array.setting_color){ _, which ->
+                setting.setColor(which)
+                binding.settingColorTitle.text = resources.getStringArray(R.array.setting_color)[which]
+            }
 
+            builder.create().show()
         }
         binding.settingAppLock.setOnCheckedChangeListener{ _, checked ->
             setting.setLock(checked)
@@ -110,7 +118,7 @@ class SettingActivity : AppCompatActivity() {
             builder.setTitle(getString(R.string.setting_first_page))
             builder.setItems(R.array.first_page){ _, which ->
                 setting.setFirstPage(which)
-                binding.settingFirstPageTitle.text = transformFirstpage(which)
+                binding.settingFirstPageTitle.text = resources.getStringArray(R.array.first_page)[which]
             }
 
             builder.create().show()
@@ -132,14 +140,12 @@ class SettingActivity : AppCompatActivity() {
         }
         binding.settingNotiDaily.setOnCheckedChangeListener{ _, checked ->
             setting.setRecvDailyNoti(checked)
-
         }
         binding.settingNotiCategory.setOnClickListener{
 
         }
         binding.settingChat.setOnCheckedChangeListener{ _, checked ->
             setting.setRecvChat(checked)
-
         }
         binding.settingOperation.setOnClickListener{
 
@@ -159,18 +165,6 @@ class SettingActivity : AppCompatActivity() {
         binding.settingRemoveData.setOnClickListener{
 
         }
-    }
-
-    private fun transformFirstpage(index:Int):String{
-        if(index==0)
-            return getString(R.string.bottom_nav_home)
-        if(index==1)
-            return getString(R.string.bottom_nav_daily)
-        if(index==2)
-            return getString(R.string.bottom_nav_chat)
-        if(index==3)
-            return getString(R.string.bottom_nav_menu)
-        return ""
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

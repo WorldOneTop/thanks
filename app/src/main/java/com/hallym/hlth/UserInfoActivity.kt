@@ -35,7 +35,7 @@ class UserInfoActivity : AppCompatActivity() {
         binding.infoSaveCount.text = "0"
         binding.infoKindCount.text = "0"
         binding.infoBookCount.text = "0"
-
+        binding.infoName.backgroundTintList = applicationContext.getColorStateList(Setting.getIndexToColor(Setting.color))
 
         dialog = Dialog(this)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

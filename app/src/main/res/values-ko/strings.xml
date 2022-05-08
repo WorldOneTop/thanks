@@ -172,6 +172,16 @@
         <item>메뉴</item>
     </string-array>
 
+    <string-array name = "setting_color">
+        <item>그린</item>
+        <item>오렌지</item>
+        <item>블루</item>
+        <item>퍼플</item>
+        <item>레드</item>
+        <item>인디고</item>
+    </string-array>
+
+
 
 
 </resources>

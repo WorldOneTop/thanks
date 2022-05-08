@@ -10,11 +10,12 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import com.hallym.hlth.R
 
 class Setting (val context: Context) {
     companion object{
         const val FILE_PATH = "app_setting"
-        var color:String? = null
+        var color:Int = 0
             private set
         var isLock:Boolean = false
             private set
@@ -34,13 +35,25 @@ class Setting (val context: Context) {
             private set
         var isRecvChat:Boolean = false
             private set
+
+        fun getIndexToColor(index:Int):Int{
+            return when(index){
+                0 -> R.color.green
+                1 -> R.color.orange
+                2 -> R.color.blue
+                3 -> R.color.purple
+                4 -> R.color.red
+                5 -> R.color.indigo
+                else -> R.color.green
+            }
+        }
     }
 
     private val preference = context.getSharedPreferences(FILE_PATH, AppCompatActivity.MODE_PRIVATE)
     private val editPreference = preference.edit()
 
     fun loadData(){
-        color = preference.getString("color",null)
+        color = preference.getInt("color",0)
         isLock = preference.getBoolean("isLock",false)
         pin = preference.getString("pin",null)
         isFingerLock = preference.getBoolean("isFingerLock",false)
@@ -86,8 +99,8 @@ class Setting (val context: Context) {
 
         editPreference.apply()
     }
-    fun setColor(data: String?){
-        editPreference.putString("color",data)
+    fun setColor(data: Int){
+        editPreference.putInt("color",data)
         color = data
     }
     fun setLock(data: Boolean){

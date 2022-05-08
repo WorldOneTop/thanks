@@ -22,4 +22,14 @@
     <color name="black">#000000</color>
     <color name="cyan_100">#B2EBF2</color>
     <color name="blue_100">#B3E5FC</color>
+
+
+    <color name="green">#C0DF30</color>
+    <color name="orange">#ED7428</color>
+    <color name="blue">#29B6F6</color>
+    <color name="purple">#531C9E</color>
+    <color name="red">#FF2223</color>
+    <color name="indigo">#3A34D3</color>
+
+
 </resources>
