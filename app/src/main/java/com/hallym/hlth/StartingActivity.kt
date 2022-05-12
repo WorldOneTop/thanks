@@ -59,6 +59,7 @@ class StartingActivity : AppCompatActivity() {
                     val status = JSONObject(it)
                     if(status.getString("status") == "OK"){
                         Query.CSRF = status.getString("CSRF")
+                        LoginStorage.status = status.getInt("userStatus")
                         loginSuccess = true
                         InitData(this){
                             startActivity()

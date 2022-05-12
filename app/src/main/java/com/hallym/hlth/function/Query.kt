@@ -13,7 +13,7 @@ import java.util.*
 
 class Query {
     companion object{
-        const val URL:String = "https://thanks-server-ggxvc.run.goorm.io/"
+        const val URL:String = "http://thanks.hallym.ac.kr/"
         lateinit var CSRF:String
         fun now():String{
             return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis)
@@ -28,7 +28,7 @@ class Query {
                 onResponse("fail")
             }else{
                 val request = Request.Builder()
-                    .url(URL + "userLogin?userId=$id&pw=$pw&token=${task.result.toString()}")
+                    .url(URL + "userLogin?userId=$id&pw=$pw&token=${task.result}")
                     .build()
 
                 okHttpClient.newCall(request).enqueue(object : Callback {
@@ -190,4 +190,21 @@ class Query {
             }
         })
     }
+
+    fun applyMentoring(term:Int,applyType:Int, onResponse: (JSONObject) -> Unit){
+        val request = Request.Builder()
+            .url(URL + "createSignup/?userId=${LoginStorage.id}&term=$term&userType=$applyType&CSRF=$CSRF")
+            .build()
+
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body!!.string()
+                Log.d("asd applyMentoring",body)
+                onResponse(JSONObject(body))
+            }
+        })
+    }
+
 }

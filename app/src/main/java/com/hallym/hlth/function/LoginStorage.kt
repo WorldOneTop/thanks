@@ -12,7 +12,6 @@ class LoginStorage (val context: Context){
         var pw:String? = null
             private set
         var status:Int? = null
-            private set
     }
     var content:JSONObject
 

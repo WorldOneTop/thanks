@@ -14,6 +14,7 @@ class PushMsg(val context: Context) {
     companion object{
         const val ID_NOTICE = 0
         const val ID_DAILY = 1
+        const val ID_REJECT = 2
     }
 
     fun createPushMsg(title:String, content:String, NOTIFICATION_ID:Int, intent: Intent){

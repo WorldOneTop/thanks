@@ -139,4 +139,7 @@ class Setting (val context: Context) {
         editPreference.putBoolean("isRecvChat",data)
         isRecvChat = data
     }
+    fun getRecvChat():Boolean{
+        return preference.getBoolean("isRecvChat",false)
+    }
 }

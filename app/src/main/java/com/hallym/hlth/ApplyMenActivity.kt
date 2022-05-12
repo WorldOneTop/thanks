@@ -18,11 +18,13 @@ import com.hallym.hlth.databinding.ActivityApplyMenBinding
 import com.hallym.hlth.databinding.RowApplyMenBinding
 import com.hallym.hlth.databinding.RowChatBinding
 import com.hallym.hlth.databinding.RowDailyBinding
+import com.hallym.hlth.function.LoginStorage
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.models.Chatting
 import com.hallym.hlth.models.Term
 import com.hallym.hlth.viewholders.ChatViewHolder
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -58,7 +60,24 @@ class ApplyMenActivity() : AppCompatActivity() {
         }
         adapter = ApplyMenAdapter(applicationContext,intent.getBooleanExtra("isMentor",true))
         adapter.onClickListener = {term, isMentor ->
-            Toast.makeText(applicationContext,"${term.id}기 ${if(isMentor) "멘토" else "멘티"} 신청",Toast.LENGTH_SHORT).show()
+            val loadingDialog = Dialog(this)
+            loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            loadingDialog.setContentView(ProgressBar(this))
+            loadingDialog.setCanceledOnTouchOutside(false)
+            loadingDialog.setOnCancelListener { this.finish() }
+            loadingDialog.show()
+            Query().applyMentoring(term.id, if(isMentor) 1 else 0) {
+                CoroutineScope(Dispatchers.Main).launch{
+                    if(it.getString("status") == "OK"){
+                        LoginStorage.status = if(isMentor) 2 else 3
+                        Toast.makeText(applicationContext, getString(R.string.menu_manageMen_success),Toast.LENGTH_LONG).show()
+                        finish()
+                    }else if(it.getString("status") == "user have never been mentee"){
+                        Toast.makeText(applicationContext, getString(R.string.menu_applyMentor_noMentee),Toast.LENGTH_LONG).show()
+                    }
+                    loadingDialog.dismiss()
+                }
+            }
         }
 
         binding.rvApplyMen.adapter = adapter

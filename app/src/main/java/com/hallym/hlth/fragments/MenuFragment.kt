@@ -75,27 +75,11 @@ class MenuFragment : Fragment() {
 
         adapter.onClickListener = { id ->
             when (id) {
-                "register_mentor" -> { //멘티 헀는지 여부 체크해야함
-                    if(LoginStorage.status == 3)
-                        Toast.makeText(requireContext(),getString(R.string.menu_applyMentor_already),Toast.LENGTH_LONG).show()
-                    else if(LoginStorage.status!! >= 4)
-                        Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
-                    else{
-                        val intent = Intent(requireContext(), ApplyMenActivity::class.java)
-                        intent.putExtra("isMentor",true)
-                        startActivity(intent)
-                    }
+                "register_mentor" -> {
+                    startApplyMen(true)
                 }
                 "register_mentee" -> {
-                    if(LoginStorage.status == 2)
-                        Toast.makeText(requireContext(),getString(R.string.menu_applyMentee_already),Toast.LENGTH_LONG).show()
-                    else if(LoginStorage.status!! >= 4)
-                        Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
-                    else{
-                        val intent = Intent(requireContext(), ApplyMenActivity::class.java)
-                        intent.putExtra("isMentor",false)
-                        startActivity(intent)
-                    }
+                    startApplyMen(false)
                 }
                 "app_setting" ->{
                     startActivity(Intent(requireContext(),SettingActivity::class.java))
@@ -114,5 +98,18 @@ class MenuFragment : Fragment() {
 //            Toast.makeText(requireContext(), "$id clicked", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun startApplyMen(isMentor:Boolean){
+        when(LoginStorage.status){
+            1 ->{
+                val intent = Intent(requireContext(), ApplyMenActivity::class.java)
+                intent.putExtra("isMentor",isMentor)
+                startActivity(intent)
+            }
+            2 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentee_already),Toast.LENGTH_LONG).show()
+            3 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentor_already),Toast.LENGTH_LONG).show()
+            else -> Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
+        }
     }
 }

@@ -113,6 +113,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="apply_men_status_true">In active</string>
     <string name="apply_men_status_false">Recruiting</string>
     <string name="apply_men_status_null">End of activity</string>
+    <string name="menu_manageMen_success">Your mentoring request has been completed</string>
 
     <!--  SettingActivity  -->
     <string name="setting_tab_private_setting">Personal settings</string>

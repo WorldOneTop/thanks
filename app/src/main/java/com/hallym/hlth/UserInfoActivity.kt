@@ -31,10 +31,6 @@ class UserInfoActivity : AppCompatActivity() {
     }
     private fun initView(){
         binding.infoId.text = LoginStorage.id
-        binding.infoThanksCount.text = "0"
-        binding.infoSaveCount.text = "0"
-        binding.infoKindCount.text = "0"
-        binding.infoBookCount.text = "0"
         binding.infoName.backgroundTintList = applicationContext.getColorStateList(Setting.getIndexToColor(Setting.color))
 
         dialog = Dialog(this)

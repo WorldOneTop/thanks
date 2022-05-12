@@ -79,6 +79,7 @@
     <string name="menu_applyMentee_already">이미 멘토를 지원했습니다.</string>
     <string name="menu_applyMen_already">현재 멘토링 진행중입니다.</string>
     <string name="menu_manageMen_noMentor">멘토가 아닙니다.</string>
+    <string name="menu_manageMen_success">멘토링 신청이 완료되었습니다.</string>
 
 
     <!--  StartingActivity  -->
