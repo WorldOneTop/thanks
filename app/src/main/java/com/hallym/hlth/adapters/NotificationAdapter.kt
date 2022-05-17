@@ -11,7 +11,7 @@ import com.hallym.hlth.viewholders.MenuCategoryViewHolder
 import com.hallym.hlth.viewholders.MenuViewHolder
 import com.hallym.hlth.viewholders.NotificationViewHolder
 
-class NotificationAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NotificationAdapter(private val context: Context, private val initOpenId:Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val data: ArrayList<Notice> = arrayListOf()
 
@@ -25,12 +25,13 @@ class NotificationAdapter(private val context: Context) : RecyclerView.Adapter<R
     }
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return NotificationViewHolder(
             RowNotificationBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
-        ))
+        ), initOpenId)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

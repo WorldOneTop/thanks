@@ -11,7 +11,7 @@ import com.hallym.hlth.adapters.MenuValueObject
 import com.hallym.hlth.databinding.RowNotificationBinding
 import com.hallym.hlth.models.Notice
 
-class NotificationViewHolder(private val binding: RowNotificationBinding) : RecyclerView.ViewHolder(binding.root) {
+class NotificationViewHolder(private val binding: RowNotificationBinding, private val initOpenId:Int) : RecyclerView.ViewHolder(binding.root) {
     var isOpen:Boolean = false
 
     fun bind(data: Notice) {
@@ -30,6 +30,14 @@ class NotificationViewHolder(private val binding: RowNotificationBinding) : Recy
                 binding.rowNotiDetail.visibility = View.GONE
                 binding.root.setBackgroundColor(Color.parseColor("#F0F2F6"))
             }
+        }
+
+        if(initOpenId == data.id){
+            isOpen = true
+            val currentDegree = binding.rowNotiArrow.rotation
+            ObjectAnimator.ofFloat(binding.rowNotiArrow, View.ROTATION, currentDegree, currentDegree + 180f).setDuration(100).start()
+            binding.rowNotiDetail.visibility = View.VISIBLE
+            binding.root.setBackgroundColor(Color.parseColor("#E2E4E8"))
         }
     }
 }

@@ -15,18 +15,23 @@ class PushMsg(val context: Context) {
         const val ID_NOTICE = 0
         const val ID_DAILY = 1
         const val ID_REJECT = 2
+        const val ID_ACCEPT = 2
     }
 
-    fun createPushMsg(title:String, content:String, NOTIFICATION_ID:Int, intent: Intent){
+    fun createPushMsg(title:String?, content:String?, NOTIFICATION_ID:Int, intent: Intent){
         val channelId = "${context.packageName}-${context.getString(R.string.app_name)}"
 
         createNotificationChannel(channelId)
 
-        val pendingIntent = PendingIntent.getActivity(context, 0,
-            intent, PendingIntent.FLAG_IMMUTABLE)
+        intent.setAction(Intent.ACTION_MAIN)
+            .addCategory(Intent.CATEGORY_LAUNCHER)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        val pendingIntent = PendingIntent.getActivity(context, NOTIFICATION_ID,
+            intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(context, channelId)
-        builder.setSmallIcon(R.drawable.ic_app)
+        builder.setSmallIcon(R.drawable.ic_launcher_foreground)
         builder.setContentTitle(title)
         builder.setContentText(content)
         builder.priority = NotificationCompat.PRIORITY_DEFAULT

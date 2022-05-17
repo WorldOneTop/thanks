@@ -2,6 +2,7 @@ package com.hallym.hlth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.hallym.hlth.databinding.ActivityMainBinding
 import com.hallym.hlth.fragments.DailyFragment
@@ -36,10 +37,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-//        val initViewIndex = if(true) 1 else Setting.firstPage
-        // Set first fragment
-        when(Setting.firstPage){
-            0 -> {changeFragment(homeFragment)
+        intent.getIntArrayExtra("link")?.let{
+            val bundle = Bundle()
+            bundle.putIntArray("link",it)
+            homeFragment.arguments = bundle
+        }
+
+        when(intent.getIntArrayExtra("link")?.get(0) ?: Setting.firstPage){
+            0 -> {
+                changeFragment(homeFragment)
                 binding.bnvMain.selectedItemId = R.id.action_home
             }
             1 -> {
@@ -59,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                 binding.bnvMain.selectedItemId = R.id.action_home
             }
         }
+        intent.removeExtra("link")
 
         // Set OnItemSelectedListener on BottomNavigationView
         binding.bnvMain.setOnItemSelectedListener { menu ->

@@ -12,6 +12,7 @@ import android.content.DialogInterface
 import android.content.ActivityNotFoundException
 import android.net.Uri
 import android.provider.Settings
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
@@ -115,9 +116,12 @@ class StartingActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext,errString.toString(),Toast.LENGTH_SHORT).show()
                         this@StartingActivity.finish()
                         if(Setting.pin != null) {
-                            intent = Intent(this@StartingActivity, PINActivity::class.java)
-                            intent.putExtra("loginSuccess",loginSuccess)
-                            startActivity(intent)
+
+                            val nextIntent = Intent(this@StartingActivity, PINActivity::class.java)
+                            nextIntent.putExtra("loginSuccess",loginSuccess)
+                            nextIntent.putExtra("link",intent.getIntArrayExtra("link"))
+                            intent.removeExtra("link")
+                            startActivity(nextIntent)
                             this@StartingActivity.finish()
                         }
                     }
@@ -137,9 +141,11 @@ class StartingActivity : AppCompatActivity() {
 
                 biometricPrompt.authenticate(promptInfo)
         }else if(Setting.pin != null){
-            intent = Intent(this@StartingActivity, PINActivity::class.java)
-            intent.putExtra("loginSuccess",loginSuccess)
-            startActivity(intent)
+            val nextIntent = Intent(this@StartingActivity, PINActivity::class.java)
+            nextIntent.putExtra("loginSuccess",loginSuccess)
+            nextIntent.putExtra("link",intent.getIntArrayExtra("link"))
+            intent.removeExtra("link")
+            startActivity(nextIntent)
             finish()
         } else{
             startNextActivity()
@@ -147,7 +153,11 @@ class StartingActivity : AppCompatActivity() {
     }
     private fun startNextActivity(){
         if(loginSuccess){
-            startActivity(Intent(this@StartingActivity, MainActivity::class.java))
+            val nextIntent = Intent(this@StartingActivity, MainActivity::class.java)
+            nextIntent.putExtra("link", intent.getIntArrayExtra("link"))
+            intent.removeExtra("link")
+//            nextIntent.putExtra("link", intArrayOf(0,1,8))
+            startActivity(nextIntent)
         }else{
             startActivity(Intent(this@StartingActivity, LoginActivity::class.java))
         }

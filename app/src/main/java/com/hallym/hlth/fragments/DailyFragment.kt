@@ -204,6 +204,7 @@ class DailyFragment : Fragment() {
             Document.todayDataType[currentPosition]!!.add(Document( it.getJSONObject("data")))
             CoroutineScope(Main).launch {
                 adapter.setData(currentPosition)
+                binding.dailySumTxt.text = "${Document.todayDataType[currentPosition]!!.size} / ${currentLimitSubmit()}"
             }
         }
         closeDialog()

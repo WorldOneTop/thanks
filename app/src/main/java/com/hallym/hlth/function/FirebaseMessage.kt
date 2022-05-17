@@ -31,9 +31,9 @@ class FirebaseMessage : FirebaseMessagingService() {
         when(remoteMessage.data["category"]) {
              "notice" -> {
                 Notice.noticeList?.let {
-                    Notice.noticeList!!.add(0,Notice(remoteMessage.data["title"]!!,remoteMessage.data["body"]!!,remoteMessage.data["date"]!!,Notice.iconNotice))
+                    Notice.noticeList!!.add(0,Notice(remoteMessage.data["id"]!!.toInt(),remoteMessage.data["title"]!!,remoteMessage.data["body"]!!,remoteMessage.data["date"]!!,Notice.iconNotice))
                 }
-
+                 intent.putExtra("link",intArrayOf(0,1,remoteMessage.data["id"]!!.toInt()))
                  PushMsg(applicationContext).createPushMsg(getString(R.string.app_name),getString(R.string.message_notice_body),PushMsg.ID_NOTICE,intent)
             }
             "readChat" -> {
@@ -48,15 +48,16 @@ class FirebaseMessage : FirebaseMessagingService() {
             }
             "sendChat" -> {
                 val currentRoom =remoteMessage.data["senderId"]!!.toInt() == ChatInActivity.userId
-                val intent = Intent("Chatting")
-                intent.putExtra("userId", remoteMessage.data["senderId"]!!.toInt())
-                intent.putExtra("category", "send")
-                intent.putExtra("content", remoteMessage.data["content"])
-                intent.putExtra("date", remoteMessage.data["date"])
-                intent.putExtra("name", remoteMessage.data["senderName"])
-                LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(intent)
+                val pendingIntent = Intent("Chatting")
+                pendingIntent.putExtra("userId", remoteMessage.data["senderId"]!!.toInt())
+                pendingIntent.putExtra("category", "send")
+                pendingIntent.putExtra("content", remoteMessage.data["content"])
+                pendingIntent.putExtra("date", remoteMessage.data["date"])
+                pendingIntent.putExtra("name", remoteMessage.data["senderName"])
+                LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(pendingIntent)
 
                 if(!currentRoom && Setting(applicationContext).getRecvChat()) {
+                    intent.putExtra("link",intArrayOf(2,remoteMessage.data["senderId"]!!.toInt()))
                     PushMsg(applicationContext).createPushMsg(remoteMessage.data["senderName"].toString(),remoteMessage.data["content"].toString(),remoteMessage.data["senderId"]!!.toInt()
                         ,intent)
                 }
@@ -69,39 +70,13 @@ class FirebaseMessage : FirebaseMessagingService() {
                 LoginStorage.status?.let { LoginStorage.status = 1}
                 PushMsg(applicationContext).createPushMsg(remoteMessage.data["title"].toString(),remoteMessage.data["content"].toString(),PushMsg.ID_REJECT,intent)
             }
+            "mentoringAccept" -> {
+                LoginStorage.status?.let { LoginStorage.status = remoteMessage.data["userStatus"]!!.toInt()}
+                PushMsg(applicationContext).createPushMsg(remoteMessage.data["title"].toString(),null,PushMsg.ID_ACCEPT,intent)
+            }
         }
 
     }
 
-
-//    private fun createPushMsg(title:String, content:String, NOTIFICATION_ID:Int, intent:Intent ){
-//        val channelId = "$packageName-${getString(R.string.app_name)}"
-//
-//        createNotificationChannel(channelId)
-//
-//        val pendingIntent = PendingIntent.getActivity(baseContext, 0,
-//            intent, PendingIntent.FLAG_IMMUTABLE)
-//
-//        val builder = NotificationCompat.Builder(baseContext, channelId)
-//        builder.setSmallIcon(R.drawable.ic_app)
-//        builder.setContentTitle(title)
-//        builder.setContentText(content)
-//        builder.priority = NotificationCompat.PRIORITY_DEFAULT
-//        builder.setAutoCancel(true)
-//        builder.setContentIntent(pendingIntent)
-//
-//        val notificationManager = NotificationManagerCompat.from(baseContext)
-//        notificationManager.notify(NOTIFICATION_ID, builder.build())
-//    }
-//    private fun createNotificationChannel(channelId:String) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = getString(R.string.app_name)
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channel = NotificationChannel(channelId, name, importance)
-//            val notificationManager: NotificationManager =
-//                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//    }
 
 }

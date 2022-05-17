@@ -1,15 +1,14 @@
 package com.hallym.hlth.fragments
 
+import android.R.attr.data
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.marginTop
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +20,10 @@ import com.hallym.hlth.adapters.HomeAdapter
 import com.hallym.hlth.adapters.HomeGoalsValueObject
 import com.hallym.hlth.databinding.FragmentHomeBinding
 import com.hallym.hlth.models.Document
-import kotlinx.android.synthetic.main.dialog_add_doc.*
 import kotlinx.android.synthetic.main.dialog_detail_doc.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class HomeFragment : Fragment() {
 
@@ -42,6 +40,11 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        arguments?.getIntArray("link")?.let {
+            linkActivity(it)
+            arguments?.remove("link")
+        }
 
         return binding.root
     }
@@ -115,6 +118,14 @@ class HomeFragment : Fragment() {
 
         docDialogLayout = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
         docDialogLayout.topMargin = 40
+    }
+
+    private fun linkActivity(link:IntArray){
+        if(link[1] == 1){
+            val nextIntent = Intent(requireContext(),NotificationActivity::class.java)
+            nextIntent.putExtra("link",link[2])
+            startActivity(nextIntent)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

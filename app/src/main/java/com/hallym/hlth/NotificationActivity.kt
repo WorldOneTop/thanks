@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
@@ -36,7 +37,9 @@ class NotificationActivity : AppCompatActivity() {
         initData()
     }
     private fun initView(){
-        adapter = NotificationAdapter(applicationContext)
+        adapter = NotificationAdapter(applicationContext, intent.getIntExtra("link",-1))
+        intent.removeExtra("link")
+
         binding.rvNotification.adapter = adapter
         binding.rvNotification.layoutManager = LinearLayoutManager(applicationContext)
         binding.rvNotification.addItemDecoration(DividerItemDecoration(applicationContext,1))
@@ -53,12 +56,14 @@ class NotificationActivity : AppCompatActivity() {
     private fun initData(){
         if(Notice.noticeList != null){
             adapter.setData(Notice.noticeList!!)
+            linkView(intent.getIntExtra("link",-1))
         }else{
             Query().getNoti{
                 val data = it.getJSONArray("data")
                 Notice.noticeList = ArrayList<Notice>()
                 for( i in 0 until data.length()){
                     Notice.noticeList!!.add(Notice(
+                        data.getJSONObject(i).getInt("id"),
                         data.getJSONObject(i).getString("title"),
                         data.getJSONObject(i).getString("content"),
                         data.getJSONObject(i).getString("registerDate"),
@@ -67,34 +72,21 @@ class NotificationActivity : AppCompatActivity() {
                 }
                 CoroutineScope(Dispatchers.Main).launch {
                     adapter.setData(Notice.noticeList!!)
+                    linkView(intent.getIntExtra("link",-1))
                     dialog.dismiss()
                 }
             }
         }
     }
-//    private fun initRecyclerView() {
-//
-//        // TODO: Replace with real data
-//        adapter.setData(
-//            arrayOf(
-//                NotificationObject(
-//                    "알림 제목 title1",
-//                    "내용 내용 text1",
-//                    R.drawable.ic_round_notifications_24
-//                ),
-//                NotificationObject(
-//                    "알림 제목 title2",
-//                    "내용 내용 text2",
-//                    R.drawable.ic_round_notifications_24
-//                ),
-//                NotificationObject(
-//                    "알림 제목 title3",
-//                    "내용 내용 text3",
-//                    R.drawable.ic_round_notifications_24
-//                ),
-//            )
-//        )
-//    }
+    private fun linkView(id:Int){
+        if(id != -1){
+            for(i in Notice.noticeList!!.count()-1 .. 0){
+                if(Notice.noticeList!![i].id == id)
+                    binding.rvNotification.findViewHolderForAdapterPosition(i)?.itemView?.performClick()
+
+            }
+        }
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
