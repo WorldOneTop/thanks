@@ -14,16 +14,16 @@ class HomeLinkViewHolder(val binding: RowHomeLinkBinding): RecyclerView.ViewHold
 
     fun bind() {
         binding.layoutRowHomeLinkBecome.setOnClickListener {
-            onLinkClickedListener?.let { it("https://www.hallym.ac.kr") }
+            onLinkClickedListener?.let { it("https://become.hallym.ac.kr") }
         }
         binding.layoutRowHomeLinkBus.setOnClickListener {
-            onLinkClickedListener?.let { it("https://www.hallym.ac.kr") }
+            onLinkClickedListener?.let { it("https://www.hallym.ac.kr/hallym_univ/sub04/cP6/sCP3") }
         }
         binding.layoutRowHomeLinkShuttle.setOnClickListener {
-            onLinkClickedListener?.let { it("https://www.hallym.ac.kr") }
+            onLinkClickedListener?.let { it("https://www.hallym.ac.kr/hallym_univ/sub04/cP6/sCP4") }
         }
         binding.layoutRowHomeLinkMap.setOnClickListener {
-            onLinkClickedListener?.let { it("https://www.hallym.ac.kr") }
+            onLinkClickedListener?.let { it("https://www.hallym.ac.kr/hallym_univ/sub04/cP6/sCP1.html") }
         }
     }
 

@@ -38,10 +38,10 @@ class LoginActivity : AppCompatActivity() {
         dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_login_help)
         dialog.loginHelpChoice1.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://was1.hallym.ac.kr:8087/hlwc/mdi/Login.html")))
         }
         dialog.loginHelpChoice2.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub04/cP13/sCP4/tab1.html")))
         }
         dialog.loginHelpChoice3.setOnClickListener{
             dialog.dismiss()
@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
             dialog.show()
         }
         binding.loginPrivacy.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
         }
     }
     private fun checkForm():Boolean{

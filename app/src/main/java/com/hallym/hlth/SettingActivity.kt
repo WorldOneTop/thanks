@@ -3,6 +3,7 @@ package com.hallym.hlth
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -148,10 +149,10 @@ class SettingActivity : AppCompatActivity() {
             setting.setRecvChat(checked)
         }
         binding.settingOperation.setOnClickListener{
-
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
         }
         binding.settingPrivateOperation.setOnClickListener{
-
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
         }
         binding.settingHelp.setOnClickListener{
 

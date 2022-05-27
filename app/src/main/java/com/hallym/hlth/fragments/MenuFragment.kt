@@ -75,6 +75,9 @@ class MenuFragment : Fragment() {
 
         adapter.onClickListener = { id ->
             when (id) {
+                "account_manage" -> {
+                    startActivity(Intent(requireContext(),UserInfoActivity::class.java))
+                }
                 "register_mentor" -> {
                     startApplyMen(true)
                 }
