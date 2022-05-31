@@ -8,8 +8,10 @@ import android.icu.util.Calendar
 import android.os.SystemClock
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import com.hallym.hlth.LockProcessLifecycle
 import com.hallym.hlth.R
 
 class Setting (val context: Context) {
@@ -96,6 +98,14 @@ class Setting (val context: Context) {
             LoginStorage(context).saveData(LoginStorage.id,LoginStorage.pw, LoginStorage.status!!)
         }
 
+
+        if(isFingerLock != preference.getBoolean("isFingerLock",false) || pin != preference.getString("pin",null)){
+            if(isFingerLock || pin != null){
+                ProcessLifecycleOwner.get().lifecycle.addObserver(LockProcessLifecycle.getInstance(context))
+            }else{
+                ProcessLifecycleOwner.get().lifecycle.removeObserver(LockProcessLifecycle.getInstance(context))
+            }
+        }
 
         editPreference.apply()
     }

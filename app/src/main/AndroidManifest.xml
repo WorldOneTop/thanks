@@ -25,7 +25,7 @@
                 android:name=".DiaryActivity"
                 android:exported="false" />
         <activity
-                android:name=".PINActivity"
+                android:name=".LockActivity"
                 android:exported="false" />
         <activity
                 android:name=".SettingActivity"

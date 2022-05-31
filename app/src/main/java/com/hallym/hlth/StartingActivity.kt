@@ -14,8 +14,6 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import com.hallym.hlth.function.InitData
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.function.Setting
@@ -32,8 +30,6 @@ class StartingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStartingBinding
     private val PERMISSION_REQUEST_CODE = 1
-    private var loginSuccess: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,12 +57,11 @@ class StartingActivity : AppCompatActivity() {
                     if(status.getString("status") == "OK"){
                         Query.CSRF = status.getString("CSRF")
                         LoginStorage.status = status.getInt("userStatus")
-                        loginSuccess = true
                         InitData(this){
-                            startActivity()
+                            startNextActivity(true)
                         }
                     }else{
-                        startActivity()
+                        startNextActivity(false)
                     }
                 }catch (e:JSONException){
                     CoroutineScope(Dispatchers.Main).launch{
@@ -76,7 +71,7 @@ class StartingActivity : AppCompatActivity() {
                 }
             }
         }else{
-            startActivity()
+            startNextActivity(false)
         }
     }
     private fun checkPermission(): Boolean{
@@ -96,7 +91,7 @@ class StartingActivity : AppCompatActivity() {
             PERMISSION_REQUEST_CODE -> {
                 if(grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startActivity()
+                    startNextActivity(false)
                 } else {
                     permissionDialog()
                 }
@@ -105,65 +100,17 @@ class StartingActivity : AppCompatActivity() {
         }
     }
 
-    private fun startActivity(){
-        if(Setting.isFingerLock){
-            val executor = ContextCompat.getMainExecutor(this)
-            val biometricPrompt = BiometricPrompt(this, executor,
-                object : BiometricPrompt.AuthenticationCallback() {
-                    override fun onAuthenticationError(errorCode: Int,
-                                                       errString: CharSequence) {
-                        super.onAuthenticationError(errorCode, errString)
-                        Toast.makeText(applicationContext,errString.toString(),Toast.LENGTH_SHORT).show()
-                        this@StartingActivity.finish()
-                        if(Setting.pin != null) {
-
-                            val nextIntent = Intent(this@StartingActivity, PINActivity::class.java)
-                            nextIntent.putExtra("loginSuccess",loginSuccess)
-                            nextIntent.putExtra("link",intent.getIntArrayExtra("link"))
-                            intent.removeExtra("link")
-                            startActivity(nextIntent)
-                            this@StartingActivity.finish()
-                        }
-                    }
-
-                    override fun onAuthenticationSucceeded(
-                        result: BiometricPrompt.AuthenticationResult) {
-                        super.onAuthenticationSucceeded(result)
-                        startNextActivity()
-                    }
-                })
-
-            val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric login for my app")
-                .setSubtitle("Log in using your biometric credential")
-                .setNegativeButtonText("Use account password")
-                .build()
-
-                biometricPrompt.authenticate(promptInfo)
-        }else if(Setting.pin != null){
-            val nextIntent = Intent(this@StartingActivity, PINActivity::class.java)
-            nextIntent.putExtra("loginSuccess",loginSuccess)
-            nextIntent.putExtra("link",intent.getIntArrayExtra("link"))
-            intent.removeExtra("link")
-            startActivity(nextIntent)
-            finish()
-        } else{
-            startNextActivity()
-        }
-    }
-    private fun startNextActivity(){
-        if(loginSuccess){
+    private fun startNextActivity(isLogined:Boolean){
+        if(isLogined){
             val nextIntent = Intent(this@StartingActivity, MainActivity::class.java)
             nextIntent.putExtra("link", intent.getIntArrayExtra("link"))
             intent.removeExtra("link")
-//            nextIntent.putExtra("link", intArrayOf(0,1,8))
             startActivity(nextIntent)
         }else{
             startActivity(Intent(this@StartingActivity, LoginActivity::class.java))
         }
         finish()
     }
-
 
     private fun permissionDialog(){
         val localBuilder: AlertDialog.Builder = AlertDialog.Builder(this)

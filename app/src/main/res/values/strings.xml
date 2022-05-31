@@ -142,6 +142,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
 
     <!--  PINActivity  -->
     <string name="pin_check_title">Enter your PIN number</string>
+    <string name="pin_check_finger">Enter your fingerprint</string>
     <string name="pin_old_title">Enter your old PIN number</string>
     <string name="pin_new_title">Enter the PIN to set</string>
     <string name="pin_4_letter">Please enter at least 4 characters</string>

@@ -1,9 +1,11 @@
 package com.hallym.hlth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.hallym.hlth.databinding.ActivityMainBinding
 import com.hallym.hlth.fragments.DailyFragment
 import com.hallym.hlth.fragments.HomeFragment
@@ -27,6 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         initFragment()
         initView()
+
+
+        if(Setting.isFingerLock || Setting.pin != null){
+            ProcessLifecycleOwner.get().lifecycle.addObserver(LockProcessLifecycle.getInstance(applicationContext))
+        }
     }
 
     private fun initFragment() {
@@ -78,6 +85,11 @@ class MainActivity : AppCompatActivity() {
             })
             true
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ProcessLifecycleOwner.get().lifecycle.removeObserver(LockProcessLifecycle.getInstance(applicationContext))
     }
 
     private fun changeFragment(fragment: Fragment) {

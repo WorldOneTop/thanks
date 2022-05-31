@@ -75,7 +75,7 @@ class SettingActivity : AppCompatActivity() {
             }
         }
         binding.settingPin.setOnClickListener{
-            val intent = Intent(this, PINActivity::class.java)
+            val intent = Intent(this, LockActivity::class.java)
             intent.putExtra("isChange",true)
             startActivity(intent)
         }

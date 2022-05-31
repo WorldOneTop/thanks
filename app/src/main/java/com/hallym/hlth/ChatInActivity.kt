@@ -126,11 +126,21 @@ class ChatInActivity : AppCompatActivity() {
         }
 
     }
+    override fun onStart() {
+        super.onStart()
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+            mBroadcastReceiver, IntentFilter("Chatting")
+        )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         userId = 0
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
