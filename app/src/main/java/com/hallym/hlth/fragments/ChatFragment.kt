@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONException
 
 
 class ChatFragment : Fragment() {
@@ -97,14 +99,16 @@ class ChatFragment : Fragment() {
         binding.chatAddList.adapter = listViewAdapter
 
         Query().getMenteesDoc{
-            val data = it.getJSONArray("data")
-
-            for(i in 0 until data.length()){
-                listItemName.add(data.getJSONObject(i).getString("userId__name"))
-                listItemId.add(data.getJSONObject(i).getInt("userId"))
-            }
-            CoroutineScope(Dispatchers.Main).launch {
-                listViewAdapter.notifyDataSetChanged()
+            try{
+                val data = it.getJSONArray("data")
+                for(i in 0 until data.length()){
+                    listItemName.add(data.getJSONObject(i).getString("userId__name"))
+                    listItemId.add(data.getJSONObject(i).getInt("userId"))
+                }
+                CoroutineScope(Dispatchers.Main).launch {
+                    listViewAdapter.notifyDataSetChanged()
+                }
+            }catch (e: JSONException){
             }
         }
 

@@ -141,6 +141,7 @@
     <string name="setting_bug">버그 신고</string>
     <string name="setting_danger">위험</string>
     <string name="setting_remove_data">모든 데이터 삭제</string>
+    <string name="setting_remove_data_check">정말로 지우시겠습니까?</string>
 
 
     <!--  PINActivity  -->

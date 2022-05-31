@@ -4,16 +4,17 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.hallym.hlth.databinding.ActivitySettingBinding
+import com.hallym.hlth.function.LoginStorage
 import com.hallym.hlth.function.Setting
+import java.io.File
 
 class SettingActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySettingBinding
@@ -164,10 +165,45 @@ class SettingActivity : AppCompatActivity() {
 
         }
         binding.settingRemoveData.setOnClickListener{
-
+            removeDialog()
         }
     }
 
+    private fun removeDialog(){
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.setting_remove_data))
+            .setMessage(getString(R.string.setting_remove_data_check))
+            .setPositiveButton("ok") { _: DialogInterface, _: Int ->
+                val cache: File = applicationContext.cacheDir
+                val appDir = cache.parent?.let { it1 -> File(it1) }
+                if (appDir?.exists() == true) {
+                    val children: Array<String> = appDir.list() as Array<String>
+                    for (s in children) {
+                        removeProcess(File(appDir, s))
+                    }
+                }
+                applicationContext.getSharedPreferences(Setting.FILE_PATH, MODE_PRIVATE)
+                    .edit()
+                    .clear()
+                    .apply()
+                File(LoginStorage.FILE_PATH).delete()
+                finishAffinity()
+            }
+            .create()
+            .show()
+    }
+    private fun removeProcess(dir:File?):Boolean{
+        if (dir?.isDirectory == true) {
+            val children: Array<String> = dir.list() as Array<String>
+            for (i in children.indices) {
+                val success: Boolean = removeProcess(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+        }
+        return dir?.delete() == true
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()

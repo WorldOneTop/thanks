@@ -137,7 +137,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="setting_bug">Report a bug</string>
     <string name="setting_danger">Danger</string>
     <string name="setting_remove_data">Remove all data</string>
-
+    <string name="setting_remove_data_check">Are you sure you want to delete</string>
 
 
     <!--  PINActivity  -->
