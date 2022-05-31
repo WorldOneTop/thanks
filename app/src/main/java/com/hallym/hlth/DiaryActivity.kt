@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hallym.hlth.databinding.ActivityDiaryBinding
 import com.hallym.hlth.databinding.RowDiaryBinding
+import com.hallym.hlth.function.DiaryController
+import com.hallym.hlth.function.DiaryDB
 import com.hallym.hlth.function.LoginStorage
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.models.Document
@@ -40,6 +43,7 @@ class DiaryActivity : AppCompatActivity() {
     private lateinit var dialog: Dialog
     private lateinit var diaryData: DiaryData
     private lateinit var progressDialog: Dialog
+    private var isNewDiary:Boolean = true
 
     var onClickListener: ((data: DiaryData) -> Unit)? = null
 
@@ -72,7 +76,7 @@ class DiaryActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.dialog_add_diary)
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         dialog.addDiaryClose.setOnClickListener{ dialog.dismiss() }
-        diaryData = DiaryData(
+        diaryData = DiaryData(-1,
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis),
             ""
         )
@@ -84,13 +88,16 @@ class DiaryActivity : AppCompatActivity() {
     }
     private fun initOnClick(){
         binding.toolbarDairyWrite.setOnClickListener{
+            isNewDiary = true
             diaryData.date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis)
-            setDialgData(Document.todayDataType[0]!!,"")
+            diaryData.content = ""
+            setDialogData(Document.todayDataType[0]!!,"")
             dialog.show()
         }
         adapter.onClickListener = { diaryData ->
             progressDialog.show()
             this.diaryData = diaryData
+            isNewDiary = false
             Query().getDoc(LoginStorage.id.toString(),diaryData.date){
                 val documents = JSONObject(it).getJSONArray("data")
                 val thanksDoc:java.util.ArrayList<Document> = ArrayList()
@@ -99,7 +106,7 @@ class DiaryActivity : AppCompatActivity() {
                         thanksDoc.add(Document(documents.getJSONObject(i)))
                     }
                 }
-                setDialgData(thanksDoc,diaryData.content)
+                setDialogData(thanksDoc,diaryData.content)
                 CoroutineScope(Dispatchers.Main).launch {
                     dialog.show()
                     progressDialog.dismiss()
@@ -108,18 +115,22 @@ class DiaryActivity : AppCompatActivity() {
         }
         dialog.addDiarySubmit.setOnClickListener{
             diaryData.content = dialog.addDiaryEdit.text.toString()
-            Toast.makeText(applicationContext,diaryData.date+", "+diaryData.content,Toast.LENGTH_LONG).show()
+            if(isNewDiary){
+                diaryData.id = DiaryController(DiaryDB(applicationContext).writableDatabase).addDiary(diaryData).toInt()
+                adapter.addData(diaryData)
+            }else{
+                DiaryController(DiaryDB(applicationContext).writableDatabase).changeDiary(diaryData)
+                adapter.changeData(diaryData)
+            }
             dialog.dismiss()
         }
     }
     private fun setData(){
-        adapter.setData(arrayListOf(
-            DiaryData("2022-02-02","크고 끝까지 못할 오아이스도 소담스러운 청춘 아니다. 뼈 이 청춘에서만 청춘의 거친 소금이라 수 풀이 석가는 것이다. 웅대한 심장은 얼마나 끝까지 두손을 있는 있는 때문이다. 인생의 하여도 품으며, 사람은 갑 보라. 이상, 그림자는 든 불어 때문이다. 동산에는 품고 가장 이것이다. 그들에게 때에, 속잎나고, 스며들어 아니더면, 대중을 실현에 우리 사람은 봄바람이다. 찬미를 현저하게 같이, 산야에 있는 위하여서. 굳세게 위하여 싸인 그것을 위하여 동산에는 대중을 피부가 끓는다."),
-            DiaryData("2022-02-03","크고 끝까지 못할 오아이스도 소담스러운 청춘 아니다. 뼈 이 청춘에서만 청춘의 거친 소금이라 수 풀이 석가는 것이다. 웅대한 심장은 얼마나 끝까지 두손을 있는 있는 때문이다. 인생의 하여도 품으며, 사람은 갑 보라. 이상, 그림자는 든 불어 때문이다. 동산에는 품고 가장 이것이다. 그들에게 때에, 속잎나고, 스며들어 아니더면, 대중을 실현에 우리 사람은 봄바람이다. 찬미를 현저하게 같이, 산야에 있는 위하여서. 굳세게 위하여 싸인 그것을 위하여 동산에는 대중을 피부가 끓는다."),
-            DiaryData("2022-03-21","크고 끝까지 못할 오아이스도 소담스러운 청춘 아니다. 뼈 이 청춘에서만 청춘의 거친 소금이라 수 풀이 석가는 것이다. 웅대한 심장은 얼마나 끝까지 두손을 있는 있는 때문이다. 인생의 하여도 품으며, 사람은 갑 보라. 이상, 그림자는 든 불어 때문이다. 동산에는 품고 가장 이것이다. 그들에게 때에, 속잎나고, 스며들어 아니더면, 대중을 실현에 우리 사람은 봄바람이다. 찬미를 현저하게 같이, 산야에 있는 위하여서. 굳세게 위하여 싸인 그것을 위하여 동산에는 대중을 피부가 끓는다."),
-            ))
+            adapter.setData(
+                DiaryController(DiaryDB(applicationContext).writableDatabase).selectDiary()
+            )
     }
-    private fun setDialgData(documents:java.util.ArrayList<Document>, edit:String){
+    private fun setDialogData(documents:java.util.ArrayList<Document>, edit:String){
         val itemList:ArrayList<String> = ArrayList()
         for(doc in documents){
             itemList.add(doc.content)
@@ -153,6 +164,22 @@ class DiaryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.data.addAll(data)
         notifyItemRangeInserted(0, data.size)
     }
+    fun addData(data:DiaryData){
+        this.data.add(data)
+        notifyItemInserted(this.data.size-1)
+    }
+    fun changeData(diaryData:DiaryData){
+        var index:Int = -1
+        for(i in 0 until data.size){
+            if(data[i].id == diaryData.id){
+                index = i
+                break
+            }
+        }
+
+        this.data[index] = diaryData
+        notifyItemChanged(index)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return DiaryViewHolder(
             RowDiaryBinding.inflate(
@@ -181,6 +208,7 @@ class DiaryViewHolder(private val binding: RowDiaryBinding): RecyclerView.ViewHo
 }
 
 data class DiaryData(
+    var id:Int,
     var date:String,
     var content:String
 )
