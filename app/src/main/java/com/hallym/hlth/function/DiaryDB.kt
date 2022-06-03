@@ -46,17 +46,17 @@ class DiaryController(private val db: SQLiteDatabase){
                 ");"
         db.execSQL(sql)
     }
-    fun addDiary(diaryData: DiaryData):Long{
+    fun addDiary(content:String, date:String):Long{
         val values = ContentValues()
-        values.put("content",diaryData.content)
-        values.put("date",diaryData.date)
+        values.put("content",content)
+        values.put("date",date)
         val lastIndex = db.insert(tableName, null, values)
         db.close()
         return lastIndex
     }
     fun selectDiary():ArrayList<DiaryData>{
         val sql = "SELECT _id, date, content FROM $tableName " +
-                "ORDER BY -_id"
+                "ORDER BY _id"
 
         val cursor = db.rawQuery(sql,null)
         val result = ArrayList<DiaryData>()
@@ -75,9 +75,9 @@ class DiaryController(private val db: SQLiteDatabase){
         db.close()
         return result
     }
-    fun changeDiary(data: DiaryData){
-        val sql = "UPDATE $tableName SET content = '${data.content}' " +
-                "WHERE _id=${data.id};"
+    fun changeDiary(id:Int, content: String){
+        val sql = "UPDATE $tableName SET content = '$content' " +
+                "WHERE _id=$id;"
         db.execSQL(sql)
     }
 }

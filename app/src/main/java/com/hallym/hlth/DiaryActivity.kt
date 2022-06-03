@@ -66,9 +66,11 @@ class DiaryActivity : AppCompatActivity() {
         adapter = DiaryAdapter()
 
         binding.rvDiary.adapter = adapter
-        binding.rvDiary.layoutManager = LinearLayoutManager(applicationContext)
+        val layoutManager = LinearLayoutManager(applicationContext)
+        layoutManager.reverseLayout = true
+        layoutManager.stackFromEnd = true
+        binding.rvDiary.layoutManager =layoutManager
         binding.rvDiary.addItemDecoration(DividerItemDecoration(applicationContext,1))
-
 
     }
     private fun initDialog(){
@@ -76,10 +78,7 @@ class DiaryActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.dialog_add_diary)
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         dialog.addDiaryClose.setOnClickListener{ dialog.dismiss() }
-        diaryData = DiaryData(-1,
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis),
-            ""
-        )
+        diaryData = DiaryData()
         progressDialog = Dialog(this)
         progressDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(ProgressBar(this))
@@ -96,7 +95,10 @@ class DiaryActivity : AppCompatActivity() {
         }
         adapter.onClickListener = { diaryData ->
             progressDialog.show()
-            this.diaryData = diaryData
+            this.diaryData.id = diaryData.id
+            this.diaryData.content = diaryData.content
+            this.diaryData.date = diaryData.date
+
             isNewDiary = false
             Query().getDoc(LoginStorage.id.toString(),diaryData.date){
                 val documents = JSONObject(it).getJSONArray("data")
@@ -106,8 +108,8 @@ class DiaryActivity : AppCompatActivity() {
                         thanksDoc.add(Document(documents.getJSONObject(i)))
                     }
                 }
-                setDialogData(thanksDoc,diaryData.content)
                 CoroutineScope(Dispatchers.Main).launch {
+                    setDialogData(thanksDoc,diaryData.content)
                     dialog.show()
                     progressDialog.dismiss()
                 }
@@ -116,12 +118,20 @@ class DiaryActivity : AppCompatActivity() {
         dialog.addDiarySubmit.setOnClickListener{
             diaryData.content = dialog.addDiaryEdit.text.toString()
             if(isNewDiary){
-                diaryData.id = DiaryController(DiaryDB(applicationContext).writableDatabase).addDiary(diaryData).toInt()
-                adapter.addData(diaryData)
+                adapter.addData(DiaryData(
+                    DiaryController(DiaryDB(applicationContext).writableDatabase).addDiary(diaryData.content, diaryData.date).toInt(),
+                    diaryData.date,
+                    diaryData.content
+                ))
             }else{
-                DiaryController(DiaryDB(applicationContext).writableDatabase).changeDiary(diaryData)
-                adapter.changeData(diaryData)
+                Log.d("asd","id${diaryData.id}")
+                Log.d("asd","conte${diaryData.content}")
+                Log.d("asd","date${diaryData.date}")
+                Log.d("asd","ts${diaryData.toString()}")
+                DiaryController(DiaryDB(applicationContext).writableDatabase).changeDiary(diaryData.id, diaryData.content)
+                adapter.changeData(diaryData.id, diaryData.content)
             }
+
             dialog.dismiss()
         }
     }
@@ -168,16 +178,16 @@ class DiaryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.data.add(data)
         notifyItemInserted(this.data.size-1)
     }
-    fun changeData(diaryData:DiaryData){
+    fun changeData(id:Int, content:String){
         var index:Int = -1
         for(i in 0 until data.size){
-            if(data[i].id == diaryData.id){
+            if(data[i].id == id){
                 index = i
                 break
             }
         }
 
-        this.data[index] = diaryData
+        this.data[index].content = content
         notifyItemChanged(index)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -208,7 +218,7 @@ class DiaryViewHolder(private val binding: RowDiaryBinding): RecyclerView.ViewHo
 }
 
 data class DiaryData(
-    var id:Int,
-    var date:String,
-    var content:String
+    var id:Int = -1,
+    var date:String = "",
+    var content:String = ""
 )
