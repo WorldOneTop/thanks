@@ -104,15 +104,18 @@ class MenuFragment : Fragment() {
     }
 
     private fun startApplyMen(isMentor:Boolean){
-        when(LoginStorage.status){
-            1 ->{
-                val intent = Intent(requireContext(), ApplyMenActivity::class.java)
-                intent.putExtra("isMentor",isMentor)
-                startActivity(intent)
-            }
-            2 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentee_already),Toast.LENGTH_LONG).show()
-            3 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentor_already),Toast.LENGTH_LONG).show()
-            else -> Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
-        }
+        val intent = Intent(requireContext(), ApplyMenActivity::class.java)
+        intent.putExtra("isMentor",isMentor)
+        startActivity(intent)
+//        when(LoginStorage.status){
+//            1 ->{
+//                val intent = Intent(requireContext(), ApplyMenActivity::class.java)
+//                intent.putExtra("isMentor",isMentor)
+//                startActivity(intent)
+//            }
+//            2 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentee_already),Toast.LENGTH_LONG).show()
+//            3 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentor_already),Toast.LENGTH_LONG).show()
+//            else -> Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
+//        }
     }
 }

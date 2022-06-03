@@ -59,25 +59,8 @@ class ApplyMenActivity() : AppCompatActivity() {
             supportActionBar?.setTitle(R.string.menu_apply_mentee)
         }
         adapter = ApplyMenAdapter(applicationContext,intent.getBooleanExtra("isMentor",true))
-        adapter.onClickListener = {term, isMentor ->
-            val loadingDialog = Dialog(this)
-            loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            loadingDialog.setContentView(ProgressBar(this))
-            loadingDialog.setCanceledOnTouchOutside(false)
-            loadingDialog.setOnCancelListener { this.finish() }
-            loadingDialog.show()
-            Query().applyMentoring(term.id, if(isMentor) 1 else 0) {
-                CoroutineScope(Dispatchers.Main).launch{
-                    if(it.getString("status") == "OK"){
-                        LoginStorage.status = if(isMentor) 2 else 3
-                        Toast.makeText(applicationContext, getString(R.string.menu_manageMen_success),Toast.LENGTH_LONG).show()
-                        finish()
-                    }else if(it.getString("status") == "user have never been mentee"){
-                        Toast.makeText(applicationContext, getString(R.string.menu_applyMentor_noMentee),Toast.LENGTH_LONG).show()
-                    }
-                    loadingDialog.dismiss()
-                }
-            }
+        adapter.onClickListener = { term, isMentor ->
+            submitOnClick(term, isMentor)
         }
 
         binding.rvApplyMen.adapter = adapter
@@ -86,7 +69,7 @@ class ApplyMenActivity() : AppCompatActivity() {
     private fun setData(){
         Query().getTerm(null){
             val terms = it.getJSONArray("data")
-            var data = ArrayList<Term>()
+            val data = ArrayList<Term>()
 
             for( i in 0 until terms.length()){
                 val activated = terms.getJSONObject(i).getString("activated")
@@ -101,6 +84,33 @@ class ApplyMenActivity() : AppCompatActivity() {
             CoroutineScope(Main).launch {
                 adapter.setData(data)
                 dialog.dismiss()
+            }
+        }
+    }
+    private fun submitOnClick(term: Term, isMentor: Boolean){
+        when(LoginStorage.status){
+            1-> {}
+            2 -> {Toast.makeText(this,getString(R.string.menu_applyMentee_already),Toast.LENGTH_LONG).show(); return}
+            3 -> {Toast.makeText(this,getString(R.string.menu_applyMentor_already),Toast.LENGTH_LONG).show(); return}
+            else -> {Toast.makeText(this,getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show(); return}
+        }
+
+        val loadingDialog = Dialog(this)
+        loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loadingDialog.setContentView(ProgressBar(this))
+        loadingDialog.setCanceledOnTouchOutside(false)
+        loadingDialog.setOnCancelListener { this.finish() }
+        loadingDialog.show()
+        Query().applyMentoring(term.id, if(isMentor) 1 else 0) {
+            CoroutineScope(Main).launch{
+                if(it.getString("status") == "OK"){
+                    LoginStorage.status = if(isMentor) 2 else 3
+                    Toast.makeText(applicationContext, getString(R.string.menu_manageMen_success),Toast.LENGTH_LONG).show()
+                    finish()
+                }else if(it.getString("status") == "user have never been mentee"){
+                    Toast.makeText(applicationContext, getString(R.string.menu_applyMentor_noMentee),Toast.LENGTH_LONG).show()
+                }
+                loadingDialog.dismiss()
             }
         }
     }
