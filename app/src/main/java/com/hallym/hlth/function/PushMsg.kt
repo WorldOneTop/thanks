@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.hallym.hlth.R
@@ -26,9 +27,13 @@ class PushMsg(val context: Context) {
         intent.setAction(Intent.ACTION_MAIN)
             .addCategory(Intent.CATEGORY_LAUNCHER)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        val pendingIntent = PendingIntent.getActivity(context, NOTIFICATION_ID,
-            intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getActivity(context, NOTIFICATION_ID,
+                intent, PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getActivity(context, NOTIFICATION_ID,
+                intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        }
 
         val builder = NotificationCompat.Builder(context, channelId)
         builder.setSmallIcon(R.drawable.ic_launcher_foreground)

@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
+import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -76,7 +77,11 @@ class Setting (val context: Context) {
         }
         if(isRecvDailyNoti != preference.getBoolean("isRecvDailyNoti",false)){
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
-            val pendingIntent = PendingIntent.getBroadcast(context, 1, Intent(context, AlarmReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getBroadcast(context, 1, Intent(context, AlarmReceiver::class.java), PendingIntent.FLAG_MUTABLE)
+            } else {
+                PendingIntent.getBroadcast(context, 1, Intent(context, AlarmReceiver::class.java), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+            }
 
             if(isRecvDailyNoti){
                 val calendar: Calendar = Calendar.getInstance().apply {

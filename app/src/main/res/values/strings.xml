@@ -162,6 +162,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
 
     <!-- notification message -->
     <string name="message_notice_body">Your notice has been registered</string>
+    <string name="message_daily_body"><b>Thanks of the day</b> Time to write about 5 things you are grateful for!</string>
 
     <string-array name="first_page">
         <item>Home</item>

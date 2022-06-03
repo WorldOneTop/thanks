@@ -167,6 +167,7 @@
 
     <!--  notification message  -->
     <string name="message_notice_body">공지사항이 등록되었습니다.</string>
+    <string name="message_daily_body"><b>오늘의 감사</b>> 5가지 감사한 일에 대해 작성하실 시간입니다!</string>
 
     <string-array name = "first_page">
         <item>홈</item>
