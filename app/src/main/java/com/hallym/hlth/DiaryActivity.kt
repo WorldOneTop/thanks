@@ -124,10 +124,6 @@ class DiaryActivity : AppCompatActivity() {
                     diaryData.content
                 ))
             }else{
-                Log.d("asd","id${diaryData.id}")
-                Log.d("asd","conte${diaryData.content}")
-                Log.d("asd","date${diaryData.date}")
-                Log.d("asd","ts${diaryData.toString()}")
                 DiaryController(DiaryDB(applicationContext).writableDatabase).changeDiary(diaryData.id, diaryData.content)
                 adapter.changeData(diaryData.id, diaryData.content)
             }
