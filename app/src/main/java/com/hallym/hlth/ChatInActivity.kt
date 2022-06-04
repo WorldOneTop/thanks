@@ -51,6 +51,7 @@ class ChatInActivity : AppCompatActivity() {
                     Query().readChat(userId)
                     }
                 }
+                Log.d("asd","category: ${intent.getStringExtra("category")}  실행")
             }
         }
     }
@@ -72,9 +73,6 @@ class ChatInActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = userName
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-            mBroadcastReceiver, IntentFilter("Chatting")
-        )
     }
     private fun initRecyclerView() {
         adapter = ChatInAdapter(applicationContext)
@@ -94,8 +92,7 @@ class ChatInActivity : AppCompatActivity() {
         binding.chatInEditButton.setOnClickListener{
             val content = binding.chatInEdit.text.toString()
             if(content.isNotEmpty()){
-                binding.chatInEditRoot.isClickable = false
-                binding.chatInEdit.isEnabled = false
+                binding.chatInEdit.setText("")
 
                 // 서버 전송
                 Query().sendChat(userId,content){
@@ -106,8 +103,6 @@ class ChatInActivity : AppCompatActivity() {
                     CoroutineScope(Dispatchers.Main).launch {
                         adapter.addChat(Chatting(userId,userName,it.getString("date"),content,1,true))
                         binding.chatInEdit.setText("")
-                        binding.chatInEditRoot.isClickable = true
-                        binding.chatInEdit.isEnabled = true
                         binding.rvNotification.scrollToPosition(adapter.itemCount - 1)
                     }
                 }

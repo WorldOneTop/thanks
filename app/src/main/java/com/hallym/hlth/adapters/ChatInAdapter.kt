@@ -25,9 +25,9 @@ class ChatInAdapter(private val context: Context) : RecyclerView.Adapter<Recycle
     }
     fun addChat(data: Chatting) {
         this.data.add(data)
-        notifyItemInserted(this.data.size-1)
+        notifyItemInserted(this.data.size)
     }
-    fun setAllRead(){
+    @Synchronized fun setAllRead(){
         var count = 0
         for(i in data.size-1 downTo 0){
             if(data[i].read == 0)
@@ -35,7 +35,6 @@ class ChatInAdapter(private val context: Context) : RecyclerView.Adapter<Recycle
             data[i].read = 0
             count++
         }
-        Log.d("asd","허ㅘㄱ인 ${data.last().read}")
         notifyItemRangeChanged(data.size-count,count)
     }
     fun requireReadServer():Boolean{

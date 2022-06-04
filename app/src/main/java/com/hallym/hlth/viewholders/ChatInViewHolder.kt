@@ -23,6 +23,8 @@ class ChatInViewHolder(private val binding: RowChatInBinding) : RecyclerView.Vie
             binding.rowChatInTime.text = data.getDateTime()
             if(data.read != 0)
                 binding.rowChatInRead.text = "1"
+            else
+                binding.rowChatInRead.text = ""
             binding.rowChatYouLayout.visibility = View.GONE
             binding.rowChatMyLayout.visibility = View.VISIBLE
         }else{
@@ -31,6 +33,8 @@ class ChatInViewHolder(private val binding: RowChatInBinding) : RecyclerView.Vie
             binding.rowChatInUTime.text = data.getDateTime()
             if(data.read != 0)
                 binding.rowChatInURead.text = "1"
+            else
+                binding.rowChatInRead.text = ""
             binding.rowChatYouLayout.visibility = View.VISIBLE
             binding.rowChatMyLayout.visibility = View.GONE
         }

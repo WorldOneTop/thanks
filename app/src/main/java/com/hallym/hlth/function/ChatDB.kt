@@ -133,12 +133,16 @@ class ChatController(private val db: SQLiteDatabase){
         // 읽음표시
         val sql2 = "UPDATE $tableName SET ${ChatDB.Column.NO_READ}=0 WHERE ${ChatDB.Column.OTHER_ID} = $userId AND ${ChatDB.Column.NO_READ}=1 AND ${ChatDB.Column.IS_RECEIVED}=1;"
         db.execSQL(sql2)
-
         db.close()
         return result
     }
     fun readAllChat(userId:String){
         val sql = "UPDATE $tableName SET ${ChatDB.Column.NO_READ}=0 WHERE ${ChatDB.Column.OTHER_ID} = $userId AND ${ChatDB.Column.NO_READ}=1;"
+        db.execSQL(sql)
+        db.close()
+    }
+    fun deleteChatRoom(userId:String){
+        val sql = "DELETE FROM $tableName WHERE ${ChatDB.Column.OTHER_ID} = $userId;"
         db.execSQL(sql)
         db.close()
     }

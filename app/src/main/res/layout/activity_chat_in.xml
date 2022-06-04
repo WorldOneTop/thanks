@@ -49,7 +49,7 @@
             android:background="#e0e0e0"
             app:layout_constraintBottom_toTopOf="@+id/chatInEditRoot" />
 
-    <RelativeLayout
+    <LinearLayout
             android:id="@+id/chatInEditRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,28 +59,27 @@
 
 
         <EditText
-                android:layout_marginStart="16dp"
                 android:id="@+id/chatInEdit"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/chatInEditButton"
+                android:paddingHorizontal="16dp"
                 android:background="@color/transparent"
                 android:hint="@string/edit_hint"
                 android:inputType="textMultiLine"
                 android:paddingVertical="10dp"
-                android:maxLines="6"
+                android:layout_weight="1"
+                android:maxLines="5"
                 tools:ignore="Autofill" />
 
         <ImageButton
                 android:id="@+id/chatInEditButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
                 android:padding="10dp"
                 android:background="@color/color_secondary"
-                android:src="@drawable/ic_baseline_send_24"/>
+                android:src="@drawable/ic_baseline_send_24" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

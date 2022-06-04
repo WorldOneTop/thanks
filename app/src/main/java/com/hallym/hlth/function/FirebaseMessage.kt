@@ -28,6 +28,7 @@ class FirebaseMessage : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         val intent = Intent(applicationContext,StartingActivity::class.java)
 
+        Log.d("asd firebase message",remoteMessage.data.toString())
         when(remoteMessage.data["category"]) {
              "notice" -> {
                 Notice.noticeList?.let {
@@ -43,6 +44,7 @@ class FirebaseMessage : FirebaseMessagingService() {
                     pendingIntent.putExtra("category", "read")
                     LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(pendingIntent)
                 }
+                Log.d("asd readChat", "senderId : ${remoteMessage.data["senderId"]!!} ")
                 // DB 설정
                 ChatController(ChatDB(applicationContext).writableDatabase).readAllChat(remoteMessage.data["senderId"]!!)
             }
@@ -56,6 +58,7 @@ class FirebaseMessage : FirebaseMessagingService() {
                 pendingIntent.putExtra("name", remoteMessage.data["senderName"])
                 LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(pendingIntent)
 
+                Log.d("asd sendChat","userId: ${remoteMessage.data["senderId"]!!}     content: ${remoteMessage.data["content"]}      name: ${remoteMessage.data["senderName"]}            date:${remoteMessage.data["date"]}")
                 if(!currentRoom && Setting(applicationContext).getRecvChat()) {
                     intent.putExtra("link",intArrayOf(2,remoteMessage.data["senderId"]!!.toInt()))
                     PushMsg(applicationContext).createPushMsg(remoteMessage.data["senderName"].toString(),remoteMessage.data["content"].toString(),remoteMessage.data["senderId"]!!.toInt()

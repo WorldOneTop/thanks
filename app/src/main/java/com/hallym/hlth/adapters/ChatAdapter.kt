@@ -14,6 +14,7 @@ class ChatAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
 
     private val data: ArrayList<ChatRoom> = arrayListOf()
     var onClickListener: ((chatRoom: Int,userName: String) -> Unit)? = null
+    var onContextMenuItemClickListener: ((userId: Int) -> Unit)? = null
 
     fun setData(data: ArrayList<ChatRoom>) {
         val prev = this.data.size
@@ -24,7 +25,6 @@ class ChatAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
         notifyItemRangeInserted(0, data.size + 1)
     }
     fun addChatting(userId:Int, date:String, content:String, name:String){
-        Log.d("asd","??${data[0].sumNoRead}")
         for(i in 0 until data.size){
             if(data[i].userId == userId){
                 data[i].content = content
@@ -42,7 +42,13 @@ class ChatAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
         ))
         notifyItemInserted(0)
     }
-
+    fun deleteChatRoom(userId:Int){
+        for(i in 0 until data.size){
+            if(data[i].userId == userId)
+                data.removeAt(i)
+                notifyItemRemoved(i)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ChatViewHolder(
@@ -55,6 +61,7 @@ class ChatAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerV
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ChatViewHolder).bind(data[position])
         holder.onClickListener = onClickListener
+        holder.onContextMenuItemClickListener = onContextMenuItemClickListener
 
     }
 

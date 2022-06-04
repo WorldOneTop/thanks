@@ -48,6 +48,7 @@ class Query {
         val request = Request.Builder()
             .url(URL + "selectDocument?userId=$id&date=$date")
             .build()
+        Log.d("asd getDoc URL",URL + "selectDocument?userId=$id&date=$date")
 
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -62,6 +63,7 @@ class Query {
     fun uploadDoc(content:String, type:Int, imagePath: String?, onResponse: (JSONObject)-> Unit){
         val request = Request.Builder()
             .url(URL + "createDoc/?userId=${LoginStorage.id}&docType=$type&CSRF=$CSRF")
+        Log.d("asd query-uploadDoc URL",URL + "createDoc/?userId=${LoginStorage.id}&docType=$type&CSRF=$CSRF")
 
 
         imagePath?.let {
@@ -96,6 +98,7 @@ class Query {
         val request = Request.Builder()
             .url(URL + "accountInfo?userId=${LoginStorage.id}&CSRF=$CSRF")
             .build()
+        Log.d("asd query-getAccountInfo URL",URL + "accountInfo?userId=${LoginStorage.id}&CSRF=$CSRF")
 
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -114,6 +117,7 @@ class Query {
         activated?.let {
             url += "?activated=" + if(activated) 1 else 0
         }
+        Log.d("asd query-getTerm URL",url)
 
         val request = Request.Builder().url(url).build()
 
@@ -132,6 +136,7 @@ class Query {
         val request = Request.Builder()
             .url(URL + "getNotice")
             .build()
+        Log.d("asd getNoti URL",URL + "getNotice")
 
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -149,7 +154,7 @@ class Query {
         val request = Request.Builder()
             .url(URL + "getMenteesDoc?userId=${LoginStorage.id}&date=$date&CSRF=$CSRF")
             .build()
-
+        Log.d("asd getMenteesDoc URL",URL + "getMenteesDoc?userId=${LoginStorage.id}&date=$date&CSRF=$CSRF")
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
             }
@@ -164,6 +169,7 @@ class Query {
     fun sendChat(receiverId:Int, content:String, onResponse: (JSONObject) -> Unit){
         val request = Request.Builder()
             .url(URL + "sendChat/?senderId=${LoginStorage.id}&receiverId=$receiverId&CSRF=$CSRF")
+        Log.d("asd sendChat URL",URL + "sendChat/?senderId=${LoginStorage.id}&receiverId=$receiverId&CSRF=$CSRF")
 
         request.post(FormBody.Builder().add("content",content).build())
 
@@ -181,12 +187,13 @@ class Query {
         val request = Request.Builder()
             .url(URL + "readChat?senderId=${LoginStorage.id}&receiverId=$receiverId&CSRF=$CSRF")
             .build()
+        Log.d("asd readChat URL", URL + "readChat?senderId=${LoginStorage.id}&receiverId=$receiverId&CSRF=$CSRF")
 
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
             }
             override fun onResponse(call: Call, response: Response) {
-                Log.d("asd getLastChatList",response.body!!.string())
+                Log.d("asd readChat",response.body!!.string())
             }
         })
     }
@@ -195,6 +202,7 @@ class Query {
         val request = Request.Builder()
             .url(URL + "createSignup/?userId=${LoginStorage.id}&term=$term&userType=$applyType&CSRF=$CSRF")
             .build()
+        Log.d("asd applyMentoring URL", URL + "createSignup/?userId=${LoginStorage.id}&term=$term&userType=$applyType&CSRF=$CSRF")
 
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -202,6 +210,22 @@ class Query {
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body!!.string()
                 Log.d("asd applyMentoring",body)
+                onResponse(JSONObject(body))
+            }
+        })
+    }
+    fun getChatUserList( onResponse: (JSONObject) -> Unit){
+        val request = Request.Builder()
+            .url(URL + "getChatUserList/?userId=${LoginStorage.id}&CSRF=$CSRF")
+            .build()
+        Log.d("asd getChatUserList URL", URL + "getChatUserList/?userId=${LoginStorage.id}&CSRF=$CSRF")
+
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body!!.string()
+                Log.d("asd getChatUserList",body)
                 onResponse(JSONObject(body))
             }
         })

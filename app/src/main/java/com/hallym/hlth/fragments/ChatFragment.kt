@@ -89,6 +89,10 @@ class ChatFragment : Fragment() {
             intent.putExtra("userName",userName)
             startActivity(intent)
         }
+        adapter.onContextMenuItemClickListener = {
+            ChatController(ChatDB(requireContext()).readableDatabase).deleteChatRoom(it.toString())
+            adapter.deleteChatRoom(it)
+        }
     }
     private fun initAddView(){
         listItemName = ArrayList()
@@ -98,17 +102,14 @@ class ChatFragment : Fragment() {
             android.R.layout.simple_list_item_1, listItemName)
         binding.chatAddList.adapter = listViewAdapter
 
-        Query().getMenteesDoc{
-            try{
-                val data = it.getJSONArray("data")
-                for(i in 0 until data.length()){
-                    listItemName.add(data.getJSONObject(i).getString("userId__name"))
-                    listItemId.add(data.getJSONObject(i).getInt("userId"))
-                }
-                CoroutineScope(Dispatchers.Main).launch {
-                    listViewAdapter.notifyDataSetChanged()
-                }
-            }catch (e: JSONException){
+        Query().getChatUserList{
+            val data = it.getJSONArray("data")
+            for(i in 0 until data.length()){
+                listItemName.add(data.getJSONObject(i).getString("userId__name"))
+                listItemId.add(data.getJSONObject(i).getInt("userId"))
+            }
+            CoroutineScope(Dispatchers.Main).launch {
+                listViewAdapter.notifyDataSetChanged()
             }
         }
 
