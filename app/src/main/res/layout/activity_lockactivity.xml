@@ -9,10 +9,10 @@
 
     <ImageView
             android:id="@+id/pinIcon"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:src="@drawable/ic_launcher_foreground"
+            android:src="@mipmap/ic_launcher_foreground"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

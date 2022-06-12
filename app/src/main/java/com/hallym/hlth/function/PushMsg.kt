@@ -36,7 +36,7 @@ class PushMsg(val context: Context) {
         }
 
         val builder = NotificationCompat.Builder(context, channelId)
-        builder.setSmallIcon(R.drawable.ic_launcher_foreground)
+        builder.setSmallIcon(R.mipmap.ic_launcher_foreground)
         builder.setContentTitle(title)
         builder.setContentText(content)
         builder.priority = NotificationCompat.PRIORITY_DEFAULT
