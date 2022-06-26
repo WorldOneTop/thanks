@@ -143,27 +143,27 @@ class SettingActivity : AppCompatActivity() {
         binding.settingNotiDaily.setOnCheckedChangeListener{ _, checked ->
             setting.setRecvDailyNoti(checked)
         }
-        binding.settingNotiCategory.setOnClickListener{
-
-        }
+//        binding.settingNotiCategory.setOnClickListener{
+//
+//        }
         binding.settingChat.setOnCheckedChangeListener{ _, checked ->
             setting.setRecvChat(checked)
         }
-        binding.settingOperation.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
-        }
+//        binding.settingOperation.setOnClickListener{
+//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
+//        }
         binding.settingPrivateOperation.setOnClickListener{
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
         }
-        binding.settingHelp.setOnClickListener{
-
-        }
-        binding.settingQnA.setOnClickListener{
-
-        }
-        binding.settingBug.setOnClickListener{
-
-        }
+//        binding.settingHelp.setOnClickListener{
+//
+//        }
+//        binding.settingQnA.setOnClickListener{
+//
+//        }
+//        binding.settingBug.setOnClickListener{
+//
+//        }
         binding.settingRemoveData.setOnClickListener{
             removeDialog()
         }
@@ -173,7 +173,7 @@ class SettingActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.setting_remove_data))
             .setMessage(getString(R.string.setting_remove_data_check))
-            .setPositiveButton("ok") { _: DialogInterface, _: Int ->
+            .setPositiveButton(getString(R.string.OK)) { _: DialogInterface, _: Int ->
                 val cache: File = applicationContext.cacheDir
                 val appDir = cache.parent?.let { it1 -> File(it1) }
                 if (appDir?.exists() == true) {
@@ -188,6 +188,8 @@ class SettingActivity : AppCompatActivity() {
                     .apply()
                 File(LoginStorage.FILE_PATH).delete()
                 finishAffinity()
+            }
+            .setNegativeButton(getString(R.string.CANCEL)){ _, _ ->
             }
             .create()
             .show()

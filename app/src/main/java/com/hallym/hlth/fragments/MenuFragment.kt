@@ -55,7 +55,7 @@ class MenuFragment : Fragment() {
         data.add(MenuValueObject("manager_mentee", getString(R.string.menu_manage_mentee), R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("cat_app", getString(R.string.menu_tab_app)))
         data.add(MenuValueObject("app_setting", getString(R.string.menu_setting), R.drawable.ic_round_account_circle_24))
-        data.add(MenuValueObject("app_info", getString(R.string.menu_app_info), R.drawable.ic_round_account_circle_24))
+//        data.add(MenuValueObject("app_info", getString(R.string.menu_app_info), R.drawable.ic_round_account_circle_24))
         data.add(MenuValueObject("footer", ""))
     }
 
@@ -88,7 +88,7 @@ class MenuFragment : Fragment() {
                     startActivity(Intent(requireContext(),SettingActivity::class.java))
                 }
                 "app_info" -> {
-                    Toast.makeText(requireContext(), "v 1.0.1 최신?", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "v 1.0.1 최신?", Toast.LENGTH_SHORT).show()
                 }
                 "manager_mentee" -> {
                     if(LoginStorage.status != 4)
@@ -98,7 +98,6 @@ class MenuFragment : Fragment() {
                 }
 
             }
-//            Toast.makeText(requireContext(), "$id clicked", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -107,15 +106,5 @@ class MenuFragment : Fragment() {
         val intent = Intent(requireContext(), ApplyMenActivity::class.java)
         intent.putExtra("isMentor",isMentor)
         startActivity(intent)
-//        when(LoginStorage.status){
-//            1 ->{
-//                val intent = Intent(requireContext(), ApplyMenActivity::class.java)
-//                intent.putExtra("isMentor",isMentor)
-//                startActivity(intent)
-//            }
-//            2 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentee_already),Toast.LENGTH_LONG).show()
-//            3 -> Toast.makeText(requireContext(),getString(R.string.menu_applyMentor_already),Toast.LENGTH_LONG).show()
-//            else -> Toast.makeText(requireContext(),getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show()
-//        }
     }
 }

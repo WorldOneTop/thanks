@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
             dialog.show()
         }
         binding.loginPrivacy.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://thanks.hallym.ac.kr/privacy/")))
         }
     }
     private fun checkForm():Boolean{

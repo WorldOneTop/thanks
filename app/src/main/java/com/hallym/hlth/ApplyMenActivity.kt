@@ -1,7 +1,9 @@
 package com.hallym.hlth
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,7 @@ import com.hallym.hlth.databinding.RowChatBinding
 import com.hallym.hlth.databinding.RowDailyBinding
 import com.hallym.hlth.function.LoginStorage
 import com.hallym.hlth.function.Query
+import com.hallym.hlth.function.Setting
 import com.hallym.hlth.models.Chatting
 import com.hallym.hlth.models.Term
 import com.hallym.hlth.viewholders.ChatViewHolder
@@ -28,6 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.io.File
 
 class ApplyMenActivity() : AppCompatActivity() {
     private lateinit var binding: ActivityApplyMenBinding
@@ -95,24 +99,38 @@ class ApplyMenActivity() : AppCompatActivity() {
             else -> {Toast.makeText(this,getString(R.string.menu_applyMen_already),Toast.LENGTH_LONG).show(); return}
         }
 
-        val loadingDialog = Dialog(this)
-        loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        loadingDialog.setContentView(ProgressBar(this))
-        loadingDialog.setCanceledOnTouchOutside(false)
-        loadingDialog.setOnCancelListener { this.finish() }
-        loadingDialog.show()
-        Query().applyMentoring(term.id, if(isMentor) 1 else 0) {
-            CoroutineScope(Main).launch{
-                if(it.getString("status") == "OK"){
-                    LoginStorage.status = if(isMentor) 2 else 3
-                    Toast.makeText(applicationContext, getString(R.string.menu_manageMen_success),Toast.LENGTH_LONG).show()
-                    finish()
-                }else if(it.getString("status") == "user have never been mentee"){
-                    Toast.makeText(applicationContext, getString(R.string.menu_applyMentor_noMentee),Toast.LENGTH_LONG).show()
+        AlertDialog.Builder(this)
+            .setTitle(
+                if(isMentor) getString(R.string.menu_apply_mentor)
+                else getString(R.string.menu_apply_mentee)
+            )
+            .setMessage(getString(R.string.apply_men_sure))
+            .setPositiveButton(getString(R.string.OK)) { _: DialogInterface, _: Int ->
+                val loadingDialog = Dialog(this)
+                loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                loadingDialog.setContentView(ProgressBar(this))
+                loadingDialog.setCanceledOnTouchOutside(false)
+                loadingDialog.setOnCancelListener { this.finish() }
+                loadingDialog.show()
+                Query().applyMentoring(term.id, if(isMentor) 1 else 0) {
+                    CoroutineScope(Main).launch{
+                        if(it.getString("status") == "OK"){
+                            LoginStorage.status = if(isMentor) 2 else 3
+                            Toast.makeText(applicationContext, getString(R.string.menu_manageMen_success),Toast.LENGTH_LONG).show()
+                            finish()
+                        }else if(it.getString("status") == "user have never been mentee"){
+                            Toast.makeText(applicationContext, getString(R.string.menu_applyMentor_noMentee),Toast.LENGTH_LONG).show()
+                        }
+                        loadingDialog.dismiss()
+                    }
                 }
-                loadingDialog.dismiss()
             }
-        }
+            .setNegativeButton(getString(R.string.CANCEL)){ _, _ ->
+            }
+            .create()
+            .show()
+
+
     }
 
 

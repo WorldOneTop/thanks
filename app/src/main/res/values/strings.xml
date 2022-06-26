@@ -21,6 +21,7 @@
     <string name="login_help_choice3">Cancel</string>
 
     <string name="OK">OK</string>
+    <string name="CANCEL">Cancel</string>
 
     <!-- Status -->
     <string name="status_1">User</string>
@@ -76,6 +77,7 @@
     <string name="menu_applyMentee_already">Already applied for a mentor</string>
     <string name="menu_applyMen_already">Mentoring is currently in progress</string>
     <string name="menu_manageMen_noMentor">I am not a mentor</string>
+    <string name="menu_manageMen_success">Your mentoring request has been completed</string>
 
     <!--  StartingActivity  -->
     <string name="permission_require">Requires permission for storage space.</string>
@@ -113,7 +115,7 @@ Five things to be grateful for a day\nWrite down the things you are grateful for
     <string name="apply_men_status_true">In active</string>
     <string name="apply_men_status_false">Recruiting</string>
     <string name="apply_men_status_null">End of activity</string>
-    <string name="menu_manageMen_success">Your mentoring request has been completed</string>
+    <string name="apply_men_sure">Cancellation is not possible when applying for mentoring\nAre you sure you want to proceed?</string>
 
     <!--  SettingActivity  -->
     <string name="setting_tab_private_setting">Personal settings</string>

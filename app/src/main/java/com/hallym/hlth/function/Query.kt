@@ -13,7 +13,7 @@ import java.util.*
 
 class Query {
     companion object{
-        const val URL:String = "http://thanks.hallym.ac.kr/"
+        const val URL:String = "https://thanks.hallym.ac.kr/"
         lateinit var CSRF:String
         fun now():String{
             return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().timeInMillis)

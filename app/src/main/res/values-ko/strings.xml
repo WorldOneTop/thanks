@@ -22,6 +22,7 @@
 
 
     <string name="OK">확인</string>
+    <string name="CANCEL">취소</string>
 
     <!--  Status  -->
     <string name="status_1">유저</string>
@@ -118,6 +119,7 @@
     <string name="apply_men_status_true">활동 중</string>
     <string name="apply_men_status_false">모집 중</string>
     <string name="apply_men_status_null">활동 종료</string>
+    <string name="apply_men_sure">멘토링 신청 시 취소가 불가능합니다\n정말로 진행하시겠습니까?</string>
 
     <!--  SettingActivity  -->
     <string name="setting_tab_private_setting">개인 설정</string>
