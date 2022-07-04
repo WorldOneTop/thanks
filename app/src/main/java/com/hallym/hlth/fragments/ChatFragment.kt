@@ -33,12 +33,9 @@ import org.json.JSONException
 
 
 class ChatFragment : Fragment() {
-
     private lateinit var binding: FragmentChatBinding
     private lateinit var adapter: ChatAdapter
     private lateinit var listViewAdapter: ArrayAdapter<String>
-    private lateinit var listItemName: ArrayList<String>
-    private lateinit var listItemId: ArrayList<Int>
     private var addButtonIsOpen: Boolean = false
 
     private val mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -95,23 +92,29 @@ class ChatFragment : Fragment() {
         }
     }
     private fun initAddView(){
-        listItemName = ArrayList()
-        listItemId = ArrayList()
+        if(!ChatListObject.isInit) {
+            ChatListObject.listItemName = ArrayList()
+            ChatListObject.listItemId = ArrayList()
+
+            Query().getChatUserList{
+                val data = it.getJSONArray("data")
+
+                for(i in 0 until data.length()){
+                    ChatListObject.listItemName!!.add(data.getJSONObject(i).getString("userId__name"))
+                    ChatListObject.listItemId!!.add(data.getJSONObject(i).getInt("userId"))
+                }
+                CoroutineScope(Dispatchers.Main).launch {
+                    listViewAdapter.notifyDataSetChanged()
+                }
+            }
+            ChatListObject.isInit = true
+        }
 
         listViewAdapter = ArrayAdapter<String>(requireContext(),
-            android.R.layout.simple_list_item_1, listItemName)
+            android.R.layout.simple_list_item_1, ChatListObject.listItemName!!)
         binding.chatAddList.adapter = listViewAdapter
 
-        Query().getChatUserList{
-            val data = it.getJSONArray("data")
-            for(i in 0 until data.length()){
-                listItemName.add(data.getJSONObject(i).getString("userId__name"))
-                listItemId.add(data.getJSONObject(i).getInt("userId"))
-            }
-            CoroutineScope(Dispatchers.Main).launch {
-                listViewAdapter.notifyDataSetChanged()
-            }
-        }
+
 
         ObjectAnimator.ofFloat(chatAddList, "translationY", 200f).start()
 
@@ -130,8 +133,8 @@ class ChatFragment : Fragment() {
 
         binding.chatAddList.setOnItemClickListener{ _, _, position, _ ->
             val intent = Intent(requireContext(), ChatInActivity::class.java)
-            intent.putExtra("userId", listItemId[position])
-            intent.putExtra("userName", listItemName[position])
+            intent.putExtra("userId", ChatListObject.listItemId!![position])
+            intent.putExtra("userName", ChatListObject.listItemName!![position])
             startActivity(intent)
         }
     }
@@ -150,4 +153,11 @@ class ChatFragment : Fragment() {
             binding.chatAddButton.callOnClick()
         }
     }
+}
+
+
+object ChatListObject{
+    var listItemName: ArrayList<String>? = null
+    var listItemId: ArrayList<Int>? = null
+    var isInit:Boolean = false
 }
