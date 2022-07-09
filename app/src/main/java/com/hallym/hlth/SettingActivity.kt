@@ -153,7 +153,11 @@ class SettingActivity : AppCompatActivity() {
 //            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
 //        }
         binding.settingPrivateOperation.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
+            try{
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub07/cP2/tab2")))
+            }catch (e:Exception){
+                Toast.makeText(applicationContext, getString(R.string.error_open_url),Toast.LENGTH_LONG).show()
+            }
         }
 //        binding.settingHelp.setOnClickListener{
 //

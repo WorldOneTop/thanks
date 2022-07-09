@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Thanks a day</string>
 
+    <!--  error  -->
+    <string name="error_open_url">Cannot open internet</string>
+
     <!--  Login  -->
     <string name="login">Login</string>
     <string name="logout">Logout</string>
@@ -88,8 +91,7 @@
     <string name="edit_hint">Enter Message</string>
 
     <!--  DailyActivity  -->
-    <string name="daily_thanks_text">
-Five things to be grateful for a day\nWrite down the things you are grateful for today.</string>
+    <string name="daily_thanks_text">Five things to be grateful for a day\nWrite down the things you are grateful for today.</string>
     <string name="daily_kind_text">Do one good thing a day\nWrite down what you did today.</string>
     <string name="daily_save_text">Saving one thing a day\nWrite down what you saved today.</string>
     <string name="daily_book_text">Read one book a month\nWrite down your impressions of a book you read deeply.</string>

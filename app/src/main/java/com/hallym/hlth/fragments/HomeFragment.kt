@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -105,7 +106,11 @@ class HomeFragment : Fragment() {
         adapter.onCardClickListener = { detailDocDialog(it)}
 
         adapter.onLinkClickListener = { url ->
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            try{
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }catch (e:Exception){
+                Toast.makeText(context, getString(R.string.error_open_url), Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.rvHome.adapter = adapter

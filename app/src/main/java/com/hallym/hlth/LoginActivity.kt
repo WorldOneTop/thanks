@@ -38,10 +38,18 @@ class LoginActivity : AppCompatActivity() {
         dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_login_help)
         dialog.loginHelpChoice1.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://was1.hallym.ac.kr:8087/hlwc/mdi/Login.html")))
+            try{
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://was1.hallym.ac.kr:8087/hlwc/mdi/Login.html")))
+            }catch (e:Exception){
+                Toast.makeText(applicationContext, getString(R.string.error_open_url),Toast.LENGTH_LONG).show()
+            }
         }
         dialog.loginHelpChoice2.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub04/cP13/sCP4/tab1.html")))
+            try{
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hallym.ac.kr/hallym_univ/sub04/cP13/sCP4/tab1.html")))
+            }catch (e:Exception){
+                Toast.makeText(applicationContext, getString(R.string.error_open_url),Toast.LENGTH_LONG).show()
+            }
         }
         dialog.loginHelpChoice3.setOnClickListener{
             dialog.dismiss()
@@ -70,7 +78,12 @@ class LoginActivity : AppCompatActivity() {
             dialog.show()
         }
         binding.loginPrivacy.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://thanks.hallym.ac.kr/privacy/")))
+            try{
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://thanks.hallym.ac.kr/privacy/")))
+            }catch (e:Exception){
+                Toast.makeText(applicationContext, getString(R.string.error_open_url),Toast.LENGTH_LONG).show()
+            }
+
         }
     }
     private fun checkForm():Boolean{
