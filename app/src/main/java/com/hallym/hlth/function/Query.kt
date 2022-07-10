@@ -21,6 +21,21 @@ class Query {
     }
     private var okHttpClient:OkHttpClient = OkHttpClient()
 
+    fun checkVersion(onResponse: (Int)-> Unit){
+        val request = Request.Builder()
+            .url(URL + "checkVersion?isAndroid=1")
+            .build()
+
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body!!.string()
+                Log.d("checkVersion",body)
+                onResponse(JSONObject(body).getInt("version"))
+            }
+        })
+    }
     fun login(id:String, pw:String, onResponse: (String)-> Unit){
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (!task.isSuccessful) {

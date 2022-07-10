@@ -4,6 +4,7 @@
 
     <!--  error  -->
     <string name="error_open_url">Cannot open internet</string>
+    <string name="error_update">A new update is available</string>
 
     <!--  Login  -->
     <string name="login">Login</string>

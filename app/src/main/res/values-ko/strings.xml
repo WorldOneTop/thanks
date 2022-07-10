@@ -4,6 +4,7 @@
 
     <!--  error  -->
     <string name="error_open_url">인터넷을 열 수 없습니다.</string>
+    <string name="error_update">새로운 업데이트가 있습니다.</string>
 
     <!--  Login  -->
     <string name="login">로그인</string>

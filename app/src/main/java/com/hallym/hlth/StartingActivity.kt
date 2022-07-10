@@ -1,29 +1,26 @@
 package com.hallym.hlth
 
 import android.Manifest
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.hallym.hlth.databinding.ActivityStartingBinding
-import android.content.DialogInterface
-
-import android.content.ActivityNotFoundException
-import android.net.Uri
-import android.provider.Settings
-import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import com.hallym.hlth.function.InitData
+import com.hallym.hlth.function.LoginStorage
 import com.hallym.hlth.function.Query
 import com.hallym.hlth.function.Setting
-import com.hallym.hlth.function.LoginStorage
-import com.hallym.hlth.models.Document
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class StartingActivity : AppCompatActivity() {
@@ -38,13 +35,44 @@ class StartingActivity : AppCompatActivity() {
 
 
         if(checkPermission()) {
-            initData()
-            startApp()
+            checkVersion()
         }else{
             requestPermission()
         }
     }
 
+    private fun checkVersion(){
+        Query().checkVersion{
+            CoroutineScope(Dispatchers.Main).launch{
+                if(BuildConfig.VERSION_CODE != it) {
+                    createUpdateDialog()
+                }
+                else {
+                    initData()
+                    startApp()
+                }
+            }
+        }
+    }
+    private fun createUpdateDialog(){
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.error_update))
+            .setPositiveButton("download") { _: DialogInterface, _: Int ->
+                val appPackageName = packageName
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id=$appPackageName")))
+                } catch (anfe: ActivityNotFoundException) {
+                    startActivity(Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
+                }
+            }
+            .setNegativeButton(getString(R.string.CANCEL)){ _, _ ->
+                initData()
+                startApp()
+            }
+            .setCancelable(false)
+            .create()
+            .show()
+    }
     private fun initData(){
         LoginStorage(applicationContext).loadData()
         Setting(applicationContext).loadData()
